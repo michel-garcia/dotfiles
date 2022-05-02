@@ -211,5 +211,11 @@ require("packer").startup(function (use)
             require("numb").setup()
         end
     }
+    use {
+        "windwp/nvim-ts-autotag",
+        config = function ()
+            require("nvim-ts-autotag").setup()
+        end
+    }
 end)
 
