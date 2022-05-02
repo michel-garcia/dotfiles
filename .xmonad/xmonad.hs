@@ -21,7 +21,7 @@ main = do
         borderWidth = 2,
         clickJustFocuses = False,
         focusFollowsMouse = True,
-        focusedBorderColor = "#b45dbb",
+        focusedBorderColor = "#98c379",
         handleEventHook = fullscreenEventHook,
         keys = \conf -> Data.Map.fromList $ [
             ((modMask, xK_Return), spawn $ XMonad.terminal conf),
