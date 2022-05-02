@@ -6,6 +6,7 @@ vim.opt.encoding = "utf-8"
 vim.opt.swapfile = false
 
 -- Rendering --
+vim.opt.mouse:append("a")
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 5
 vim.opt.termguicolors = true
@@ -57,23 +58,6 @@ vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true })
 -- Plugins --
 require("packer").startup(function (use)
     use { "wbthomason/packer.nvim" }
-    use {
-        "nvim-treesitter/nvim-treesitter",
-        config = function ()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = "all",
-                highlight = { enable = true },
-                indent = { enable = true }
-            })
-        end,
-        run = ":TSUpdate"
-    }
-    use {
-        "navarasu/onedark.nvim",
-        config = function ()
-            vim.cmd("colorscheme onedark")
-        end
-    }
     use {
         "neovim/nvim-lspconfig",
         config = function ()
@@ -149,6 +133,17 @@ require("packer").startup(function (use)
         }
     }
     use {
+        "nvim-treesitter/nvim-treesitter",
+        config = function ()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = "all",
+                highlight = { enable = true },
+                indent = { enable = true }
+            })
+        end,
+        run = ":TSUpdate"
+    }
+    use {
         "lukas-reineke/indent-blankline.nvim",
         config = function ()
             require("indent_blankline").setup({
@@ -162,6 +157,12 @@ require("packer").startup(function (use)
         "numToStr/Comment.nvim",
         config = function ()
             require("Comment").setup({})
+        end
+    }
+    use {
+        "navarasu/onedark.nvim",
+        config = function ()
+            vim.cmd("colorscheme onedark")
         end
     }
     use {
@@ -193,9 +194,21 @@ require("packer").startup(function (use)
         end
     }
     use {
+        "romgrk/barbar.nvim",
+        requires = {
+            "kyazdani42/nvim-web-devicons"
+        }
+    }
+    use {
         "norcalli/nvim-colorizer.lua",
         config = function ()
             require("colorizer").setup()
+        end
+    }
+    use {
+        "nacro90/numb.nvim",
+        config = function ()
+            require("numb").setup()
         end
     }
 end)
