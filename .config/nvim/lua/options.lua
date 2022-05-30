@@ -26,7 +26,10 @@ vim.opt.showmode = false
 vim.opt.autoindent = true
 vim.opt.expandtab = true
 vim.opt.list = true
-vim.opt.listchars = { space = "⋅", tab = "⋅⋅" }
+vim.opt.listchars = {
+    space = "·",
+    tab = "··"
+}
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.softtabstop = 4
