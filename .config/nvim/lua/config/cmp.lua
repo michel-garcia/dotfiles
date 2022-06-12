@@ -14,7 +14,8 @@ return {
         cmp.setup({
             formatting = {
                 format = require("lspkind").cmp_format({
-                    mode = "symbol"
+                    mode = "symbol",
+                    preset = "codicons"
                 })
             },
             mapping = {

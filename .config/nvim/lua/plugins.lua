@@ -24,19 +24,22 @@ packer.startup({
         use(require("config.gitsigns"))
         use(require("config.lspconfig"))
         use(require("config.lualine"))
+        use(require("config.notify"))
         use(require("config.theme"))
         use(require("config.toggleterm"))
         use(require("config.treesitter"))
         use(require("config.trouble"))
         use(require("config.wilder"))
         if packer_bootstrap then
-            require("packer").sync()
+            packer.sync()
         end
     end,
     config = {
         display = {
             open_fn = function ()
-                return require("packer.util").float({ border = "rounded" })
+                return require("packer.util").float({
+                    border = "rounded"
+                })
             end
         }
     }
