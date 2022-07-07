@@ -1,7 +1,23 @@
+function get_server_configuration (server_name)
+    local completion = require("cmp_nvim_lsp")
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    completion.update_capabilities(capabilities)
+    local configuration = {
+        capabilities = capabilities,
+        on_attach = function (_)
+        end
+    }
+    local filename = "lsp." .. server_name
+    local found, settings = pcall(require, filename)
+    if found then
+        configuration = vim.tbl_deep_extend("force", settings, configuration)
+    end
+    return configuration
+end
+
 return {
     "neovim/nvim-lspconfig",
     requires = {
-        -- "RRethy/vim-illuminate",
         "williamboman/nvim-lsp-installer"
     },
     config = function ()
@@ -18,21 +34,10 @@ return {
             ensure_installed = servers,
         })
         local lspconfig = require("lspconfig")
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        require("cmp_nvim_lsp").update_capabilities(capabilities)
-        for _, server in ipairs(servers) do
-            local filename = "lsp" .. "." .. server
-            local configuration = {
-                capabilities = capabilities,
-                on_attach = function (client)
-                    -- require("illuminate").on_attach(client)
-                end
-            }
-            local found, settings = pcall(require, filename)
-            if found then
-                configuration = vim.tbl_deep_extend("force", settings, configuration)
-            end
-            lspconfig[server].setup(configuration)
+        for _, server_name in ipairs(servers) do
+            local server = lspconfig[server_name]
+            local configuration = get_server_configuration(server_name)
+            server.setup(configuration)
         end
         vim.diagnostic.config({
             severity_sort = true,

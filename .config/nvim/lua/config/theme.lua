@@ -1,8 +1,10 @@
 return {
-    "Shatur/neovim-ayu",
+    "navarasu/onedark.nvim",
     config = function ()
-        local ayu = require("ayu")
-        ayu.setup({})
-        ayu.colorscheme()
+        local onedark = require("onedark")
+        onedark.setup({
+            style = "deep"
+        })
+        onedark.load()
     end
 }
