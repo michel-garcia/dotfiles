@@ -5,7 +5,7 @@ return {
         toggleterm.setup({
             direction = "float",
             float_opts = {
-                border = "curved"
+                border = "single"
             },
             open_mapping = "<C-\\>",
             terminal_mappings = true
