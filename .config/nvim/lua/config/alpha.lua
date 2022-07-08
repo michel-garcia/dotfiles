@@ -11,7 +11,8 @@ function get_header_artwork()
     end
 end
 
-function Button(caption, action)
+function Button(caption, action, shortcut)
+    vim.keymap.set("n", shortcut, action .. "<CR>")
     return {
         type = "button",
         val = caption,
@@ -19,8 +20,11 @@ function Button(caption, action)
             vim.cmd(action)
         end,
         opts = {
+            align_shortcut = "right",
+            cursor = 5,
+            hl_shortcut = "Keyword",
             position = "center",
-            shortcut = " ",
+            shortcut = shortcut,
             width = 50
         }
     }
@@ -36,8 +40,9 @@ return {
                 val = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * .3) })
             }, {
                 type = "text",
-                val = get_header_artwork() or "Neovim",
+                val = get_header_artwork() or "NEOVIM",
                 opts = {
+                    hl = "String",
                     position = "center"
                 }
             }, {
@@ -46,10 +51,46 @@ return {
             }, {
                 type = "group",
                 val = {
-                    Button("New File", ":e New File"),
-                    Button("File Browser", ":Telescope file_browser"),
-                    Button("Find Files", ":Telescope find_files"),
-                    Button("Quit", ":qa")
+                    Button(
+                        "  New File",
+                        ":enew",
+                        "<leader>fn"
+                    ),
+                    Button(
+                        "  Recent Files",
+                        ":Telescope oldfiles",
+                        "<leader>fr"
+                    ),
+                    Button(
+                        "  Bookmarks",
+                        ":Telescope marks",
+                        "<leader>fm"
+                    ),
+                    Button(
+                        "  File Browser",
+                        ":Telescope file_browser",
+                        "<leader>fb"
+                    ),
+                    Button(
+                        "  Find Files",
+                        ":Telescope find_files",
+                        "<leader>ff"
+                    ),
+                    Button(
+                        "  Options",
+                        ":Telescope vim_options",
+                        "<leader>fo"
+                    ),
+                    Button(
+                        "  Extensions",
+                        ":PackerStatus",
+                        "<leader>ps"
+                    ),
+                    Button(
+                        "  Quit",
+                        ":qa",
+                        "<leader>q"
+                    )
                 },
                 opts = {
                     spacing = 1
@@ -58,6 +99,7 @@ return {
                 type = "text",
                 val = os.date("%Y-%M-%d %H:%m"),
                 opts = {
+                    hl = "Special",
                     position = "center"
                 }
             }},
