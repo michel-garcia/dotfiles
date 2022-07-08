@@ -4,7 +4,9 @@ function get_server_configuration (server_name)
     completion.update_capabilities(capabilities)
     local configuration = {
         capabilities = capabilities,
-        on_attach = function (_)
+        on_attach = function (client)
+            local illuminate = require("illuminate")
+            illuminate.on_attach(client)
         end
     }
     local filename = "lsp." .. server_name
@@ -18,7 +20,8 @@ end
 return {
     "neovim/nvim-lspconfig",
     requires = {
-        "williamboman/nvim-lsp-installer"
+        "williamboman/nvim-lsp-installer",
+        "RRethy/vim-illuminate"
     },
     config = function ()
         local servers = {
