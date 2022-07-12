@@ -20,8 +20,7 @@ return {
                         width = 0.5
                     }
                 },
-                layout_strategy = "vertical",
-                preview = false
+                layout_strategy = "horizontal",
             }
         })
         telescope.load_extension("file_browser")
