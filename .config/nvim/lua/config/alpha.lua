@@ -1,5 +1,8 @@
 function get_header_artwork()
-    local filename = vim.fn.expand("~/.config/nvim/artwork.txt")
+    local filename = string.format(
+        "%s/artwork.txt",
+        vim.fn.stdpath("config")
+    )
     local file = io.open(filename)
     if file then
         local lines = {}
@@ -12,7 +15,6 @@ function get_header_artwork()
 end
 
 function Button(caption, action, shortcut)
-    vim.keymap.set("n", shortcut, action .. "<CR>")
     return {
         type = "button",
         val = caption,
@@ -89,7 +91,7 @@ return {
                     Button(
                         "  Quit",
                         ":qa",
-                        "<leader>q"
+                        ""
                     )
                 },
                 opts = {
