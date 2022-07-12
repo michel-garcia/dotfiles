@@ -15,26 +15,28 @@ return {
             formatting = {
                 format = require("lspkind").cmp_format({
                     mode = "symbol",
-                    preset = "codicons"
                 })
             },
-            mapping = {
-                ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<C-q>"] = cmp.mapping.close(),
-                ["<CR>"] = cmp.mapping.confirm({
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    select = false
-                })
-            },
-            sources = {
+            mapping = cmp.mapping.preset.insert({
+                ["<C-p>"] = cmp.mapping.select_prev_item(),
+                ["<C-n>"] = cmp.mapping.select_next_item(),
+                ["<C-e>"] = cmp.mapping.close(),
+                ["<CR>"] = cmp.mapping(function (fallback)
+                    if cmp.visible() and cmp.get_selected_entry() then
+                        cmp.complete()
+                        cmp.close()
+                    else
+                        fallback()
+                    end
+                end)
+            }),
+            sources = cmp.config.sources({
                 { name = "nvim_buffer" },
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
                 { name = "nvim_path" },
                 { name = "nvim_lsp_signature_help" }
-            }
+            })
         })
     end
 }
