@@ -10,9 +10,9 @@ vim.opt.sidescrolloff = 5
 vim.opt.termguicolors = true
 
 -- Interface --
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 2
 vim.opt.colorcolumn = { 80 }
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 vim.opt.guicursor = "i:block"
 vim.opt.laststatus = 3
 vim.opt.number = true
@@ -48,3 +48,4 @@ vim.opt.smartcase = true
 
 -- Explorer --
 vim.g.netrw_banner = 0
+

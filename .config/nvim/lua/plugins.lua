@@ -1,4 +1,7 @@
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = string.format(
+    "%s/site/pack/packer/start/packer.nvim",
+    vim.fn.stdpath("data")
+)
 
 local packer_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -21,7 +24,6 @@ packer.startup({
         use(require("config.cmp"))
         use(require("config.colorizer"))
         use(require("config.comment"))
-        -- use(require("config.dashboard"))
         use(require("config.indent-blankline"))
         use(require("config.gitsigns"))
         use(require("config.lspconfig"))
