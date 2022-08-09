@@ -5,7 +5,7 @@ return {
         lualine.setup({
             options = {
                 component_separators = "│",
-                icons = false,
+                icons_enabled = false,
                 section_separators = ""
             }
         })

@@ -11,8 +11,8 @@ vim.opt.termguicolors = true
 
 -- Interface --
 vim.opt.cmdheight = 2
-vim.opt.colorcolumn = { 80 }
-vim.opt.cursorline = true
+vim.opt.colorcolumn = {}
+vim.opt.cursorline = false
 vim.opt.guicursor = "i:block"
 vim.opt.laststatus = 3
 vim.opt.number = true

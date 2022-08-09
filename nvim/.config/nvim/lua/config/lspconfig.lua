@@ -22,9 +22,6 @@ function get_server_configuration (server_name)
         capabilities = capabilities,
         on_attach = function (client, buffer)
             bind_buffer_mappings(buffer)
-            vim.notify("Language server attached!", "info", {
-                title = server_name
-            })
             local illuminate = require("illuminate")
             illuminate.on_attach(client)
         end
@@ -49,7 +46,7 @@ return {
     },
     config = function ()
         local servers = {
-            "clangd",
+            "ccls",
             "intelephense",
             "jsonls",
             "sumneko_lua",
@@ -59,6 +56,9 @@ return {
         installer.setup({
             automatic_installation = true,
             ensure_installed = servers,
+            ui = {
+                border = "single"
+            }
         })
         local lspconfig = require("lspconfig")
         for _, server_name in ipairs(servers) do
@@ -68,7 +68,7 @@ return {
         end
         vim.diagnostic.config({
             severity_sort = true,
-            signs = false,
+            signs = true,
             underline = true,
             update_in_insert = true,
             virtual_text = false

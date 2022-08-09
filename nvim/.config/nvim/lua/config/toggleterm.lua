@@ -3,12 +3,9 @@ return {
     config = function ()
         local toggleterm = require("toggleterm")
         toggleterm.setup({
-            direction = "float",
-            float_opts = {
-                border = "single"
-            },
             open_mapping = "<C-\\>",
-            terminal_mappings = true
+            terminal_mappings = true,
+            shade_terminals = false
         })
     end
 }
