@@ -60,13 +60,13 @@ function setup_opts() {
     setopt SHARE_HISTORY
 }
 
-function setup_prompt() {
-    add-zsh-hook precmd on_before_command
-    export PROMPT="%F{#3fdcee}%f "
+function on_before_command() {
+    print -P "%n@%m %F{#3fdcee}%~%f"
 }
 
-function on_before_command() {
-    print -P "%F{#b043d1}%~%f"
+function setup_prompt() {
+    add-zsh-hook precmd on_before_command
+    export PROMPT="%F{#b043d1}%f "
 }
 
 function setup_completion() {
@@ -90,5 +90,5 @@ setup_opts
 setup_prompt
 setup_completion
 setup_autosuggestions
-setup_syntax_highlighting
+# setup_syntax_highlighting
 
