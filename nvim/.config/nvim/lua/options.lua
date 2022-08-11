@@ -35,6 +35,10 @@ vim.opt.smartindent = true
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 
+-- Folding --
+vim.opt.foldenable = false
+vim.opt.foldmethod = "indent"
+
 -- Panes --
 vim.opt.splitbelow = true
 vim.opt.splitright = true
