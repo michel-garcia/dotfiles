@@ -66,17 +66,31 @@ return {
             local configuration = get_server_configuration(server_name)
             server.setup(configuration)
         end
+        vim.g.Illuminate_ftblacklist = {
+           "NvimTree"
+        }
         vim.diagnostic.config({
             severity_sort = true,
             signs = true,
             underline = true,
             update_in_insert = true,
-            virtual_text = false
+            virtual_text = {
+                format = function (diagnostic)
+                    local signs = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                        [vim.diagnostic.severity.HINT] = ""
+                    }
+                    return string.format(
+                        "%s %s",
+                        signs[diagnostic.severity],
+                        diagnostic.message
+                    )
+                end,
+                prefix = ""
+            }
         })
-        vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-        vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
     end
 }
 
