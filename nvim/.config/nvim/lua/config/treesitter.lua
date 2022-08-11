@@ -7,7 +7,9 @@ return {
     config = function ()
         local treesitter = require("nvim-treesitter.configs")
         treesitter.setup({
-            autotag = { enable = true },
+            autotag = {
+                enable = true
+            },
             ensure_installed = {
                 "bash",
                 "c",
@@ -24,10 +26,15 @@ return {
                 "python",
                 "typescript"
             },
-            highlight = { enable = true },
-            ignore_install = { "phpdoc" },
-            indent = { enable = false }
+            highlight = {
+                enable = true
+            },
+            indent = {
+                enable = false
+            }
         })
+        vim.opt.foldmethod = "expr"
+        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end
 }
 
