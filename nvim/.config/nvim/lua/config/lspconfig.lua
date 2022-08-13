@@ -27,8 +27,8 @@ function get_server_configuration (server_name)
         end
     }
     local filename = string.format("lsp.%s", server_name)
-    local found, custom_configuration = pcall(require, filename)
-    if found then
+    local ok, custom_configuration = pcall(require, filename)
+    if ok then
         configuration = vim.tbl_deep_extend(
             "force",
             custom_configuration,

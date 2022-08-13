@@ -6,17 +6,11 @@ return {
     config = function ()
         local tree = require("nvim-tree")
         tree.setup({
-            actions = {
-                open_file = {
-                    window_picker = {
-                        enable = false
-                    }
-                }
-            },
             git = {
                 enable = true,
                 ignore = false
             },
+            hijack_cursor = true,
             hijack_directories = {
                 enable = true
             },
