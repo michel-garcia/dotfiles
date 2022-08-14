@@ -1,8 +1,6 @@
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.g.mapleader = " "
-
 vim.keymap.set("n", "<leader>wv", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", ":split<CR>")
 
@@ -12,3 +10,4 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
 vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>")
+
