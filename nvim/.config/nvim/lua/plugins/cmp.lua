@@ -14,7 +14,7 @@ return {
         cmp.setup({
             formatting = {
                 format = require("lspkind").cmp_format({
-                    mode = "symbol",
+                    mode = "symbol"
                 })
             },
             mapping = cmp.mapping.preset.insert({
@@ -36,7 +36,15 @@ return {
                 { name = "nvim_lua" },
                 { name = "nvim_path" },
                 { name = "nvim_lsp_signature_help" }
-            })
+            }),
+            window = {
+                completion = cmp.config.window.bordered({
+                    border = "single"
+                }),
+                documentation = cmp.config.window.bordered({
+                    border = "single"
+                })
+            }
         })
     end
 }

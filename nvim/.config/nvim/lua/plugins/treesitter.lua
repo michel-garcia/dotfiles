@@ -18,13 +18,16 @@ return {
                 "dart",
                 "glsl",
                 "html",
+                "http",
                 "javascript",
                 "json",
                 "lua",
                 "make",
                 "php",
                 "python",
-                "typescript"
+                "sql",
+                "typescript",
+                "yaml"
             },
             highlight = {
                 enable = true

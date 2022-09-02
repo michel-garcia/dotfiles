@@ -15,12 +15,13 @@ picom -b --experimental-backends
 
 # Services
 sxhkd &
-dunst &
+# dunst &
 udiskie &
 
 # Keyboard
 setxkbmap -layout us -variant altgr-intl
 
 # Environment
-exec xmonad
+# exec xmonad
+exec awesome
 

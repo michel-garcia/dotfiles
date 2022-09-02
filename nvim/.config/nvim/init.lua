@@ -1,6 +1,4 @@
-require("diagnostics")
-require("globals")
-require("keys")
-require("options")
+require("config")
+require("mappings")
 require("plugins")
 

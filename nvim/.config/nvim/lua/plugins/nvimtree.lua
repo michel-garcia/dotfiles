@@ -18,12 +18,13 @@ return {
                 highlight_git = true,
                 icons = {
                     show = {
+                        file = false,
                         git = false
                     }
                 }
             },
-            view = {
-                hide_root_folder = true
+            update_focused_file = {
+                enable = true
             }
         })
     end
