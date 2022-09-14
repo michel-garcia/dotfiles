@@ -20,7 +20,6 @@ packer.startup({
     function (use)
         use({
             "wbthomason/packer.nvim",
-            require("plugins.alpha"),
             require("plugins.bufferline"),
             require("plugins.cmp"),
             require("plugins.colorizer"),
