@@ -1,3 +1,6 @@
+nvim/.config/nvim/plugin
+zsh/.config/zsh/.zcompdump
+zsh/.config/zsh/.zsh_history
 polybar/.config/polybar/modules/balance.php
 polybar/.config/polybar/modules/weather.php
 

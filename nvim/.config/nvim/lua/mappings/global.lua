@@ -19,14 +19,12 @@ return {
             rest.run()
         end)
         vim.keymap.set("n", "<A-t>", function ()
-            local fterm = require("FTerm")
-            fterm.toggle()
+            vim.cmd("ToggleTerm")
         end)
         vim.keymap.set("t", "<A-t>", function ()
             vim.api.nvim_feedkeys("<C-\\>", "n", true)
             vim.api.nvim_feedkeys("<C-n>", "n", true)
-            local fterm = require("FTerm")
-            fterm.toggle()
+            vim.cmd("ToggleTerm")
         end)
     end
 }

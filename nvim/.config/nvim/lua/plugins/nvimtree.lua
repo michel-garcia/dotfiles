@@ -21,10 +21,14 @@ return {
                         file = false,
                         git = false
                     }
-                }
+                },
+                symlink_destination = false
             },
             update_focused_file = {
                 enable = true
+            },
+            view = {
+                hide_root_folder = true
             }
         })
     end

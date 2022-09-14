@@ -36,15 +36,7 @@ return {
                 { name = "nvim_lua" },
                 { name = "nvim_path" },
                 { name = "nvim_lsp_signature_help" }
-            }),
-            window = {
-                completion = cmp.config.window.bordered({
-                    border = "single"
-                }),
-                documentation = cmp.config.window.bordered({
-                    border = "single"
-                })
-            }
+            })
         })
     end
 }

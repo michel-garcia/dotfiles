@@ -23,11 +23,12 @@ return {
     "neovim/nvim-lspconfig",
     requires = {
         "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
         "RRethy/vim-illuminate"
     },
     config = function ()
         local servers = {
-            "ccls",
+            "clangd",
             "intelephense",
             "jsonls",
             "sumneko_lua",
@@ -35,6 +36,10 @@ return {
         }
         local mason = require("mason")
         mason.setup()
+        local mason_lspconfig = require("mason-lspconfig")
+        mason_lspconfig.setup({
+            ensure_installed = servers
+        })
         local lspconfig = require("lspconfig")
         for _, server_name in ipairs(servers) do
             local server = lspconfig[server_name]

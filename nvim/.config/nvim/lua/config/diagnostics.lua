@@ -13,10 +13,6 @@ for type, icon in pairs(signs) do
 end
 
 vim.diagnostic.config({
-    float = {
-        border = "single",
-        style = "minimal"
-    },
     severity_sort = true,
     signs = true,
     underline = true,
@@ -30,8 +26,7 @@ vim.diagnostic.config({
                 "DiagnosticSignHint"
             }
             local name = names[diagnostic.severity]
-            local defined = vim.fn.sign_getdefined(name)
-            local sign = defined[1]
+            local sign = vim.fn.sign_getdefined(name)[1]
             if not sign then
                 return diagnostic.message
             end
