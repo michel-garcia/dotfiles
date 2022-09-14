@@ -20,7 +20,6 @@ packer.startup({
     function (use)
         use({
             "wbthomason/packer.nvim",
-            require("plugins.bufferline"),
             require("plugins.cmp"),
             require("plugins.colorizer"),
             require("plugins.colorscheme"),
@@ -29,7 +28,6 @@ packer.startup({
             require("plugins.gitsigns"),
             require("plugins.lspconfig"),
             require("plugins.lualine"),
-            require("plugins.nvimtree"),
             require("plugins.rest"),
             require("plugins.telescope"),
             require("plugins.toggleterm"),
@@ -40,5 +38,15 @@ packer.startup({
         if packer_bootstrap then
             packer.sync()
         end
-    end
+    end,
+    config = {
+        display = {
+            open_fn = function ()
+                local util = require("packer.util")
+                return util.float({
+                    border = "single"
+                })
+            end
+        }
+    }
 })
