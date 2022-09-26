@@ -20,20 +20,21 @@ packer.startup({
     function (use)
         use({
             "wbthomason/packer.nvim",
-            require("plugins.cmp"),
-            require("plugins.colorizer"),
-            require("plugins.colorscheme"),
-            require("plugins.comment"),
-            require("plugins.indent"),
-            require("plugins.gitsigns"),
-            require("plugins.lspconfig"),
-            require("plugins.lualine"),
-            require("plugins.rest"),
-            require("plugins.telescope"),
-            require("plugins.toggleterm"),
-            require("plugins.treesitter"),
-            require("plugins.trouble"),
-            require("plugins.wilder")
+            require("user.plugins.bufferline"),
+            require("user.plugins.cmp"),
+            require("user.plugins.colorizer"),
+            require("user.plugins.colorscheme"),
+            require("user.plugins.comment"),
+            require("user.plugins.indent_blankline"),
+            require("user.plugins.gitsigns"),
+            require("user.plugins.lspconfig"),
+            require("user.plugins.lualine"),
+            require("user.plugins.rest"),
+            require("user.plugins.telescope"),
+            require("user.plugins.treesitter"),
+            require("user.plugins.treesitter_context"),
+            require("user.plugins.trouble"),
+            require("user.plugins.wilder")
         })
         if packer_bootstrap then
             packer.sync()

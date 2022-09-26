@@ -9,6 +9,9 @@ vim.opt.expandtab = true
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+vim.opt.formatoptions = {
+    r = false
+}
 vim.opt.guicursor = "i:block"
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true

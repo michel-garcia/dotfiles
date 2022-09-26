@@ -3,7 +3,7 @@ export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=2000
 
-bindkey -v
+# bindkey -v
 bindkey "^[[H" "beginning-of-line"
 bindkey "^[[F" "end-of-line"
 bindkey "^[[2~" "overwrite-mode"
@@ -52,6 +52,6 @@ setopt promptsubst
 setopt pushdignoredups
 setopt sharehistory
 
-export PROMPT="%F{5}>%f "
+export PROMPT="%F{15}>%f "
 export PROMPT_EOL_MARK=""
 

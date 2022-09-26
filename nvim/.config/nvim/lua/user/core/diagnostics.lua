@@ -4,13 +4,6 @@ local signs = {
     DiagnosticSignInfo = "",
     DiagnosticSignHint = ""
 }
-for type, icon in pairs(signs) do
-    vim.fn.sign_define(type, {
-        numhl = type,
-        text = icon,
-        texthl = type
-    })
-end
 
 vim.diagnostic.config({
     severity_sort = true,

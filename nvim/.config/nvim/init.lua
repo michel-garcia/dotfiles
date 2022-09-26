@@ -1,4 +1,2 @@
-require("config")
-require("mappings")
-require("plugins")
+require("user")
 

@@ -5,7 +5,9 @@ return {
         wilder.setup({
             modes = { ":" }
         })
-        wilder.set_option("renderer", wilder.popupmenu_renderer())
+        wilder.set_option("renderer", wilder.popupmenu_renderer({
+            highlighter = wilder.basic_highlighter()
+        }))
     end
 }
 

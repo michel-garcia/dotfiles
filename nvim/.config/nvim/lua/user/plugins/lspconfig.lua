@@ -1,17 +1,26 @@
+function on_attach(client, buffer)
+    local illuminate = require("illuminate")
+    illuminate.on_attach(client)
+    local opts = {
+        buffer = buffer,
+        noremap = true,
+        silent = true
+    }
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+end
+
 function get_server_config (server_name)
     local completion = require("cmp_nvim_lsp")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     completion.update_capabilities(capabilities)
     local config = {
         capabilities = capabilities,
-        on_attach = function (client, buffer)
-            local mappings = require("mappings.buffer")
-            mappings.bind(buffer)
-            local illuminate = require("illuminate")
-            illuminate.on_attach(client)
-        end
+        on_attach = on_attach
     }
-    local filename = string.format("lsp.%s", server_name)
+    local filename = string.format("user.langs.%s", server_name)
     local ok, custom = pcall(require, filename)
     if ok then
         config = vim.tbl_deep_extend("force", custom, config)
@@ -35,7 +44,11 @@ return {
             "tsserver"
         }
         local mason = require("mason")
-        mason.setup()
+        mason.setup({
+            ui = {
+                border = "single"
+            }
+        })
         local mason_lspconfig = require("mason-lspconfig")
         mason_lspconfig.setup({
             ensure_installed = servers
