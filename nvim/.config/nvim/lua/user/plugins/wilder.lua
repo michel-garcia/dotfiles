@@ -3,11 +3,10 @@ return {
     config = function ()
         local wilder = require("wilder")
         wilder.setup({
-            modes = { ":" }
+            modes = { ":", "/" }
         })
-        wilder.set_option("renderer", wilder.popupmenu_renderer({
-            highlighter = wilder.basic_highlighter()
-        }))
+        local renderer = wilder.wildmenu_renderer()
+        wilder.set_option("renderer", renderer)
     end
 }
 

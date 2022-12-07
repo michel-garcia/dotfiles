@@ -52,6 +52,6 @@ setopt promptsubst
 setopt pushdignoredups
 setopt sharehistory
 
-export PROMPT="%F{15}>%f "
+export PROMPT="%F{1}>%f "
 export PROMPT_EOL_MARK=""
 

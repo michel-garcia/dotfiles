@@ -1,12 +1,16 @@
 return {
-    "navarasu/onedark.nvim",
+    "luisiacc/gruvbox-baby",
     config = function ()
-        local onedark = require("onedark")
-        onedark.setup({
-            style = "deep",
-            transparent = true
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            callback = function ()
+                vim.cmd("hi lualine_c_inactive none")
+                vim.cmd("hi link lualine_c_inactive lualine_c_normal")
+            end,
+            group = vim.api.nvim_create_augroup("CustomHighlightingGroups", {
+                clear = true
+            })
         })
-        onedark.load()
+        vim.cmd("colorscheme gruvbox-baby")
     end
 }
 

@@ -6,6 +6,7 @@ return {
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-path",
+        "L3MON4D3/LuaSnip",
         "mortepau/codicons.nvim",
         "onsails/lspkind-nvim"
     },
@@ -21,15 +22,16 @@ return {
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
                 ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-e>"] = cmp.mapping.close(),
-                ["<CR>"] = cmp.mapping(function (fallback)
-                    if cmp.visible() and cmp.get_selected_entry() then
-                        cmp.complete()
-                        cmp.close()
-                    else
-                        fallback()
-                    end
-                end)
+                ["<CR>"] = cmp.mapping.confirm({
+                    select = true
+                })
             }),
+            snippet = {
+                expand = function (args)
+                    local luasnip = require("luasnip")
+                    luasnip.lsp_expand(args.body)
+                end
+            },
             sources = cmp.config.sources({
                 { name = "nvim_buffer" },
                 { name = "nvim_lsp" },

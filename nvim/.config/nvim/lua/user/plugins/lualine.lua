@@ -1,66 +1,84 @@
-function branch()
-    return {
-        "branch",
-        icons_enabled = true
-    }
-end
-
-function diagnostics()
-    local function get_sign(name)
-        local signs = vim.fn.sign_getdefined(name)
-        local sign = signs[1]
-        if sign then
-            return sign.text
-        end
-    end
-    return {
-        "diagnostics",
-        always_visible = true,
-        colored = false,
-        sources = {
-            "nvim_diagnostic"
-        },
-        symbols = {
-            error = get_sign("DiagnosticSignError"),
-            warn = get_sign("DiagnosticSignWarn"),
-            info = get_sign("DiagnosticSignInfo"),
-            hint = get_sign("DiagnosticSignHint")
-        }
-    }
-end
-
-function location()
-    return {
-        function ()
-            local line = vim.fn.line(".")
-            local col = vim.fn.col(".")
-            return string.format(
-                "Ln %s, Col %s",
-                line,
-                col
-            )
-        end
-    }
-end
-
-function filetype()
-    return {
-        function ()
-            local filetype = vim.api.nvim_buf_get_option(
-                0,
-                "filetype"
-            )
-            return filetype
-        end
-    }
-end
-
 return {
     "nvim-lualine/lualine.nvim",
     config = function ()
+        local function get_sign(name)
+            local signs = vim.fn.sign_getdefined(name)
+            local sign = signs[1]
+            if sign then
+                return sign.text
+            end
+        end
+        local components = {
+            branch = {
+                "branch",
+                icons_enabled = true
+            },
+            context = {
+                function ()
+                    local ok, navic = pcall(require, "nvim-navic")
+                    if ok then
+                        return navic.get_location()
+                    end
+                end
+            },
+            diagnostics = {
+                "diagnostics",
+                always_visible = true,
+                colored = false,
+                symbols = {
+                    error = get_sign("DiagnosticSignError"),
+                    warn = get_sign("DiagnosticSignWarn"),
+                    info = get_sign("DiagnosticSignInfo"),
+                    hint = get_sign("DiagnosticSignHint")
+                }
+            },
+            filename = {
+                "filename",
+                symbols = {
+                    modified = "ﱣ ",
+                    newfile = "New File",
+                    readonly = " ",
+                    unnamed = "Unnamed"
+                }
+            },
+            filetype = {
+                "filetype"
+            },
+            location = {
+                "location"
+            },
+            mode = {
+                "mode"
+            },
+            tabs = {
+                "tabs",
+                tabs_color = {
+                    active = "@function",
+                    inactive = "@symbol"
+                }
+            },
+            title = {
+                function ()
+                    local version = vim.version()
+                    return string.format(
+                        " NeoVim %s.%s.%s",
+                        version.major,
+                        version.minor,
+                        version.patch
+                    )
+                end,
+                color = "@type"
+            }
+        }
         local lualine = require("lualine")
         lualine.setup({
             inactive_sections = {},
+            inactive_winbar = {
+                lualine_c = {
+                    components.filename,
+                    components.context
+                }
+            },
             options = {
                 component_separators = "",
                 icons_enabled = false,
@@ -68,19 +86,33 @@ return {
             },
             sections = {
                 lualine_a = {
-                    "mode",
+                    components.mode
                 },
                 lualine_b = {},
                 lualine_c = {
-                    branch(),
-                    diagnostics()
+                    components.branch,
+                    components.diagnostics
                 },
                 lualine_x = {
-                    location(),
-                    filetype()
+                    components.location,
+                    components.filetype
                 },
                 lualine_y = {},
                 lualine_z = {}
+            },
+            tabline = {
+                lualine_b = {
+                    components.title
+                },
+                lualine_c = {
+                    components.tabs
+                }
+            },
+            winbar = {
+                lualine_c = {
+                    components.filename,
+                    components.context
+                }
             }
         })
     end

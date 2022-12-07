@@ -1,14 +1,11 @@
 vim.opt.autoindent = true
 vim.opt.autoread = true
 vim.opt.clipboard = "unnamedplus"
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 0
 vim.opt.colorcolumn = {}
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 vim.opt.encoding = "utf-8"
 vim.opt.expandtab = true
-vim.opt.foldenable = true
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
 vim.opt.formatoptions = {
     r = false
 }
