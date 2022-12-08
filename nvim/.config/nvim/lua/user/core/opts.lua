@@ -6,9 +6,6 @@ vim.opt.colorcolumn = {}
 vim.opt.cursorline = true
 vim.opt.encoding = "utf-8"
 vim.opt.expandtab = true
-vim.opt.formatoptions = {
-    r = false
-}
 vim.opt.guicursor = "i:block"
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true

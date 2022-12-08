@@ -9,6 +9,17 @@ vim.api.nvim_create_autocmd("VimEnter", {
     })
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function ()
+        vim.cmd("setlocal formatoptions-=c")
+        vim.cmd("setlocal formatoptions-=r")
+        vim.cmd("setlocal formatoptions-=o")
+    end,
+    group = vim.api.nvim_create_augroup("DisableAutoComments", {
+        clear = true
+    })
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function (args)
         local path = vim.fn.fnamemodify(args.file, ":p:h")
