@@ -53,8 +53,8 @@ return {
             tabs = {
                 "tabs",
                 tabs_color = {
-                    active = "@function",
-                    inactive = "@symbol"
+                    active = "lualine_a_insert",
+                    inactive = "lualine_b_insert"
                 }
             },
             title = {
@@ -81,6 +81,10 @@ return {
             },
             options = {
                 component_separators = "",
+                disabled_filetypes = {
+                    statusline = { "dashboard" },
+                    winbar = { "dashboard" }
+                },
                 icons_enabled = false,
                 section_separators = ""
             },
@@ -115,6 +119,8 @@ return {
                 }
             }
         })
+        vim.cmd("hi lualine_c_inactive none")
+        vim.cmd("hi link lualine_c_inactive lualine_c_normal")
     end
 }
 

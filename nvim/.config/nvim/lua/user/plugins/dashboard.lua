@@ -55,6 +55,10 @@ return {
             "",
             "--- Linus Torvalds"
         }
+        vim.cmd("hi DashboardHeader none")
+        vim.cmd("hi link DashboardHeader @type")
+        vim.cmd("hi DashboardFooter none")
+        vim.cmd("hi link DashboardFooter @variable")
     end
 }
 
