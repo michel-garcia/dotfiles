@@ -46,3 +46,17 @@ vim.api.nvim_create_autocmd("TermOpen", {
     })
 })
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function ()
+        vim.cmd("hi lualine_c_inactive none")
+        vim.cmd("hi link lualine_c_inactive lualine_c_normal")
+        vim.cmd("hi DashboardHeader none")
+        vim.cmd("hi link DashboardHeader @type")
+        vim.cmd("hi DashboardFooter none")
+        vim.cmd("hi link DashboardFooter @variable")
+    end,
+    group = vim.api.nvim_create_augroup("CustomHighlights", {
+        clear = true
+    })
+})
+

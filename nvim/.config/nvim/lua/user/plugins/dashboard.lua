@@ -31,6 +31,7 @@ return {
             }
         end
         dashboard.custom_center = {
+            button("", "New File", ":enew"),
             button("", "Recent", ":FzfLua oldfiles"),
             button("", "Find", ":FzfLua files"),
             button("", "Config", function ()
