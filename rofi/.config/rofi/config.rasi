@@ -1,0 +1,63 @@
+configuration {
+    disable-history: true;
+    display-drun: "Applications ";
+    font: "CaskaydiaCove Nerd Font 11";
+    sidebar-mode: false;
+}
+
+@theme "/dev/null"
+
+* {
+    background-color: transparent;
+}
+
+window {
+    background-color: #202020;
+    border: 2px;
+    border-color: #5f676a;
+    padding: 16px;
+    width: 512px;
+}
+
+inputbar {
+    margin: 0 0 16px 0;
+    padding: 1px;
+}
+
+prompt {
+    enabled: true;
+    text-color: #c78f23;
+}
+
+entry {
+    text-color: #fff;
+}
+
+listview {
+    columns: 1;
+    dynamic: true;
+    lines: 6;
+    padding-top: 2px;
+}
+
+element {
+    children: [
+        element-icon,
+        element-text
+    ];
+    padding: 4px;
+}
+
+element-icon {
+    padding: 0 8px 0 0;
+    size: 20px;
+}
+
+element-text {
+    text-color: #665c54;
+}
+
+element-text selected {
+    text-color: #fff;
+}
+
