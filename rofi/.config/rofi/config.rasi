@@ -12,11 +12,11 @@ configuration {
 }
 
 window {
-    background-color: #202020;
+    background-color: #282828;
     border: 2px;
     border-color: #5f676a;
     padding: 16px;
-    width: 512px;
+    width: 768px;
 }
 
 inputbar {
@@ -25,18 +25,21 @@ inputbar {
 }
 
 prompt {
-    enabled: true;
+    enabled: false;
     text-color: #c78f23;
 }
 
 entry {
+    placeholder: "Search apps";
+    placeholder-color: #665c54;
     text-color: #fff;
 }
 
 listview {
-    columns: 1;
+    columns: 4;
     dynamic: true;
-    lines: 6;
+    layout: vertical;
+    lines: 3;
     padding-top: 2px;
 }
 
@@ -45,15 +48,17 @@ element {
         element-icon,
         element-text
     ];
-    padding: 4px;
+    orientation: vertical;
+    padding: 16px;
 }
 
 element-icon {
     padding: 0 8px 0 0;
-    size: 20px;
+    size: 48px;
 }
 
 element-text {
+    horizontal-align: 0.5;
     text-color: #665c54;
 }
 
