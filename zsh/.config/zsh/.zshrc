@@ -1,9 +1,34 @@
-export EDITOR=${EDITOR:-nvim}
-export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-export HISTSIZE=1000
-export SAVEHIST=2000
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE="$XDG_CACHE_HOME/zsh/history"
 
-# bindkey -v
+setopt ALWAYS_TO_END
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt COMPLETE_IN_WORD
+setopt EXTENDED_HISTORY
+setopt GLOB_DOTS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_NO_STORE
+setopt HIST_REDUCE_BLANKS
+setopt LIST_ROWS_FIRST
+setopt NO_HUP
+setopt PUSHD_SILENT
+setopt PROMPT_SUBST
+setopt SHARE_HISTORY
+setopt TRANSIENT_RPROMPT
+
+autoload -U compinit
+zstyle ":completion:*" menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
+
+autoload -Uz vcs_info
+zstyle ":vcs_info:git:*" formats "%b"
+
+bindkey -v
 bindkey "^[[H" "beginning-of-line"
 bindkey "^[[F" "end-of-line"
 bindkey "^[[2~" "overwrite-mode"
@@ -19,39 +44,19 @@ bindkey "^[[Z" "reverse-menu-complete"
 bindkey "^[[1;5D" "backward-word"
 bindkey "^[[1;5C" "forward-word"
 
-autoload -Uz compinit
-compinit
+source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-setopt autolist
-setopt automenu
-setopt autoparamkeys
-setopt autopushd
-setopt braceccl
-setopt chaselinks
-setopt completealiases
-setopt extendedglob
-setopt globdots
-setopt histignorealldups
-setopt histnostore
-setopt histreduceblanks
-setopt incappendhistory
-setopt listtypes
-setopt magicequalsubst
-setopt multios
-setopt noautoremoveslash
-setopt nocheckjobs
-setopt noclobber
-setopt nocorrect
-setopt nocorrectall
-setopt nohup
-setopt nolistbeep
-setopt nolistpacked
-setopt nomenucomplete
-setopt pathdirs
-setopt promptsubst
-setopt pushdignoredups
-setopt sharehistory
-
-export PROMPT="%F{1}>%f "
-export PROMPT_EOL_MARK=""
+precmd() {
+    vcs_info
+    print -Pn "%B%F{green}%n%f%b"
+    print -Pn "%B in %F{blue}%~%f%b"
+    if [[ ! -z ${vcs_info_msg_0_} ]]; then
+        print -Pn "%B on %F{yellow}שׂ ${vcs_info_msg_0_}%f%b"
+    fi
+    print
+}
+PROMPT="%B%(?.%F{cyan}.%F{red})$%f%b "
+PROMPT_EOL_MARK=""
 
