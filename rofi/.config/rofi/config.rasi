@@ -16,7 +16,7 @@ window {
     border: 2px;
     border-color: #5f676a;
     padding: 16px;
-    width: 768px;
+    width: 512px;
 }
 
 inputbar {
@@ -30,17 +30,19 @@ prompt {
 }
 
 entry {
+    border: 0 0 1px 0;
+    border-color: #665c54;
+    padding: 8px;
     placeholder: "Search apps";
     placeholder-color: #665c54;
     text-color: #fff;
 }
 
 listview {
-    columns: 4;
+    columns: 1;
     dynamic: true;
     layout: vertical;
-    lines: 3;
-    padding-top: 2px;
+    lines: 6;
 }
 
 element {
@@ -48,17 +50,21 @@ element {
         element-icon,
         element-text
     ];
-    orientation: vertical;
-    padding: 16px;
+    orientation: horizontal;
+    padding: 8px;
+}
+
+element selected {
+    background-color: #504945;
 }
 
 element-icon {
     padding: 0 8px 0 0;
-    size: 48px;
+    size: 24px;
 }
 
 element-text {
-    horizontal-align: 0.5;
+    vertical-align: 0.5;
     text-color: #665c54;
 }
 
