@@ -8,5 +8,5 @@ setxkbmap -layout us -variant altgr-intl
 picom -b
 sxhkd &
 udiskie &
-exec xmonad
+exec awesome
 
