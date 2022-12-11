@@ -30,7 +30,6 @@ packer.startup({
             require("user.plugins.lualine"),
             require("user.plugins.mason"),
             require("user.plugins.notify"),
-            require("user.plugins.project"),
             require("user.plugins.rest"),
             require("user.plugins.todo"),
             require("user.plugins.treesitter"),
