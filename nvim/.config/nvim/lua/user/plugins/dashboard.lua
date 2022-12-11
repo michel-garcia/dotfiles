@@ -23,18 +23,17 @@ return {
             "",
             ""
         }
-        local button = function (icon, desc, action)
+        local button = function (desc, action)
             return {
                 action = action,
-                desc = string.format("%-50s", desc),
-                icon = string.format("%s ", icon)
+                desc = desc
             }
         end
         dashboard.custom_center = {
-            button("", "New File", ":enew"),
-            button("", "Recent", ":FzfLua oldfiles"),
-            button("", "Find", ":FzfLua files"),
-            button("", "Config", function ()
+            button("New File", ":enew"),
+            button("Recent", ":FzfLua oldfiles"),
+            button("Find", ":FzfLua files"),
+            button("Config", function ()
                 local ok, fzf = pcall(require, "fzf-lua")
                 if not ok then
                     vim.cmd("edit ~/.config/nvim/lua")
@@ -45,7 +44,7 @@ return {
                     show_cwd_header = false
                 })
             end),
-            button("", "Quit", ":quit"),
+            button("Quit", ":quit"),
         }
         dashboard.custom_footer = {
             "",
