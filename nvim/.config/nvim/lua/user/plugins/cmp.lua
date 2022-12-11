@@ -23,7 +23,7 @@ return {
                 ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-e>"] = cmp.mapping.close(),
                 ["<CR>"] = cmp.mapping.confirm({
-                    select = true
+                    select = false
                 })
             }),
             snippet = {
