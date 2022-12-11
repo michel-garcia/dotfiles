@@ -1,4 +1,5 @@
 local beautiful = require("beautiful")
+local naughty = require("naughty")
 
 beautiful.init({
     bg_normal = "#282828",
@@ -6,11 +7,13 @@ beautiful.init({
     border_normal = "#5f676a",
     border_focus = "#c78f23",
     font = "FiraCode Nerd Font Mono Bold 11",
-    useless_gap = 6,
     systray_icon_spacing = 6,
     taglist_fg_empty = "#665c54",
     taglist_fg_focus = "#fabd2f",
     taglist_fg_occupied = "#e7d7ad",
-    taglist_spacing = 4
+    taglist_spacing = 4,
+    useless_gap = 6
 })
+
+naughty.config.defaults.border_width = 2
 
