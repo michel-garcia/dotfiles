@@ -37,24 +37,6 @@ return {
         vim.keymap.set("n", "<leader>fs", function ()
             fzf.lsp_document_symbols()
         end, opts)
-        vim.api.nvim_create_autocmd("VimEnter", {
-            callback = function (args)
-                local buftype = vim.api.nvim_buf_get_option(0, "filetype")
-                if buftype ~= "netrw" then
-                    return
-                end
-                if vim.fn.isdirectory(args.file) == 0 then
-                    return
-                end
-                fzf.files({
-                    cwd = args.file,
-                    show_cwd_header = false
-                })
-            end,
-            group = vim.api.nvim_create_augroup("HijackExplorer", {
-                clear = true
-            })
-        })
     end
 }
 
