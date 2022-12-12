@@ -118,6 +118,11 @@ local keys = gears.table.join(
                 })
             end
         end
+    ),
+    awful.key(
+        { modkey }, "Pause", function ()
+            awful.spawn.with_shell("sleep 1; xset dpms force off")
+        end
     )
 )
 
