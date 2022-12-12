@@ -4,34 +4,37 @@ local wibox = require("wibox")
 local clock = require("user.widgets.clock")
 local taglist = require("user.widgets.taglist")
 local systray = require("user.widgets.systray")
+local network = require("user.widgets.network")
 
 awful.screen.connect_for_each_screen(function(s)
     if s ~= screen.primary then
         return
     end
-    s.mytaglist = taglist(s)
-    s.mywibox = awful.wibar({
-        position = "top", screen = s
+    s.taglist = taglist(s)
+    s.wibar = awful.wibar({
+        position = "top",
+        screen = s
     })
-    s.mywibox:setup({
+    s.wibar:setup({
         layout = wibox.layout.stack,
         {
             layout = wibox.layout.align.horizontal,
             {
                 layout = wibox.layout.fixed.horizontal,
-                clock(),
+                clock()
             },
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
                 systray(),
+                network()
             }
         },
         {
-            s.mytaglist,
-            valign = "center",
+            s.taglist,
+            layout = wibox.container.place,
             halign = "center",
-            layout = wibox.container.place
+            valign = "center"
         }
     })
 end)
