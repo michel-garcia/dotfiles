@@ -28,7 +28,7 @@ awful.rules.rules = {
             class = {
                 "Arandr",
                 "Blueman-manager",
-                "Gnome-calculator",
+                "gnome-calculator",
                 "Gpick",
                 "Kruler",
                 "MessageWin",  -- kalarm.
@@ -42,6 +42,8 @@ awful.rules.rules = {
             -- and the name shown there might not match defined rules here.
             name = {
                 "Event Tester",  -- xev.
+                "Steam - News",
+                "Friends List"
             },
             role = {
                 "AlarmWindow",  -- Thunderbird's calendar.
@@ -50,7 +52,8 @@ awful.rules.rules = {
             }
         },
         properties = {
-            floating = true
+            floating = true,
+            placement = awful.placement.centered + awful.placement.no_overlap
         }
     }
 }
