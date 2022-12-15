@@ -26,6 +26,7 @@ return {
                     select = false
                 })
             }),
+            preselect = cmp.PreselectMode.None,
             snippet = {
                 expand = function (args)
                     local luasnip = require("luasnip")
