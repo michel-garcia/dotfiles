@@ -4,8 +4,8 @@ local wibox = require("wibox")
 local clock = require("user.widgets.clock")
 local taglist = require("user.widgets.taglist")
 local systray = require("user.widgets.systray")
+local volume = require("user.widgets.volume")
 local network = require("user.widgets.network")
-local memory = require("user.widgets.memory")
 
 awful.screen.connect_for_each_screen(function(s)
     if s ~= screen.primary then
@@ -27,9 +27,9 @@ awful.screen.connect_for_each_screen(function(s)
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
-                memory(),
-                network(),
-                systray()
+                systray(),
+                volume(),
+                network()
             }
         },
         {

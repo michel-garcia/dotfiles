@@ -1,4 +1,4 @@
-local gears = require("gears")
+local timer = require("gears.timer")
 local wibox = require("wibox")
 
 local M = {}
@@ -21,12 +21,12 @@ function M:new(args)
             id = "percentage"
         }
     })
-    gears.timer({
+    timer({
         autostart = true,
         callback = function ()
             self:update()
         end,
-        timeout = args and args.timeout or 1
+        timeout = args and args.timeout or 5
     })
     self:update()
     return self.widget
@@ -54,8 +54,8 @@ function M:update()
 end
 
 function M:set_percentage(value)
-    local widget = table.remove(self.widget:get_children_by_id("percentage"))
-    widget.text = string.format("%s%%", value)
+    local widget = self.widget:get_children_by_id("percentage")[1]
+    widget:set_text(string.format("%s%%", value))
 end
 
 return setmetatable(M, {
