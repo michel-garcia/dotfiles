@@ -11,6 +11,7 @@ return {
                 "css",
                 "dart",
                 "glsl",
+                "help",
                 "html",
                 "http",
                 "javascript",
@@ -27,7 +28,7 @@ return {
                 enable = true
             },
             indent = {
-                enable = false
+                enable = true
             }
         })
         vim.opt.foldmethod = "expr"
