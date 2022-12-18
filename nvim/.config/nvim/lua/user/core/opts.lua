@@ -35,4 +35,9 @@ vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
+vim.opt.undodir = table.concat({
+    os.getenv("XDG_CACHE_HOME"),
+    "nvim", "undodir"
+}, "/")
+vim.opt.undofile = true
 
