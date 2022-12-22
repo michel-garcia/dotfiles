@@ -22,12 +22,12 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.align.horizontal,
             {
                 layout = wibox.layout.fixed.horizontal,
-                clock()
+                clock(),
+                systray()
             },
             nil,
             {
                 layout = wibox.layout.fixed.horizontal,
-                systray(),
                 volume(),
                 network()
             }

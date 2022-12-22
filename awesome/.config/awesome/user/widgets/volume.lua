@@ -51,8 +51,10 @@ end
 function M:update_volume()
     awful.spawn.easy_async("pacmd list-sinks", function (output)
         local volume, muted = output:match("%*%sindex.-front%-left.-%/%s+(%d+)%%.-muted:%s(%a+)")
-        self.volume = tonumber(volume)
-        self.muted = muted == "yes"
+        if volume ~= nil then
+            self.volume = tonumber(volume)
+            self.muted = muted == "yes"
+        end
         self:refresh()
     end)
 end
