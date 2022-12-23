@@ -9,8 +9,7 @@ return {
             },
             fzf_opts = {
                 ["--color"] = "bg+:-1,header:-1",
-                ["--info"] = "hidden",
-                ["--header"] = string.rep("-", 80 - 4)
+                ["--info"] = "hidden"
             },
             winopts = {
                 preview = {
@@ -20,10 +19,10 @@ return {
             winopts_fn = function ()
                 return {
                     border = "single",
-                    col = .5,
+                    --[[ col = .5,
                     height = 15,
                     row = .5,
-                    width = 80
+                    width = 80 ]]
                 }
             end
         })
@@ -31,12 +30,13 @@ return {
             noremap = true,
             silent = true
         }
-        vim.keymap.set("n", "<leader>ff", function ()
-            fzf.files()
-        end, opts)
-        vim.keymap.set("n", "<leader>fs", function ()
-            fzf.lsp_document_symbols()
-        end, opts)
+        vim.keymap.set("n", "<leader>pb", fzf.buffers, opts)
+        vim.keymap.set("n", "<leader>pt", fzf.tabs, opts)
+        vim.keymap.set("n", "<leader>sf", fzf.files, opts)
+        vim.keymap.set("n", "<leader>sh", fzf.help_tags, opts)
+        vim.keymap.set("n", "<leader>sg", fzf.live_grep, opts)
+        vim.keymap.set("n", "<leader>ds", fzf.lsp_document_symbols, opts)
+        vim.keymap.set("n", "<leader>sd", fzf.diagnostics_document, opts)
     end
 }
 
