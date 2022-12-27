@@ -1,6 +1,6 @@
 return {
     "kevinhwang91/nvim-ufo",
-    requires = {
+    dependencies = {
         "kevinhwang91/promise-async"
     },
     config = function ()

@@ -1,6 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
-    requires = {
+    dependencies = {
         "SmiteshP/nvim-navic"
     },
     config = function ()
