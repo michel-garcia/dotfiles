@@ -1,6 +1,7 @@
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$XDG_CACHE_HOME/zsh/history"
+mkdir -p "$XDG_CACHE_HOME/zsh"
 
 setopt ALWAYS_TO_END
 setopt AUTO_CD
