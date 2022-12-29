@@ -1,14 +1,3 @@
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function (args)
-        if vim.fn.isdirectory(args.file) ~= 0 then
-            vim.fn.chdir(args.file)
-        end
-    end,
-    group = vim.api.nvim_create_augroup("WorkingDirectory", {
-        clear = true
-    })
-})
-
 vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
         vim.cmd("setlocal formatoptions-=c")
