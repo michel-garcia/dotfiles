@@ -28,7 +28,7 @@ local keys = gears.table.join(
     ),
     awful.key(
         { modkey }, "j", function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx(1)
         end
     ),
     awful.key(

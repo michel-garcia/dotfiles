@@ -30,34 +30,6 @@ local keys = gears.table.join(
         { modkey }, "o", function (c)
             c:move_to_screen()
         end
-    ),
-    awful.key(
-        { modkey }, "t", function (c)
-            c.ontop = not c.ontop
-        end
-    ),
-    awful.key(
-        { modkey }, "n", function (c)
-            c.minimized = true
-        end
-    ),
-    awful.key(
-        { modkey }, "m", function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end
-    ),
-    awful.key(
-        { modkey, "Control" }, "m", function (c)
-            c.maximized_vertical = not c.maximized_vertical
-            c:raise()
-        end
-    ),
-    awful.key(
-        { modkey, "Shift" }, "m", function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end
     )
 )
 
