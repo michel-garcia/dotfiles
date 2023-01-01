@@ -25,10 +25,10 @@ return {
                 "yaml"
             },
             highlight = {
-                enable = true
+                disable = { "php" }
             },
             indent = {
-                enable = true
+                enable = false
             }
         })
         vim.opt.foldmethod = "expr"
