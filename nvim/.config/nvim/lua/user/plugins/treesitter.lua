@@ -25,7 +25,8 @@ return {
                 "yaml"
             },
             highlight = {
-                disable = { "php" }
+                disable = { "php" },
+                enable = true
             },
             indent = {
                 enable = false
