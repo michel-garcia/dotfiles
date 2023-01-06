@@ -2,17 +2,13 @@ local awful = require("awful")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local ICONS = {
-    syncing = "󱞒",
-    unavailable = "󱞐",
-    lan = "󰌗",
-    wifi = {
-        low = "󰤟",
-        med = "󰤢",
-        high = "󰤥",
-        full = "󰤨"
-    }
-}
+local ICON_SYNCING = "󱞒"
+local ICON_UNAVAILABLE = "󱞐"
+local ICON_LAN = "󰌗"
+local ICON_WIFI_LOW = "󰤟"
+local ICON_WIFI_MEDIUM = "󰤢"
+local ICON_WIFI_HIGH = "󰤥"
+local ICON_WIFI_FULL = "󰤨"
 
 local M = {}
 
@@ -22,22 +18,35 @@ M.connection = nil
 M.wifi_signal = 0
 
 function M:new(args)
-    self.root = wibox.widget({
+    local widget = wibox.widget({
         layout = wibox.layout.margin,
-        margins = 4,
+        left = 8,
+        right = 8,
         {
             widget = wibox.widget.textbox,
             id = "icon",
             font = "Material Design Icons",
-            text = ICONS.syncing
+            text = ICON_SYNCING
         }
     })
+    timer({
+        autostart = true,
+        callback = function ()
+            self:update(widget)
+        end,
+        timeout = args and args.timeout or 5
+    })
+    self:update(widget)
+    return widget
+end
+
+function M:attach_tooltip(widget)
     local tooltip = awful.tooltip({
         mode = "outside",
-        objects = { M.root },
+        objects = { widget },
         preferred_alignments = { "middle" }
     })
-    M.root:connect_signal("mouse::enter", function ()
+    widget:connect_signal("mouse::enter", function ()
         if self.connection then
             if self.type == "ethernet" then
                 tooltip.text = string.format("Ethernet: %s", self.connection)
@@ -48,24 +57,19 @@ function M:new(args)
             end
         end
     end)
-    timer({
-        autostart = true,
-        callback = function ()
-            self:update()
-        end,
-        timeout = args and args.timeout or 5
-    })
-    self:update()
-    return self.root
 end
 
-function M:update()
-    self:update_device_info()
-    self:update_wifi_signal()
+function M:update(widget)
+    self:update_device_info(function ()
+        self:refresh(widget)
+    end)
+    self:update_wifi_signal(function ()
+        self:refresh(widget)
+    end)
 end
 
-function M:update_device_info()
-    awful.spawn.easy_async("nmcli -t device show", function (output)
+function M:update_device_info(callback)
+    awful.spawn.easy_async("nmcli --terse device show", function (output)
         local pattern = table.concat({
             "GENERAL.DEVICE:(.-)\n.-",
             "GENERAL.TYPE:(.-)\n.-",
@@ -94,50 +98,45 @@ function M:update_device_info()
         self.device = preferred and preferred.name or nil
         self.type = preferred and preferred.type or nil
         self.connection = preferred and preferred.connection or nil
-        self:refresh()
+        if callback then
+            callback()
+        end
     end)
 end
 
-function M:update_wifi_signal()
-    awful.spawn.easy_async("nmcli -m multiline -t device wifi list", function (output)
+function M:update_wifi_signal(callback)
+    awful.spawn.easy_async("nmcli --mode multiline --terse device wifi list", function (output)
         local pattern = "IN%-USE:([%*]?)\n.-SIGNAL:([%d]+)\n"
         local matches = output:gmatch(pattern)
         for in_use, signal in matches do
             if in_use == "*" then
                 self.wifi_signal = tonumber(signal)
+                if callback then
+                    callback()
+                end
+                return
             end
         end
     end)
 end
 
-function M:refresh()
+function M:refresh(widget)
+    local icon = widget:get_children_by_id("icon")[1]
     if self.type == "ethernet" then
-        self:set_icon(ICONS.lan)
+        icon:set_text(ICON_LAN)
     elseif self.type == "wifi" then
-        local icon = self:get_wifi_icon()
-        if icon then
-            self:set_icon(icon)
+        if self.wifi_signal >= 75 then
+            icon:set_text(ICON_WIFI_FULL)
+        elseif self.wifi_signal >= 50 then
+            icon:set_text(ICON_WIFI_HIGH)
+        elseif self.wifi_signal >= 25 then
+            icon:set_text(ICON_WIFI_MEDIUM)
+        else
+            icon:set_text(ICON_WIFI_LOW)
         end
     else
-        self:set_icon(ICONS.unavailable)
+        icon:set_text(ICON_UNAVAILABLE)
     end
-end
-
-function M:get_wifi_icon()
-    if self.wifi_signal >= 75 then
-        return ICONS.wifi.full
-    elseif self.wifi_signal >= 50 then
-        return ICONS.wifi.high
-    elseif self.wifi_signal >= 25 then
-        return ICONS.wifi.med
-    elseif self.wifi_signal >= 0 then
-        return ICONS.wifi.low
-    end
-end
-
-function M:set_icon(icon)
-    local widget = self.root:get_children_by_id("icon")[1]
-    widget.text = icon
 end
 
 return setmetatable(M, {

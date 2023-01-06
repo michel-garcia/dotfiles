@@ -1,9 +1,10 @@
 local awful = require("awful")
 local wibox = require("wibox")
 
-local clock = require("user.widgets.clock")
-local taglist = require("user.widgets.taglist")
+local time = require("user.widgets.time")
+local date = require("user.widgets.date")
 local systray = require("user.widgets.systray")
+local taglist = require("user.widgets.taglist")
 local volume = require("user.widgets.volume")
 local network = require("user.widgets.network")
 
@@ -21,15 +22,24 @@ awful.screen.connect_for_each_screen(function(s)
         {
             layout = wibox.layout.align.horizontal,
             {
-                layout = wibox.layout.fixed.horizontal,
-                clock(),
-                systray()
+                layout = wibox.container.margin,
+                left = 8,
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    time(),
+                    date(),
+                    systray()
+                }
             },
             nil,
             {
-                layout = wibox.layout.fixed.horizontal,
-                volume(),
-                network()
+                layout = wibox.container.margin,
+                right = 8,
+                {
+                    layout = wibox.layout.fixed.horizontal,
+                    volume(),
+                    network()
+                }
             }
         },
         {
