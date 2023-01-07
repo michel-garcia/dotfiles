@@ -66,6 +66,7 @@ function M:update(widget)
     self:update_wifi_signal(function ()
         self:refresh(widget)
     end)
+    collectgarbage("collect")
 end
 
 function M:update_device_info(callback)

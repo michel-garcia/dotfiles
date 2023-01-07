@@ -57,6 +57,7 @@ function M:update(widget)
             self:refresh(widget)
         end)
     end)
+    collectgarbage("collect")
 end
 
 function M:update_sink_volume(sink, callback)
