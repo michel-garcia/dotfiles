@@ -17,4 +17,5 @@ beautiful.init({
 })
 
 naughty.config.defaults.border_width = 2
+naughty.config.defaults.icon_size = 48
 
