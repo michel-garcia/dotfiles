@@ -94,14 +94,14 @@ function M:update(widget)
     )
     awful.spawn.easy_async(string.format("curl '%s'", url), function (output)
         self.temperature = output:match("\"temperature\":([%d%.]+)")
-        self.code = output:match("\"weathercode\":(%d+)")
+        self.code = tonumber(output:match("\"weathercode\":(%d+)"))
         self:refresh(widget)
     end)
     collectgarbage("collect")
 end
 
 function M:refresh(widget)
-    local index = tonumber(self.code)
+    local index = XREF[self.code] and self.code or 1
     local description, icon0, icon1 = table.unpack(XREF[index])
     local hour = tonumber(os.date("%H"))
     local icon = table.unpack(widget:get_children_by_id("icon"))
