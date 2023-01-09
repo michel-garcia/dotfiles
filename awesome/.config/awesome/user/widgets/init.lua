@@ -3,9 +3,11 @@ local wibox = require("wibox")
 
 local time = require("user.widgets.time")
 local date = require("user.widgets.date")
-local systray = require("user.widgets.systray")
+local weather = require("user.widgets.weather")
 local taglist = require("user.widgets.taglist")
+local systray = require("user.widgets.systray")
 local volume = require("user.widgets.volume")
+local microphone = require("user.widgets.microphone")
 local network = require("user.widgets.network")
 
 awful.screen.connect_for_each_screen(function(s)
@@ -28,7 +30,7 @@ awful.screen.connect_for_each_screen(function(s)
                     layout = wibox.layout.fixed.horizontal,
                     time(),
                     date(),
-                    systray()
+                    weather({ latitude = 25.76, longitude = -80.19 })
                 }
             },
             nil,
@@ -37,8 +39,10 @@ awful.screen.connect_for_each_screen(function(s)
                 right = 8,
                 {
                     layout = wibox.layout.fixed.horizontal,
+                    systray(),
+                    network(),
                     volume(),
-                    network()
+                    microphone()
                 }
             }
         },

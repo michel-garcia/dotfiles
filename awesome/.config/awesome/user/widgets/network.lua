@@ -29,6 +29,7 @@ function M:new(args)
             text = ICON_SYNCING
         }
     })
+    self:attach_tooltip(widget)
     timer({
         autostart = true,
         callback = function ()
@@ -122,7 +123,7 @@ function M:update_wifi_signal(callback)
 end
 
 function M:refresh(widget)
-    local icon = widget:get_children_by_id("icon")[1]
+    local icon = table.unpack(widget:get_children_by_id("icon"))
     if self.type == "ethernet" then
         icon:set_text(ICON_LAN)
     elseif self.type == "wifi" then

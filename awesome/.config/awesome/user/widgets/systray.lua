@@ -5,8 +5,8 @@ return function ()
         layout = wibox.container.margin,
         left = 8,
         right = 8,
-        top = 5,
-        bottom = 5,
+        top = 3,
+        bottom = 3,
         {
             widget = wibox.widget.systray
         }

@@ -2,15 +2,10 @@ local awful = require("awful")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local ICON_HIGH = "󰕾"
-local ICON_MEDIUM = "󰖀"
-local ICON_LOW = "󰕿"
-local ICON_MUTED = "󰝟"
+local ICON_NORMAL = "󰍬"
+local ICON_MUTED = "󰍭"
 
 local M = {}
-
-M.volume = 0
-M.muted = false
 
 function M:new(args)
     local widget = wibox.widget({
@@ -21,7 +16,7 @@ function M:new(args)
             widget = wibox.widget.textbox,
             id = "icon",
             font = "Material Design Icons",
-            text = ICON_MUTED
+            text = ICON_NORMAL
         }
     })
     self:attach_tooltip(widget)
@@ -48,20 +43,20 @@ function M:attach_tooltip(widget)
 end
 
 function M:update(widget)
-    awful.spawn.easy_async("pactl get-default-sink", function (output)
-        local sink = output:match("([^\n]+)")
-        self:update_sink_volume(sink, function ()
+    awful.spawn.easy_async("pactl get-default-source", function (output)
+        local source = output:match("([^\n]+)")
+        self:update_source_volume(source, function ()
             self:refresh(widget)
         end)
-        self:update_sink_mute(sink, function()
+        self:update_source_mute(source, function ()
             self:refresh(widget)
         end)
     end)
     collectgarbage("collect")
 end
 
-function M:update_sink_volume(sink, callback)
-    awful.spawn.easy_async(string.format("pactl get-sink-volume %s", sink), function (output)
+function M:update_source_volume(source, callback)
+    awful.spawn.easy_async(string.format("pactl get-source-volume %s", source), function (output)
         local volume = output:match("(%d+)%%")
         self.volume = tonumber(volume)
         if callback then
@@ -70,8 +65,8 @@ function M:update_sink_volume(sink, callback)
     end)
 end
 
-function M:update_sink_mute(sink, callback)
-    awful.spawn.easy_async(string.format("pactl get-sink-mute %s", sink), function (output)
+function M:update_source_mute(source, callback)
+    awful.spawn.easy_async(string.format("pactl get-source-mute %s", source), function (output)
         local mute = output:match(":%s([%a]+)")
         self.muted = mute == "yes"
         if callback then
@@ -81,15 +76,11 @@ function M:update_sink_mute(sink, callback)
 end
 
 function M:refresh(widget)
-    local icon = widget:get_children_by_id("icon")[1]
-    if self.muted then
-        icon:set_text(ICON_MUTED)
-    elseif self.volume > 80 then
-        icon:set_text(ICON_HIGH)
-    elseif self.volume > 40 then
-        icon:set_text(ICON_MEDIUM)
+    local icon = table.unpack(widget:get_children_by_id("icon"))
+    if not self.muted then
+        icon.text = ICON_NORMAL
     else
-       icon:set_text(ICON_LOW)
+        icon.text = ICON_MUTED
     end
 end
 
