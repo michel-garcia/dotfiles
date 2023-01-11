@@ -72,9 +72,10 @@ return {
                     type = "group",
                     val = {
                         button("New file", ":enew<CR>", "e"),
-                        button("Sync plugins", ":Lazy sync<CR>", "s"),
                         button("Find files", ":FzfLua files<CR>", "ff"),
                         button("Old files", ":FzfLua oldfiles<CR>", "fo"),
+                        button("Config", ":e $MYVIMRC<CR>", "c"),
+                        button("Sync plugins", ":Lazy sync<CR>", "s"),
                         button("Quit", ":quit<CR>", "q")
                     }
                 }
