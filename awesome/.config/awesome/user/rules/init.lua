@@ -10,12 +10,12 @@ awful.rules.rules = {
         properties = {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
-            focus = awful.client.focus.filter,
-            raise = true,
-            keys = keys,
             buttons = buttons,
-            screen = awful.screen.preferred,
-            placement = awful.placement.no_overlap + awful.placement.no_offscreen
+            focus = awful.client.focus.filter,
+            keys = keys,
+            placement = awful.placement.no_overlap + awful.placement.no_offscreen,
+            raise = true,
+            screen = awful.screen.preferred
         }
     },
     {
@@ -53,7 +53,7 @@ awful.rules.rules = {
         },
         properties = {
             floating = true,
-            placement = awful.placement.centered + awful.placement.no_overlap
+            placement = awful.placement.centered
         }
     }
 }
