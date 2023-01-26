@@ -25,7 +25,17 @@ return {
                 "yaml"
             },
             highlight = {
-                disable = { "php" },
+                disable = function (lang, bufnr)
+                    if lang == "php" then
+                        return true
+                    end
+                    local max = 128 * 1024
+                    local filename = vim.api.nvim_buf_get_name(bufnr)
+                    local ok, stats = pcall(vim.loop.fs_stat, filename)
+                    if ok and stats and stats.size > max then
+                        return true
+                    end
+                end,
                 enable = true
             },
             indent = {
