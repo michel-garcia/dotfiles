@@ -30,7 +30,7 @@ function M:new(args)
         callback = function ()
             self:update(widget)
         end,
-        timeout = args and args.timeout or 5
+        timeout = args and args.timeout or .2
     })
     self:update(widget)
     return widget
@@ -48,20 +48,17 @@ function M:attach_tooltip(widget)
 end
 
 function M:update(widget)
-    awful.spawn.easy_async("pactl get-default-sink", function (output)
-        local sink = output:match("([^\n]+)")
-        self:update_sink_volume(sink, function ()
-            self:refresh(widget)
-        end)
-        self:update_sink_mute(sink, function()
-            self:refresh(widget)
-        end)
+    self:update_sink_volume(function ()
+        self:refresh(widget)
+    end)
+    self:update_sink_mute(function()
+        self:refresh(widget)
     end)
     collectgarbage("collect")
 end
 
-function M:update_sink_volume(sink, callback)
-    awful.spawn.easy_async(string.format("pactl get-sink-volume %s", sink), function (output)
+function M:update_sink_volume(callback)
+    awful.spawn.easy_async("pactl get-sink-volume @DEFAULT_SINK@", function (output)
         local volume = output:match("(%d+)%%")
         self.volume = tonumber(volume)
         if callback then
@@ -70,8 +67,8 @@ function M:update_sink_volume(sink, callback)
     end)
 end
 
-function M:update_sink_mute(sink, callback)
-    awful.spawn.easy_async(string.format("pactl get-sink-mute %s", sink), function (output)
+function M:update_sink_mute(callback)
+    awful.spawn.easy_async("pactl get-sink-mute @DEFAULT_SINK@", function (output)
         local mute = output:match(":%s([%a]+)")
         self.muted = mute == "yes"
         if callback then

@@ -25,7 +25,7 @@ function M:new(args)
         callback = function ()
             self:update(widget)
         end,
-        timeout = args and args.timeout or 5
+        timeout = args and args.timeout or .2
     })
     self:update(widget)
     return widget
@@ -43,20 +43,17 @@ function M:attach_tooltip(widget)
 end
 
 function M:update(widget)
-    awful.spawn.easy_async("pactl get-default-source", function (output)
-        local source = output:match("([^\n]+)")
-        self:update_source_volume(source, function ()
-            self:refresh(widget)
-        end)
-        self:update_source_mute(source, function ()
-            self:refresh(widget)
-        end)
+    self:update_source_volume(function ()
+        self:refresh(widget)
+    end)
+    self:update_source_mute(function ()
+        self:refresh(widget)
     end)
     collectgarbage("collect")
 end
 
-function M:update_source_volume(source, callback)
-    awful.spawn.easy_async(string.format("pactl get-source-volume %s", source), function (output)
+function M:update_source_volume(callback)
+    awful.spawn.easy_async("pactl get-source-volume @DEFAULT_SOURCE@", function (output)
         local volume = output:match("(%d+)%%")
         self.volume = tonumber(volume)
         if callback then
@@ -65,8 +62,8 @@ function M:update_source_volume(source, callback)
     end)
 end
 
-function M:update_source_mute(source, callback)
-    awful.spawn.easy_async(string.format("pactl get-source-mute %s", source), function (output)
+function M:update_source_mute(callback)
+    awful.spawn.easy_async("pactl get-source-mute @DEFAULT_SOURCE@", function (output)
         local mute = output:match(":%s([%a]+)")
         self.muted = mute == "yes"
         if callback then

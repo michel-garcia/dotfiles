@@ -34,7 +34,7 @@ function M:new(args)
         callback = function ()
             self:update(widget)
         end,
-        timeout = args and args.timeout or 5
+        timeout = args and args.timeout or .2
     })
     self:update(widget)
     return widget
