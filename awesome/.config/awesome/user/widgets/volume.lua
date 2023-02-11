@@ -81,12 +81,14 @@ function M:refresh(widget)
     local icon = widget:get_children_by_id("icon")[1]
     if self.muted then
         icon:set_text(ICON_VOLUME_MUTE)
-    elseif self.volume > 80 then
-        icon:set_text(ICON_VOLUME_HIGH)
-    elseif self.volume > 40 then
-        icon:set_text(ICON_VOLUME_MEDIUM)
-    else
-       icon:set_text(ICON_VOLUME_LOW)
+    elseif type(self.volume) == "number" then
+        if self.volume > 80 then
+            icon:set_text(ICON_VOLUME_HIGH)
+        elseif self.volume > 40 then
+            icon:set_text(ICON_VOLUME_MEDIUM)
+        else
+           icon:set_text(ICON_VOLUME_LOW)
+        end
     end
 end
 
