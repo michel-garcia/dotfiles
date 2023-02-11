@@ -1,7 +1,7 @@
 configuration {
     disable-history: true;
     display-drun: "Applications ";
-    font: "CaskaydiaCove Nerd Font 11";
+    font: "FiraCode NerdFont Mono Bold 11";
     sidebar-mode: false;
 }
 
