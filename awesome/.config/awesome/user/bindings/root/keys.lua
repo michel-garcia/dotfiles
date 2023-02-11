@@ -6,124 +6,104 @@ local modkey = config.modkey
 local terminal = config.terminal
 
 local keys = gears.table.join(
-    awful.key(
-        { modkey, "Control" }, "r", function ()
-            awesome.restart()
+    awful.key({ modkey, "Control" }, "r", function ()
+        awesome.restart()
+    end),
+    awful.key({ modkey, "Shift" }, "q", function ()
+        awesome.quit()
+    end),
+    awful.key({ modkey }, "Return", function ()
+        awful.spawn(terminal)
+    end),
+    awful.key({ modkey }, "p", function()
+        awful.spawn("rofi -disable-history -show drun")
+    end),
+    awful.key({ modkey }, "j", function ()
+        awful.client.focus.byidx(1)
+    end),
+    awful.key({ modkey }, "k", function ()
+        awful.client.focus.byidx(-1)
+    end),
+    awful.key({ modkey, "Shift" }, "j", function ()
+        awful.client.swap.byidx(1)
+    end),
+    awful.key({ modkey, "Shift" }, "k", function ()
+        awful.client.swap.byidx(-1)
+    end),
+    awful.key({ modkey, "Control" }, "j", function ()
+        awful.screen.focus_relative(1)
+    end),
+    awful.key({ modkey, "Control" }, "k", function ()
+        awful.screen.focus_relative(-1)
+    end),
+    awful.key({ modkey }, "u", function ()
+        awful.client.urgent.jumpto()
+    end),
+    awful.key({ modkey }, "Tab", function ()
+        awful.client.focus.history.previous()
+        if client.focus then
+            client.focus:raise()
         end
-    ),
-    awful.key(
-        { modkey, "Shift" }, "q", function ()
-            awesome.quit()
+    end),
+    awful.key({ modkey }, "l", function ()
+        awful.tag.incmwfact(0.05)
+    end),
+    awful.key({ modkey }, "h", function ()
+        awful.tag.incmwfact(-0.05)
+    end),
+    awful.key({ modkey, "Shift" }, "h", function ()
+        awful.tag.incnmaster(1, nil, true)
+    end),
+    awful.key({ modkey, "Shift" }, "l", function ()
+        awful.tag.incnmaster(-1, nil, true)
+    end),
+    awful.key({ modkey, "Control" }, "h", function ()
+        awful.tag.incncol(1, nil, true)
+    end),
+    awful.key({ modkey, "Control" }, "l", function ()
+        awful.tag.incncol(-1, nil, true)
+    end),
+    awful.key({ modkey }, "space", function ()
+        awful.layout.inc(1)
+    end),
+    awful.key({ modkey, "Shift" }, "space", function ()
+        awful.layout.inc(-1)
+    end),
+    awful.key({ modkey, "Control" }, "n", function ()
+        local c = awful.client.restore()
+        if c then
+            c:emit_signal("request::activate", "key.unminimize", {
+                raise = true
+            })
         end
-    ),
-    awful.key(
-        { modkey }, "Return", function ()
-            awful.spawn(terminal)
-        end
-    ),
-    awful.key(
-        { modkey }, "p", function()
-            awful.spawn("rofi -disable-history -show drun")
-        end
-    ),
-    awful.key(
-        { modkey }, "j", function ()
-            awful.client.focus.byidx(1)
-        end
-    ),
-    awful.key(
-        { modkey }, "k", function ()
-            awful.client.focus.byidx(-1)
-        end
-    ),
-    awful.key(
-        { modkey, "Shift" }, "j", function ()
-            awful.client.swap.byidx(1)
-        end
-    ),
-    awful.key(
-        { modkey, "Shift" }, "k", function ()
-            awful.client.swap.byidx(-1)
-        end
-    ),
-    awful.key(
-        { modkey, "Control" }, "j", function ()
-            awful.screen.focus_relative(1)
-        end
-    ),
-    awful.key(
-        { modkey, "Control" }, "k", function ()
-            awful.screen.focus_relative(-1)
-        end
-    ),
-    awful.key(
-        { modkey }, "u", function ()
-            awful.client.urgent.jumpto()
-        end
-    ),
-    awful.key(
-        { modkey }, "Tab", function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end
-    ),
-    awful.key(
-        { modkey }, "l", function ()
-            awful.tag.incmwfact(0.05)
-        end
-    ),
-    awful.key(
-        { modkey }, "h", function ()
-            awful.tag.incmwfact(-0.05)
-        end
-    ),
-    awful.key(
-        { modkey, "Shift" }, "h", function ()
-            awful.tag.incnmaster(1, nil, true)
-        end
-    ),
-    awful.key(
-        { modkey, "Shift" }, "l", function ()
-            awful.tag.incnmaster(-1, nil, true)
-        end
-    ),
-    awful.key(
-        { modkey, "Control" }, "h", function ()
-            awful.tag.incncol(1, nil, true)
-        end
-    ),
-    awful.key(
-        { modkey, "Control" }, "l", function ()
-            awful.tag.incncol(-1, nil, true)
-        end
-    ),
-    awful.key(
-        { modkey }, "space", function ()
-            awful.layout.inc(1)
-        end
-    ),
-    awful.key(
-        { modkey, "Shift" }, "space", function ()
-            awful.layout.inc(-1)
-        end
-    ),
-    awful.key(
-        { modkey, "Control" }, "n", function ()
-            local c = awful.client.restore()
-            if c then
-                c:emit_signal("request::activate", "key.unminimize", {
-                    raise = true
-                })
-            end
-        end
-    ),
-    awful.key(
-        { modkey }, "Pause", function ()
-            awful.spawn.with_shell("sleep 1; xset dpms force off")
-        end
-    )
+    end),
+    awful.key({ modkey }, "Pause", function ()
+        awful.spawn.with_shell("sleep 1; xset dpms force off")
+    end),
+    awful.key({}, "XF86MonBrightnessDown", function ()
+        awful.spawn.with_shell("xbacklight -dec 20")
+    end),
+    awful.key({}, "XF86MonBrightnessUp", function ()
+        awful.spawn.with_shell("xbacklight -inc 20")
+    end),
+    awful.key({}, "XF86AudioPrev", function ()
+        awful.spawn.with_shell("playerctl previous")
+    end),
+    awful.key({}, "XF86AudioPlay", function ()
+        awful.spawn.with_shell("playerctl play-pause")
+    end),
+    awful.key({}, "XF86AudioNext", function ()
+        awful.spawn.with_shell("playerctl next")
+    end),
+    awful.key({}, "XF86AudioMute", function ()
+        awful.spawn.with_shell("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    end),
+    awful.key({}, "XF86AudioLowerVolume", function ()
+        awful.spawn.with_shell("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+    end),
+    awful.key({}, "XF86AudioRaiseVolume", function ()
+        awful.spawn.with_shell("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    end)
 )
 
 for i = 1, 9 do
