@@ -2,10 +2,10 @@ local awful = require("awful")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local ICON_NORMAL = "󰍬"
-local ICON_MUTED = "󰍭"
-
 local M = {}
+
+local ICON_MICROPHONE = "\u{f036c}"
+local ICON_MICROPHONE_OFF = "\u{f036d}"
 
 function M:new(args)
     local widget = wibox.widget({
@@ -15,8 +15,8 @@ function M:new(args)
         {
             widget = wibox.widget.textbox,
             id = "icon",
-            font = "Material Design Icons",
-            text = ICON_NORMAL
+            font = "FiraCode Nerd Font Mono 14",
+            text = ICON_MICROPHONE
         }
     })
     self:attach_tooltip(widget)
@@ -78,9 +78,9 @@ end
 function M:refresh(widget)
     local icon = table.unpack(widget:get_children_by_id("icon"))
     if not self.muted then
-        icon.text = ICON_NORMAL
+        icon:set_text(ICON_MICROPHONE)
     else
-        icon.text = ICON_MUTED
+        icon:set_text(ICON_MICROPHONE_OFF)
     end
 end
 

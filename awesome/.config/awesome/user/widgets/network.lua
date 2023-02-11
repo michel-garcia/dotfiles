@@ -2,15 +2,14 @@ local awful = require("awful")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local ICON_SYNCING = "󱞒"
-local ICON_UNAVAILABLE = "󱞐"
-local ICON_LAN = "󰌗"
-local ICON_WIFI_LOW = "󰤟"
-local ICON_WIFI_MEDIUM = "󰤢"
-local ICON_WIFI_HIGH = "󰤥"
-local ICON_WIFI_FULL = "󰤨"
-
 local M = {}
+
+local ICON_UNAVAILABLE = "\u{f1405}"
+local ICON_LAN = "\u{f0318}"
+local ICON_WIFI_STRENGTH_1 = "\u{f091f}"
+local ICON_WIFI_STRENGTH_2 = "\u{f0922}"
+local ICON_WIFI_STRENGTH_3 = "\u{f0925}"
+local ICON_WIFI_STRENGTH_4 = "\u{f0928}"
 
 M.device = nil
 M.type = nil
@@ -24,9 +23,9 @@ function M:new(args)
         right = 8,
         {
             widget = wibox.widget.textbox,
+            font = "FiraCode Nerd Font Mono 14",
             id = "icon",
-            font = "Material Design Icons",
-            text = ICON_SYNCING
+            text = ICON_LAN
         }
     })
     self:attach_tooltip(widget)
@@ -128,13 +127,13 @@ function M:refresh(widget)
         icon:set_text(ICON_LAN)
     elseif self.type == "wifi" then
         if self.wifi_signal >= 75 then
-            icon:set_text(ICON_WIFI_FULL)
+            icon:set_text(ICON_WIFI_STRENGTH_4)
         elseif self.wifi_signal >= 50 then
-            icon:set_text(ICON_WIFI_HIGH)
+            icon:set_text(ICON_WIFI_STRENGTH_3)
         elseif self.wifi_signal >= 25 then
-            icon:set_text(ICON_WIFI_MEDIUM)
+            icon:set_text(ICON_WIFI_STRENGTH_2)
         else
-            icon:set_text(ICON_WIFI_LOW)
+            icon:set_text(ICON_WIFI_STRENGTH_1)
         end
     else
         icon:set_text(ICON_UNAVAILABLE)

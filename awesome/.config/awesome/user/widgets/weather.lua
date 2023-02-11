@@ -3,41 +3,45 @@ local wibox = require("wibox")
 
 local M = {}
 
-local ICON_SUNNY = "󰖙"
-local ICON_NIGHT = "󰖔"
-local ICON_PARTLY_CLOUDY = "󰖕"
-local ICON_NIGHT_PARTLY_CLOUDY = "󰼱"
-local ICON_FOG = "󰖑"
-local ICON_RAINY = "󰖗"
-local ICON_POURING = "󰖖"
-local ICON_SNOWY = "󰖘"
+local ICON_DAY_SUNNY = "\u{e30d}"
+local ICON_NIGHT_CLEAR = "\u{e32b}"
+local ICON_DAY_CLOUDY = "\u{eb99}"
+local ICON_NIGHT_CLOUDY = "\u{e32e}"
+local ICON_DAY_FOG = "\u{e303}"
+local ICON_NIGHT_FOG = "u{e346}"
+local ICON_DAY_RAIN = "\u{e308}"
+local ICON_NIGHT_RAIN = "u{e333}"
+local ICON_DAY_THUNDERSTORM = "\u{e30f}"
+local ICON_NIGHT_THUNDERSTORM = "\u{e338}"
+local ICON_DAY_SNOW = "\u{e30a}"
+local ICON_NIGHT_SNOW = "\u{e335}"
 
 local XREF = {
-    [0] = { "Clear Sky", ICON_SUNNY, ICON_NIGHT },
-    [1] = { "Mainly Clear", ICON_SUNNY, ICON_NIGHT },
-    [2] = { "Partly Cloudy", ICON_PARTLY_CLOUDY, ICON_NIGHT_PARTLY_CLOUDY },
-    [3] = { "Overcast", ICON_PARTLY_CLOUDY, ICON_NIGHT_PARTLY_CLOUDY },
-    [45] = { "Fog", ICON_FOG, ICON_FOG },
-    [48] = { "Fog", ICON_FOG, ICON_FOG },
-    [51] = { "Drizzle", ICON_RAINY, ICON_RAINY },
-    [53] = { "Drizzle", ICON_RAINY, ICON_RAINY },
-    [55] = { "Drizzle", ICON_RAINY, ICON_RAINY },
-    [56] = { "Freezing Drizzle", ICON_RAINY, ICON_RAINY },
-    [57] = { "Freezing Drizzle", ICON_RAINY, ICON_RAINY },
-    [61] = { "Rain", ICON_POURING, ICON_POURING },
-    [63] = { "Rain", ICON_POURING, ICON_POURING },
-    [65] = { "Rain", ICON_POURING, ICON_POURING },
-    [66] = { "Freezing Rain", ICON_POURING, ICON_POURING },
-    [67] = { "Freezing Rain", ICON_POURING, ICON_POURING },
-    [71] = { "Snow", ICON_SNOWY, ICON_SNOWY },
-    [73] = { "Snow", ICON_SNOWY, ICON_SNOWY },
-    [75] = { "Snow", ICON_SNOWY, ICON_SNOWY },
-    [77] = { "Snow Grains", ICON_SNOWY, ICON_SNOWY },
-    [80] = { "Rain Showers", ICON_POURING, ICON_POURING },
-    [81] = { "Rain Showers", ICON_POURING, ICON_POURING },
-    [82] = { "Rain Showers", ICON_POURING, ICON_POURING },
-    [85] = { "Snow Showers", ICON_SNOWY, ICON_SNOWY },
-    [86] = { "Snow Showers", ICON_SNOWY, ICON_SNOWY }
+    [0] = { "Clear Sky", ICON_DAY_SUNNY, ICON_NIGHT_CLEAR },
+    [1] = { "Mainly Clear", ICON_DAY_SUNNY, ICON_NIGHT_CLEAR },
+    [2] = { "Partly Cloudy", ICON_DAY_CLOUDY, ICON_NIGHT_CLOUDY },
+    [3] = { "Overcast", ICON_DAY_CLOUDY, ICON_NIGHT_CLOUDY },
+    [45] = { "Fog", ICON_DAY_FOG, ICON_NIGHT_FOG },
+    [48] = { "Fog", ICON_DAY_FOG, ICON_NIGHT_FOG },
+    [51] = { "Drizzle", ICON_DAY_RAIN, ICON_NIGHT_RAIN },
+    [53] = { "Drizzle", ICON_DAY_RAIN, ICON_NIGHT_RAIN },
+    [55] = { "Drizzle", ICON_DAY_RAIN, ICON_NIGHT_RAIN },
+    [56] = { "Freezing Drizzle", ICON_DAY_RAIN, ICON_NIGHT_RAIN },
+    [57] = { "Freezing Drizzle", ICON_DAY_RAIN, ICON_NIGHT_RAIN },
+    [61] = { "Rain", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [63] = { "Rain", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [65] = { "Rain", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [66] = { "Freezing Rain", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [67] = { "Freezing Rain", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [71] = { "Snow", ICON_DAY_SNOW, ICON_NIGHT_SNOW },
+    [73] = { "Snow", ICON_DAY_SNOW, ICON_NIGHT_SNOW },
+    [75] = { "Snow", ICON_DAY_SNOW, ICON_NIGHT_SNOW },
+    [77] = { "Snow Grains", ICON_DAY_SNOW, ICON_NIGHT_SNOW },
+    [80] = { "Rain Showers", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [81] = { "Rain Showers", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [82] = { "Rain Showers", ICON_DAY_THUNDERSTORM, ICON_NIGHT_THUNDERSTORM },
+    [85] = { "Snow Showers", ICON_DAY_SNOW, ICON_NIGHT_SNOW },
+    [86] = { "Snow Showers", ICON_DAY_SNOW, ICON_NIGHT_SNOW }
 
 }
 
@@ -50,8 +54,9 @@ function M:new(args)
             layout = wibox.layout.fixed.horizontal,
             {
                 widget = wibox.widget.textbox,
+                font = "FiraCode Nerd Font Mono 14",
                 id = "icon",
-                text = ICON_SUNNY
+                text = ICON_DAY_SUNNY
             },
             {
                 widget = wibox.container.margin,

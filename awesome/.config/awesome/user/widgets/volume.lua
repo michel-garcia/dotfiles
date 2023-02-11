@@ -2,12 +2,12 @@ local awful = require("awful")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local ICON_HIGH = "󰕾"
-local ICON_MEDIUM = "󰖀"
-local ICON_LOW = "󰕿"
-local ICON_MUTED = "󰝟"
-
 local M = {}
+
+local ICON_VOLUME_HIGH = "\u{f057e}"
+local ICON_VOLUME_MEDIUM = "\u{f0580}"
+local ICON_VOLUME_LOW = "\u{f057f}"
+local ICON_VOLUME_MUTE = "\u{f075f}"
 
 M.volume = 0
 M.muted = false
@@ -20,8 +20,8 @@ function M:new(args)
         {
             widget = wibox.widget.textbox,
             id = "icon",
-            font = "Material Design Icons",
-            text = ICON_MUTED
+            font = "FiraCode Nerd Font Mono 14",
+            text = ICON_VOLUME_HIGH
         }
     })
     self:attach_tooltip(widget)
@@ -83,13 +83,13 @@ end
 function M:refresh(widget)
     local icon = widget:get_children_by_id("icon")[1]
     if self.muted then
-        icon:set_text(ICON_MUTED)
+        icon:set_text(ICON_VOLUME_MUTE)
     elseif self.volume > 80 then
-        icon:set_text(ICON_HIGH)
+        icon:set_text(ICON_VOLUME_HIGH)
     elseif self.volume > 40 then
-        icon:set_text(ICON_MEDIUM)
+        icon:set_text(ICON_VOLUME_MEDIUM)
     else
-       icon:set_text(ICON_LOW)
+       icon:set_text(ICON_VOLUME_LOW)
     end
 end
 
