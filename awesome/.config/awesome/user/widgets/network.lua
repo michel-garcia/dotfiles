@@ -23,7 +23,7 @@ function M:new(args)
         right = 8,
         {
             widget = wibox.widget.textbox,
-            font = "FiraCode Nerd Font Mono 14",
+            font = "FiraCode Nerd Font Mono 18",
             id = "icon",
             text = ICON_LAN
         }

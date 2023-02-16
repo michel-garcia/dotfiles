@@ -15,7 +15,7 @@ function M:new(args)
         {
             widget = wibox.widget.textbox,
             id = "icon",
-            font = "FiraCode Nerd Font Mono 14",
+            font = "FiraCode Nerd Font Mono 18",
             text = ICON_MICROPHONE
         }
     })
