@@ -11,17 +11,12 @@ local mappings = {
             vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
             vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
             vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
-            vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", opts)
+            vim.keymap.set("t", "<C-w>", "<C-\\><C-n>", opts)
             vim.keymap.set("n", "<A-Tab>", ":tabnext<CR>", opts)
             vim.keymap.set("n", "<A-S-Tab>", ":tabprevious<CR>", opts)
             vim.keymap.set("n", "<A-t>", ":tabnew<CR>", opts)
             vim.keymap.set("n", "<A-\\>", ":tabnew<CR>:terminal<CR>", opts)
             vim.keymap.set("n", "<A-q>", ":tabclose<CR>", opts)
-            vim.keymap.set("t", "<A-Tab>", "<C-\\><C-n>:tabnext<CR>", opts)
-            vim.keymap.set("t", "<A-S-Tab>", "<C-\\><C-n>:tabprevious<CR>", opts)
-            vim.keymap.set("t", "<A-t>", "<C-\\><C-n>:tabnew<CR>", opts)
-            vim.keymap.set("t", "<A-\\>", "<C-\\><C-n>:tabnew<CR>:terminal<CR>", opts)
-            vim.keymap.set("t", "<A-q>", "<C-\\><C-n>:tabclose<CR>", opts)
         end
     },
     lsp = {
