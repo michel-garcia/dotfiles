@@ -9,7 +9,8 @@ return {
             },
             fzf_opts = {
                 ["--color"] = "bg+:-1,header:-1",
-                ["--info"] = "hidden"
+                ["--info"] = "default",
+                ["--scroll-off"] = 5
             },
             winopts = {
                 preview = {
@@ -19,10 +20,10 @@ return {
             winopts_fn = function ()
                 return {
                     border = "single",
-                    --[[ col = .5,
+                    col = .5,
                     height = 15,
                     row = .5,
-                    width = 80 ]]
+                    width = 80
                 }
             end
         })
