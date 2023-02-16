@@ -19,7 +19,7 @@ return {
         "clangd",
         "intelephense",
         "jsonls",
-        "sumneko_lua",
+        "lua_ls",
         "tsserver"
     }
 }
