@@ -11,6 +11,8 @@ return {
             local config = lsp.get_server_config(server_name)
             server.setup(config)
         end
+        local ui = require("lspconfig.ui.windows")
+        ui.default_options.border = "single"
     end
 }
 
