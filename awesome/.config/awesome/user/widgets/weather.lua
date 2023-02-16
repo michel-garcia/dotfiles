@@ -5,7 +5,7 @@ local M = {}
 
 local ICON_DAY_SUNNY = "\u{e30d}"
 local ICON_NIGHT_CLEAR = "\u{e32b}"
-local ICON_DAY_CLOUDY = "\u{eb99}"
+local ICON_DAY_CLOUDY = "\u{e302}"
 local ICON_NIGHT_CLOUDY = "\u{e32e}"
 local ICON_DAY_FOG = "\u{e303}"
 local ICON_NIGHT_FOG = "u{e346}"
