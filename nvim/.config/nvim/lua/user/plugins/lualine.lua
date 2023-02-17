@@ -97,8 +97,7 @@ return {
             options = {
                 component_separators = "",
                 disabled_filetypes = {
-                    statusline = { "dashboard" },
-                    winbar = { "dashboard" }
+                    "alpha"
                 },
                 icons_enabled = false,
                 section_separators = ""
@@ -134,15 +133,6 @@ return {
                 }
             }
         })
-        --[[ vim.api.nvim_create_autocmd("ColorScheme", {
-            callback = function ()
-                vim.cmd("hi lualine_c_inactive none")
-                vim.cmd("hi link lualine_c_inactive lualine_c_normal")
-            end,
-            group = vim.api.nvim_create_augroup("LualineHighlights", {
-                clear = true
-            })
-        }) ]]
     end
 }
 
