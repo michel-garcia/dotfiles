@@ -35,7 +35,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         if saved then
             vim.notify("Saved successfully!")
         else
-            local message = string.format("Failed to save '%s'", args.file)
+            local filename = vim.fn.fnamemodify(args.file, ":t")
+            local message = string.format("Failed to save '%s'", filename)
             vim.notify(message, "error")
         end
     end,
