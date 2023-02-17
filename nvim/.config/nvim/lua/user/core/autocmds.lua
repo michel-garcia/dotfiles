@@ -5,8 +5,16 @@ local group = vim.api.nvim_create_augroup("CustomAutocommands", {
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function (args)
         if vim.fn.isdirectory(args.file) ~= 0 then
+            vim.opt.hidden = false
             vim.cmd.chdir(args.file)
         end
+    end,
+    group = group
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function ()
+        vim.opt.hidden = true
     end,
     group = group
 })
