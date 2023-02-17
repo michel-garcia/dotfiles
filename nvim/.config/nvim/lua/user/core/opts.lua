@@ -6,6 +6,7 @@ vim.opt.colorcolumn = {}
 vim.opt.cursorline = true
 vim.opt.encoding = "utf-8"
 vim.opt.expandtab = true
+vim.opt.fsync = false
 vim.opt.guicursor = "i:block"
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
@@ -36,4 +37,5 @@ vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.undofile = true
+vim.opt.writebackup = false
 
