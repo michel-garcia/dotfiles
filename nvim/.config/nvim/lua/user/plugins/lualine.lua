@@ -16,10 +16,19 @@ return {
             context = {
                 function ()
                     local ok, navic = pcall(require, "nvim-navic")
-                    if ok then
-                        return navic.get_location()
+                    if not ok then
+                        return string.char(32)
                     end
-                end
+                    local context = navic.get_location()
+                    if context == "" then
+                        return string.char(32)
+                    end
+                    if context:len() > 80 then
+                        context = string.format("%s...", context:sub(1, 80))
+                    end
+                    return context
+                end,
+                color = "lualine_c_normal"
             },
             diagnostics = {
                 "diagnostics",
@@ -33,13 +42,19 @@ return {
                 }
             },
             filename = {
-                "filename",
-                symbols = {
-                    modified = "ﱣ ",
-                    newfile = "New File",
-                    readonly = " ",
-                    unnamed = "Unnamed"
-                }
+                function ()
+                    local filename = vim.api.nvim_buf_get_name(0)
+                    if filename == "" then
+                        return "New File"
+                    end
+                    filename = vim.fn.fnamemodify(filename, ":t")
+                    local modified = vim.api.nvim_buf_get_option(0, "modified")
+                    if modified then
+                        filename = string.format("%s %s", "\u{ea71}", filename)
+                    end
+                    return filename
+                end,
+                color = "lualine_a_insert"
             },
             filetype = {
                 "filetype"
@@ -53,8 +68,8 @@ return {
             tabs = {
                 "tabs",
                 tabs_color = {
-                    active = "lualine_a_insert",
-                    inactive = "lualine_b_insert"
+                    active = "@function",
+                    inactive = "lualine_c_insert"
                 }
             },
             title = {
@@ -119,7 +134,7 @@ return {
                 }
             }
         })
-        vim.api.nvim_create_autocmd("ColorScheme", {
+        --[[ vim.api.nvim_create_autocmd("ColorScheme", {
             callback = function ()
                 vim.cmd("hi lualine_c_inactive none")
                 vim.cmd("hi link lualine_c_inactive lualine_c_normal")
@@ -127,7 +142,7 @@ return {
             group = vim.api.nvim_create_augroup("LualineHighlights", {
                 clear = true
             })
-        })
+        }) ]]
     end
 }
 
