@@ -15,15 +15,15 @@ return {
             local paths = {}
             local fzf = require("fzf-lua")
             fzf.fzf_exec(function (callback)
-                    paths = {}
-                    for _, path in ipairs(persistence.list()) do
-                        local filename = vim.fn.fnamemodify(path, ":t:r")
-                        local name = filename:gsub("%%", "/")
-                        paths[name] = path
-                        callback(name)
-                    end
-                    callback()
-                end, {
+                paths = {}
+                for _, path in ipairs(persistence.list()) do
+                    local filename = vim.fn.fnamemodify(path, ":t:r")
+                    local name = filename:gsub("%%", "/")
+                    paths[name] = path
+                    callback(name)
+                end
+                callback()
+            end, {
                 actions = {
                     ["default"] = function (selected)
                         local path = vim.fn.fnameescape(paths[selected[1]])
