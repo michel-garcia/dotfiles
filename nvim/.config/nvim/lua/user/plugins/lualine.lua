@@ -23,8 +23,10 @@ return {
                     if context == "" then
                         return string.char(32)
                     end
-                    if context:len() > 80 then
-                        context = string.format("%s...", context:sub(1, 80))
+                    local columns = vim.api.nvim_get_option("columns")
+                    local max_width = math.ceil(columns / 3)
+                    if context:len() > max_width then
+                        context = string.format("%s...", context:sub(1, max_width - 3))
                     end
                     return context
                 end,
@@ -54,7 +56,14 @@ return {
                     end
                     return filename
                 end,
-                color = "lualine_a_insert"
+                color = function ()
+                    local win = tonumber(vim.g.actual_curwin)
+                    if win == vim.api.nvim_get_current_win() then
+                        return "lualine_a_insert"
+                    else
+                        return "lualine_b_insert"
+                    end
+                end
             },
             filetype = {
                 "filetype"
