@@ -1,15 +1,12 @@
 local wibox = require("wibox")
 
 return function ()
-    return wibox.widget({
-        layout = wibox.container.margin,
-        left = 8,
-        right = 8,
-        top = 3,
-        bottom = 3,
-        {
-            widget = wibox.widget.systray
-        }
-    })
+    local systray = wibox.widget.systray()
+    local container = wibox.container.margin(systray)
+    container.bottom = 4
+    container.left = 8
+    container.right = 8
+    container.top = 4
+    return container
 end
 

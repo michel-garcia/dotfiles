@@ -1,46 +1,38 @@
 local awful = require("awful")
+local icons = require("user.theme.icons")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local M = {}
+local Network = {}
+Network.__index = Network
 
-local ICON_UNAVAILABLE = "\u{f1405}"
-local ICON_LAN = "\u{f0318}"
-local ICON_WIFI_STRENGTH_1 = "\u{f091f}"
-local ICON_WIFI_STRENGTH_2 = "\u{f0922}"
-local ICON_WIFI_STRENGTH_3 = "\u{f0925}"
-local ICON_WIFI_STRENGTH_4 = "\u{f0928}"
+Network.device = nil
+Network.type = nil
+Network.connection = nil
+Network.wifi_signal = 0
 
-M.device = nil
-M.type = nil
-M.connection = nil
-M.wifi_signal = 0
-
-function M:new(args)
-    local widget = wibox.widget({
-        layout = wibox.layout.margin,
-        left = 8,
-        right = 8,
-        {
-            widget = wibox.widget.textbox,
-            font = "FiraCode Nerd Font Mono 18",
-            id = "icon",
-            text = ICON_LAN
-        }
-    })
-    self:attach_tooltip(widget)
+function Network:new(args)
+    local network = setmetatable({}, Network)
+    local icon = wibox.widget.textbox()
+    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.text = icons.network_unavailable
+    local container = wibox.container.margin(icon)
+    network.__widget = container
+    container.left = 8
+    container.right = 8
+    network:attach_tooltip(container)
     timer({
         autostart = true,
         callback = function ()
-            self:update(widget)
+            network:update(icon)
         end,
-        timeout = args and args.timeout or .2
+        timeout = args and args.timeout or 1
     })
-    self:update(widget)
-    return widget
+    network:update(icon)
+    return network
 end
 
-function M:attach_tooltip(widget)
+function Network:attach_tooltip(widget)
     local tooltip = awful.tooltip({
         mode = "outside",
         objects = { widget },
@@ -59,7 +51,7 @@ function M:attach_tooltip(widget)
     end)
 end
 
-function M:update(widget)
+function Network:update(widget)
     self:update_device_info(function ()
         self:refresh(widget)
     end)
@@ -69,7 +61,7 @@ function M:update(widget)
     collectgarbage("collect")
 end
 
-function M:update_device_info(callback)
+function Network:update_device_info(callback)
     awful.spawn.easy_async("nmcli --terse device show", function (output)
         local pattern = table.concat({
             "GENERAL.DEVICE:(.-)\n.-",
@@ -105,7 +97,7 @@ function M:update_device_info(callback)
     end)
 end
 
-function M:update_wifi_signal(callback)
+function Network:update_wifi_signal(callback)
     awful.spawn.easy_async("nmcli --mode multiline --terse device wifi list", function (output)
         local pattern = "IN%-USE:([%*]?)\n.-SIGNAL:([%d]+)\n"
         local matches = output:gmatch(pattern)
@@ -121,28 +113,28 @@ function M:update_wifi_signal(callback)
     end)
 end
 
-function M:refresh(widget)
-    local icon = table.unpack(widget:get_children_by_id("icon"))
+function Network:refresh(widget)
     if self.type == "ethernet" then
-        icon:set_text(ICON_LAN)
+        widget.text = icons.ethernet
     elseif self.type == "wifi" then
-        if self.wifi_signal >= 75 then
-            icon:set_text(ICON_WIFI_STRENGTH_4)
-        elseif self.wifi_signal >= 50 then
-            icon:set_text(ICON_WIFI_STRENGTH_3)
-        elseif self.wifi_signal >= 25 then
-            icon:set_text(ICON_WIFI_STRENGTH_2)
+        if self.wifi_signal == 100 then
+            widget.text = icons.wifi_strength_4
+        elseif self.wifi_signal >= 80 then
+            widget.text = icons.wifi_strength_3
+        elseif self.wifi_signal >= 40 then
+            widget.text = icons.wifi_strength_2
         else
-            icon:set_text(ICON_WIFI_STRENGTH_1)
+            widget.text = icons.wifi_strength_1
         end
     else
-        icon:set_text(ICON_UNAVAILABLE)
+        widget.text = icons.network_unavailable
     end
 end
 
-return setmetatable(M, {
+return setmetatable(Network, {
     __call = function (_, ...)
-        return M:new(...)
+        local network = Network:new(...)
+        return network.__widget
     end
 })
 

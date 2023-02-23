@@ -6,5 +6,5 @@ require("user.bindings")
 require("user.rules")
 require("user.signals")
 require("user.screens")
-require("user.widgets")
+require("user.panels")
 

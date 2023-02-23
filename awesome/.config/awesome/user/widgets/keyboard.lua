@@ -1,59 +1,59 @@
 local awful = require("awful")
+local icons = require("user.theme.icons")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local M = {}
+local Keyboard = {}
+Keyboard.__index = Keyboard
 
-M.layout = ""
-M.variant = ""
+Keyboard.layout = ""
+Keyboard.variant = ""
 
-function M:new(args)
-    local widget = wibox.widget({
-        layout = wibox.container.margin,
-        left = 8,
-        right = 8,
-        {
-            layout = wibox.layout.fixed.horizontal,
-            {
-                widget = wibox.widget.textbox,
-                id = "icon",
-                font = "Material Design Icons",
-                text = "󰥻"
-            },
-            {
-                widget = wibox.container.margin,
-                left = 8
-            },
-            {
-                widget = wibox.widget.textbox,
-                id = "content"
-            }
-        }
-    })
-    self:attach_tooltip(widget)
+function Keyboard:new(args)
+    local keyboard = setmetatable({}, Keyboard)
+    local icon = wibox.widget.textbox()
+    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.text = icons.keyboard
+    local spacing = wibox.container.margin()
+    spacing.right = 8
+    local keyboard_layout = wibox.widget.textbox()
+    local layout = wibox.layout.fixed.horizontal()
+    layout:add(icon)
+    layout:add(spacing)
+    layout:add(keyboard_layout)
+    local container = wibox.container.margin(layout)
+    keyboard.__widget = container
+    container.left = 8
+    container.right = 8
+    keyboard:attach_tooltip(container)
     timer({
         autostart = true,
         callback = function ()
-            self:update(widget)
+            keyboard:update(keyboard_layout)
         end,
         timeout = args and args.timeout or 5
     })
-    self:update(widget)
-    return widget
+    keyboard:update(keyboard_layout)
+    return keyboard
 end
 
-function M:attach_tooltip(widget)
+function Keyboard:attach_tooltip(widget)
     local tooltip = awful.tooltip({
         mode = "outside",
         objects = { widget },
         preferred_alignments = { "middle" }
     })
     widget:connect_signal("mouse::enter", function ()
-        tooltip.text = string.format("%s %s", self.layout, self.variant)
+        local entries = { self.layout }
+        if self.variant then
+            table.insert(entries, self.variant)
+        end
+        local description = table.concat(entries, " ")
+        tooltip.text = string.format("Keyboard: %s", description)
     end)
 end
 
-function M:update(widget)
+function Keyboard:update(widget)
     awful.spawn.easy_async("setxkbmap -query", function (output)
         self.layout = output:match("layout:%s+([^\n]+)")
         self.variant = output:match("variant:%s+([^\n]+)")
@@ -62,14 +62,14 @@ function M:update(widget)
     collectgarbage("collect")
 end
 
-function M:refresh(widget)
-    local content = widget:get_children_by_id("content")[1]
-    content.text = self.layout
+function Keyboard:refresh(widget)
+    widget:set_text(self.layout)
 end
 
-return setmetatable(M, {
+return setmetatable(Keyboard, {
     __call = function (_, ...)
-        return M:new(...)
+        local keyboard = Keyboard:new(...)
+        return keyboard.__widget
     end
 })
 

@@ -1,23 +1,23 @@
 local wibox = require("wibox")
 
-local M = {}
+local Date = {}
+Date.__index = Date
 
-function M:new(args)
-    self.widget = wibox.widget({
-        layout = wibox.container.margin,
-        left = 8,
-        right = 8,
-        {
-            format = args and args.format or "%a, %b %-e",
-            widget = wibox.widget.textclock
-        }
-    })
-    return self.widget
+function Date:new(args)
+    local date = setmetatable({}, Date)
+    local clock = wibox.widget.textclock()
+    clock.format = args and args.format or "%a, %b %-e"
+    local container = wibox.container.margin(clock)
+    date.__widget = container
+    container.left = 8
+    container.right = 8
+    return date
 end
 
-return setmetatable(M, {
+return setmetatable(Date, {
     __call = function (_, ...)
-        return M:new(...)
+        local date = Date:new(...)
+        return date.__widget
     end
 })
 

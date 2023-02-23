@@ -1,42 +1,36 @@
 local awful = require("awful")
+local icons = require("user.theme.icons")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local M = {}
+local Volume = {}
+Volume.__index = Volume
 
-local ICON_VOLUME_HIGH = "\u{f057e}"
-local ICON_VOLUME_MEDIUM = "\u{f0580}"
-local ICON_VOLUME_LOW = "\u{f057f}"
-local ICON_VOLUME_MUTE = "\u{f075f}"
+Volume.volume = 0
+Volume.muted = false
 
-M.volume = 0
-M.muted = false
-
-function M:new(args)
-    local widget = wibox.widget({
-        layout = wibox.container.margin,
-        left = 8,
-        right = 8,
-        {
-            widget = wibox.widget.textbox,
-            id = "icon",
-            font = "FiraCode Nerd Font Mono 18",
-            text = ICON_VOLUME_HIGH
-        }
-    })
-    self:attach_tooltip(widget)
+function Volume:new(args)
+    local volume = setmetatable({}, Volume)
+    local icon = wibox.widget.textbox()
+    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.text = icons.volume_mute
+    local container = wibox.container.margin(icon)
+    volume.__widget = container
+    container.left = 8
+    container.right = 8
+    volume:attach_tooltip(container)
     timer({
         autostart = true,
         callback = function ()
-            self:update(widget)
+            volume:update(icon)
         end,
-        timeout = args and args.timeout or .2
+        timeout = args and args.timeout or 1
     })
-    self:update(widget)
-    return widget
+    volume:update(icon)
+    return volume
 end
 
-function M:attach_tooltip(widget)
+function Volume:attach_tooltip(widget)
     local tooltip = awful.tooltip({
         mode = "outside",
         objects = { widget },
@@ -47,7 +41,7 @@ function M:attach_tooltip(widget)
     end)
 end
 
-function M:update(widget)
+function Volume:update(widget)
     self:update_sink_volume(function ()
         self:refresh(widget)
     end)
@@ -57,7 +51,7 @@ function M:update(widget)
     collectgarbage("collect")
 end
 
-function M:update_sink_volume(callback)
+function Volume:update_sink_volume(callback)
     awful.spawn.easy_async("pactl get-sink-volume @DEFAULT_SINK@", function (output)
         local volume = output:match("(%d+)%%")
         self.volume = tonumber(volume)
@@ -67,7 +61,7 @@ function M:update_sink_volume(callback)
     end)
 end
 
-function M:update_sink_mute(callback)
+function Volume:update_sink_mute(callback)
     awful.spawn.easy_async("pactl get-sink-mute @DEFAULT_SINK@", function (output)
         local mute = output:match(":%s([%a]+)")
         self.muted = mute == "yes"
@@ -77,24 +71,24 @@ function M:update_sink_mute(callback)
     end)
 end
 
-function M:refresh(widget)
-    local icon = widget:get_children_by_id("icon")[1]
+function Volume:refresh(widget)
     if self.muted then
-        icon:set_text(ICON_VOLUME_MUTE)
+        widget.text = icons.volume_mute
     elseif type(self.volume) == "number" then
         if self.volume > 80 then
-            icon:set_text(ICON_VOLUME_HIGH)
+            widget.text = icons.volume_high
         elseif self.volume > 40 then
-            icon:set_text(ICON_VOLUME_MEDIUM)
+            widget.text = icons.volume_medium
         else
-           icon:set_text(ICON_VOLUME_LOW)
+           widget.text = icons.volume_low
         end
     end
 end
 
-return setmetatable(M, {
+return setmetatable(Volume, {
     __call = function (_, ...)
-        return M:new(...)
+        local volume = Volume:new(...)
+        return volume.__widget
     end
 })
 

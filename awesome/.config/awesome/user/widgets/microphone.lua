@@ -1,37 +1,35 @@
 local awful = require("awful")
+local icons = require("user.theme.icons")
 local timer = require("gears.timer")
 local wibox = require("wibox")
 
-local M = {}
+local Microphone = {}
+Microphone.__index = Microphone
 
-local ICON_MICROPHONE = "\u{f036c}"
-local ICON_MICROPHONE_OFF = "\u{f036d}"
+Microphone.volume = 0
 
-function M:new(args)
-    local widget = wibox.widget({
-        layout = wibox.container.margin,
-        left = 8,
-        right = 8,
-        {
-            widget = wibox.widget.textbox,
-            id = "icon",
-            font = "FiraCode Nerd Font Mono 18",
-            text = ICON_MICROPHONE
-        }
-    })
-    self:attach_tooltip(widget)
+function Microphone:new(args)
+    local microphone = setmetatable({}, Microphone)
+    local icon = wibox.widget.textbox()
+    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.text = icons.microphone_off
+    local container = wibox.container.margin(icon)
+    microphone.__widget = container
+    container.left = 8
+    container.right = 8
+    microphone:attach_tooltip(container)
     timer({
         autostart = true,
         callback = function ()
-            self:update(widget)
+            microphone:update(icon)
         end,
-        timeout = args and args.timeout or .2
+        timeout = args and args.timeout or 1
     })
-    self:update(widget)
-    return widget
+    microphone:update(icon)
+    return microphone
 end
 
-function M:attach_tooltip(widget)
+function Microphone:attach_tooltip(widget)
     local tooltip = awful.tooltip({
         mode = "outside",
         objects = { widget },
@@ -42,7 +40,7 @@ function M:attach_tooltip(widget)
     end)
 end
 
-function M:update(widget)
+function Microphone:update(widget)
     self:update_source_volume(function ()
         self:refresh(widget)
     end)
@@ -52,7 +50,7 @@ function M:update(widget)
     collectgarbage("collect")
 end
 
-function M:update_source_volume(callback)
+function Microphone:update_source_volume(callback)
     awful.spawn.easy_async("pactl get-source-volume @DEFAULT_SOURCE@", function (output)
         local volume = output:match("(%d+)%%")
         self.volume = tonumber(volume)
@@ -62,7 +60,7 @@ function M:update_source_volume(callback)
     end)
 end
 
-function M:update_source_mute(callback)
+function Microphone:update_source_mute(callback)
     awful.spawn.easy_async("pactl get-source-mute @DEFAULT_SOURCE@", function (output)
         local mute = output:match(":%s([%a]+)")
         self.muted = mute == "yes"
@@ -72,18 +70,18 @@ function M:update_source_mute(callback)
     end)
 end
 
-function M:refresh(widget)
-    local icon = table.unpack(widget:get_children_by_id("icon"))
+function Microphone:refresh(widget)
     if not self.muted then
-        icon:set_text(ICON_MICROPHONE)
+        widget.text = icons.microphone
     else
-        icon:set_text(ICON_MICROPHONE_OFF)
+        widget.text = icons.microphone_off
     end
 end
 
-return setmetatable(M, {
+return setmetatable(Microphone, {
     __call = function (_, ...)
-        return M:new(...)
+        local microphone = Microphone:new(...)
+        return microphone.__widget
     end
 })
 
