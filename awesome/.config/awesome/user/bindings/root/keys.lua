@@ -81,10 +81,10 @@ local keys = gears.table.join(
         awful.spawn.with_shell("sleep 1; xset dpms force off")
     end),
     awful.key({}, "XF86MonBrightnessDown", function ()
-        awful.spawn.with_shell("xbacklight -dec 20")
+        awful.spawn.with_shell("brightnessctl set 10%-")
     end),
     awful.key({}, "XF86MonBrightnessUp", function ()
-        awful.spawn.with_shell("xbacklight -inc 20")
+        awful.spawn.with_shell("brightnessctl set +10%")
     end),
     awful.key({}, "XF86AudioPrev", function ()
         awful.spawn.with_shell("playerctl previous")
