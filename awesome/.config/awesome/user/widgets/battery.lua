@@ -55,7 +55,7 @@ function Battery:update(widget)
     )
     awful.spawn.easy_async(capacity_command, function (output)
         self.capacity = tonumber(output)
-        self.__widget.visible = self.capacity ~= nil
+        self.__widget.visible = output ~= ""
         self:refresh(widget)
     end)
     local status_command = string.format(
