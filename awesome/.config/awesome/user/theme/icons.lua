@@ -25,7 +25,7 @@ return {
     battery_unknown = "\u{f0091}",
     brightness_low = "\u{f00de}",
     brightness_high = "\u{f00e0}",
-    ethernet = "\u{f0200}",
+    ethernet = "\u{f0318}",
     keyboard = "\u{f11c}",
     microphone = "\u{f036c}",
     microphone_off = "\u{f036d}",
@@ -49,6 +49,7 @@ return {
     wifi_strength_1 = "\u{f091f}",
     wifi_strength_2 = "\u{f0922}",
     wifi_strength_3 = "\u{f0925}",
-    wifi_strength_4 = "\u{f0928}"
+    wifi_strength_4 = "\u{f0928}",
+    workspace = "\u{ebb4}"
 }
 
