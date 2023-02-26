@@ -1,7 +1,6 @@
 require("user.handlers")
 require("user.autostart")
 require("user.theme")
-require("user.layouts")
 require("user.bindings")
 require("user.rules")
 require("user.signals")
