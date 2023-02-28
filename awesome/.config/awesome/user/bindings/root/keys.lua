@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local naughty = require("naughty")
+local utils = require("user.theme.utils")
 
 local config = require("user.config")
 local modkey = config.modkey
@@ -114,6 +115,7 @@ local keys = gears.table.join(
         awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
             if exit_code == 0 then
                 naughty.notify({
+                    icon = utils.get_icon("accessories-screenshot"),
                     text = string.format("Screenshot saved to '%s'", filename),
                     title = "Screenshot taken"
                 })
@@ -132,6 +134,7 @@ local keys = gears.table.join(
         awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
             if exit_code == 0 then
                 naughty.notify({
+                    icon = utils.get_icon("accessories-screenshot"),
                     text = string.format("Screenshot saved to '%s'", filename),
                     title = "Screenshot taken"
                 })
@@ -147,6 +150,7 @@ local keys = gears.table.join(
         awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
             if exit_code == 0 then
                 naughty.notify({
+                    icon = utils.get_icon("accessories-screenshot"),
                     text = string.format("Screenshot saved to '%s'", filename),
                     title = "Screenshot taken"
                 })
