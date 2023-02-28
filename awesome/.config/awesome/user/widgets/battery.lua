@@ -1,4 +1,5 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
 local wibox = require("wibox")
 local timer = require("gears.timer")
 local icons = require("user.theme.icons")
@@ -14,7 +15,7 @@ function Battery:new(args)
     local battery = setmetatable({}, Battery)
     battery.device = args and args.device or Battery.device
     local icon = wibox.widget.textbox()
-    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.font = beautiful.widget_icon_font
     icon.text = icons.battery_outline
     local container = wibox.container.margin(icon)
     battery.__widget = container

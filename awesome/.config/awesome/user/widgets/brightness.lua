@@ -1,4 +1,5 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
 local icons = require("user.theme.icons")
 local wibox = require("wibox")
 
@@ -8,7 +9,7 @@ Brightness.__index = Brightness
 function Brightness:new(args)
     local brightness = setmetatable({}, Brightness)
     local icon = wibox.widget.textbox()
-    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.font = beautiful.widget_icon_font
     icon.text = icons.brightness_low
     local container = wibox.container.margin(icon)
     brightness.__widget = container

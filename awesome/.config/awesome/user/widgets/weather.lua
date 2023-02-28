@@ -1,4 +1,5 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
 local icons = require("user.theme.icons")
 local wibox = require("wibox")
 
@@ -39,7 +40,7 @@ function Weather:new(args)
     weather.longitude = args and args.longitude or 13.41
     local icon = wibox.widget.textbox()
     weather.__icon = icon
-    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.font = beautiful.widget_icon_font
     icon.text = icons.weather_day_sunny
     local spacing = wibox.container.margin()
     spacing.right = 8

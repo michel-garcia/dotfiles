@@ -1,4 +1,5 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
 local icons = require("user.theme.icons")
 local timer = require("gears.timer")
 local wibox = require("wibox")
@@ -12,7 +13,7 @@ Volume.muted = false
 function Volume:new(args)
     local volume = setmetatable({}, Volume)
     local icon = wibox.widget.textbox()
-    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.font = beautiful.widget_icon_font
     icon.text = icons.volume_mute
     local container = wibox.container.margin(icon)
     volume.__widget = container

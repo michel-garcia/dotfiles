@@ -1,4 +1,5 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
 local icons = require("user.theme.icons")
 local timer = require("gears.timer")
 local wibox = require("wibox")
@@ -14,7 +15,7 @@ Network.wifi_signal = 0
 function Network:new(args)
     local network = setmetatable({}, Network)
     local icon = wibox.widget.textbox()
-    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.font = beautiful.widget_icon_font
     icon.text = icons.network_unavailable
     local container = wibox.container.margin(icon)
     network.__widget = container

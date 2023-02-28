@@ -1,4 +1,5 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
 local icons = require("user.theme.icons")
 local timer = require("gears.timer")
 local wibox = require("wibox")
@@ -11,7 +12,7 @@ Microphone.volume = 0
 function Microphone:new(args)
     local microphone = setmetatable({}, Microphone)
     local icon = wibox.widget.textbox()
-    icon.font = "FiraCode Nerd Font Mono 18"
+    icon.font = beautiful.widget_icon_font
     icon.text = icons.microphone_off
     local container = wibox.container.margin(icon)
     microphone.__widget = container
