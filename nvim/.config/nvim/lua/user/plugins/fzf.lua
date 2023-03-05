@@ -5,12 +5,16 @@ return {
         fzf.setup({
             files = {
                 file_icons = false,
+                find_opts = "-type f -not -path '*/.git/*' -not -path '*/node_modules/*' -printf '%P\n'",
                 git_icons = false
             },
             fzf_opts = {
                 ["--color"] = "bg+:-1,header:-1",
                 ["--info"] = "default",
                 ["--scroll-off"] = 5
+            },
+            grep = {
+                grep_opts = "--recursive --ignore-case --exclude-dir node_modules"
             },
             winopts = {
                 preview = {
