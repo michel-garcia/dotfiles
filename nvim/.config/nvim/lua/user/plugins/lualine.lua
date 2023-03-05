@@ -13,25 +13,6 @@ return {
                 "branch",
                 icons_enabled = true
             },
-            context = {
-                function ()
-                    local ok, navic = pcall(require, "nvim-navic")
-                    if not ok then
-                        return string.char(32)
-                    end
-                    local context = navic.get_location()
-                    if context == "" then
-                        return string.char(32)
-                    end
-                    local columns = vim.api.nvim_get_option("columns")
-                    local max_width = math.ceil(columns / 3)
-                    if context:len() > max_width then
-                        context = string.format("%s...", context:sub(1, max_width - 3))
-                    end
-                    return context
-                end,
-                color = "lualine_c_normal"
-            },
             diagnostics = {
                 "diagnostics",
                 always_visible = true,
@@ -49,7 +30,7 @@ return {
                     if filename == "" then
                         return "New File"
                     end
-                    filename = vim.fn.fnamemodify(filename, ":t")
+                    filename = vim.fn.fnamemodify(filename, ":~:.")
                     local modified = vim.api.nvim_buf_get_option(0, "modified")
                     if modified then
                         filename = string.format("%s %s", "\u{ea71}", filename)
@@ -73,6 +54,12 @@ return {
             },
             mode = {
                 "mode"
+            },
+            spacer = {
+                function ()
+                    return string.char(32)
+                end,
+                color = "lualine_c_normal"
             },
             tabs = {
                 "tabs",
@@ -100,7 +87,7 @@ return {
             inactive_winbar = {
                 lualine_c = {
                     components.filename,
-                    components.context
+                    components.spacer
                 }
             },
             options = {
@@ -138,7 +125,7 @@ return {
             winbar = {
                 lualine_c = {
                     components.filename,
-                    components.context
+                    components.spacer
                 }
             }
         })

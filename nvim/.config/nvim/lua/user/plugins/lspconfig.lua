@@ -1,8 +1,5 @@
 return {
     "neovim/nvim-lspconfig",
-    dependencies = {
-        "SmiteshP/nvim-navic"
-    },
     config = function ()
         local lsp = require("user.lsp")
         local lspconfig = require("lspconfig")
