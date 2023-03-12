@@ -115,7 +115,7 @@ local keys = gears.table.join(
         awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
             if exit_code == 0 then
                 naughty.notify({
-                    icon = utils.get_icon("accessories-screenshot"),
+                    icon = utils.get_icon("screenshot-app", 48),
                     text = string.format("Screenshot saved to '%s'", filename),
                     title = "Screenshot taken"
                 })
@@ -134,7 +134,7 @@ local keys = gears.table.join(
         awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
             if exit_code == 0 then
                 naughty.notify({
-                    icon = utils.get_icon("accessories-screenshot"),
+                    icon = utils.get_icon("screenshot-app", 48),
                     text = string.format("Screenshot saved to '%s'", filename),
                     title = "Screenshot taken"
                 })
@@ -150,7 +150,7 @@ local keys = gears.table.join(
         awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
             if exit_code == 0 then
                 naughty.notify({
-                    icon = utils.get_icon("accessories-screenshot"),
+                    icon = utils.get_icon("screenshot-app", 48),
                     text = string.format("Screenshot saved to '%s'", filename),
                     title = "Screenshot taken"
                 })
