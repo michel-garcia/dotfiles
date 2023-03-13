@@ -71,18 +71,6 @@ return {
                     active = "@function",
                     inactive = "lualine_c_insert"
                 }
-            },
-            title = {
-                function ()
-                    local version = vim.version()
-                    return string.format(
-                        " NeoVim %s.%s.%s",
-                        version.major,
-                        version.minor,
-                        version.patch
-                    )
-                end,
-                color = "@type"
             }
         }
         local lualine = require("lualine")
@@ -120,9 +108,6 @@ return {
             },
             tabline = {
                 lualine_b = {
-                    components.title
-                },
-                lualine_c = {
                     components.tabs
                 }
             },
@@ -133,6 +118,7 @@ return {
                 }
             }
         })
+        vim.opt.showtabline = 1
     end
 }
 
