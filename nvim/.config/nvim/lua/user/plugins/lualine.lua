@@ -26,6 +26,10 @@ return {
             },
             filename = {
                 function ()
+                    local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+                    if buftype == "terminal" then
+                        return buftype
+                    end
                     local filename = vim.api.nvim_buf_get_name(0)
                     if filename == "" then
                         return "New File"
