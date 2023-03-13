@@ -11,7 +11,7 @@ local mappings = {
             vim.keymap.set({ "n", "t" }, "<C-j>", "<cmd>wincmd j<CR>", opts)
             vim.keymap.set({ "n", "t" }, "<C-k>", "<cmd>wincmd k<CR>", opts)
             vim.keymap.set({ "n", "t" }, "<C-l>", "<cmd>wincmd l<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-t>", "<cmd>tabnew$<CR>", opts)
+            vim.keymap.set({ "n", "t" }, "<A-t>", "<cmd>$tabnew<CR>", opts)
             vim.keymap.set({ "n", "t" }, "<A-q>", "<cmd>tabclose<CR>", opts)
             vim.keymap.set({ "n", "t" }, "<A-,>", "<cmd>tabprevious<CR>", opts)
             vim.keymap.set({ "n", "t" }, "<A-.>", "<cmd>tabnext<CR>", opts)
