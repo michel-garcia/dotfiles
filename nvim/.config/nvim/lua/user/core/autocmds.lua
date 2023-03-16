@@ -51,6 +51,13 @@ vim.api.nvim_create_autocmd("OptionSet", {
     group = group
 })
 
+vim.api.nvim_create_autocmd("TermEnter", {
+    callback = function ()
+        vim.fn.clearmatches()
+    end,
+    group = group
+})
+
 vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
         vim.bo.formatoptions = vim.bo.formatoptions:gsub("[cro]", "")
