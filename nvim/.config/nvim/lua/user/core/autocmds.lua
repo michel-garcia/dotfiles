@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 vim.api.nvim_create_autocmd("OptionSet", {
-    pattern = "showtabline",
+    pattern = "tabline",
     callback = function (args)
         vim.opt.showtabline = 1
     end,
