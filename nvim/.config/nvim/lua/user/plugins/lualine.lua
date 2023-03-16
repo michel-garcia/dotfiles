@@ -118,7 +118,6 @@ return {
                 }
             }
         })
-        vim.opt.showtabline = 1
     end
 }
 

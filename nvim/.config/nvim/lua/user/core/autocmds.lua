@@ -43,6 +43,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     group = group
 })
 
+vim.api.nvim_create_autocmd("OptionSet", {
+    pattern = "showtabline",
+    callback = function (args)
+        vim.opt.showtabline = 1
+    end,
+    group = group
+})
+
 vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
         vim.bo.formatoptions = vim.bo.formatoptions:gsub("[cro]", "")
