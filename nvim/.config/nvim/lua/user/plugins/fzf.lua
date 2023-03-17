@@ -1,5 +1,8 @@
 return {
     "ibhagwan/fzf-lua",
+    dependencies = {
+        "michel-garcia/fzf-lua-file-browser.nvim"
+    },
     config = function ()
         local fzf = require("fzf-lua")
         fzf.setup({
@@ -31,6 +34,8 @@ return {
                 }
             end
         })
+        local file_browser = require("fzf-lua-file-browser")
+        file_browser.setup()
         local opts = {
             noremap = true,
             silent = true
@@ -42,6 +47,7 @@ return {
         vim.keymap.set("n", "<leader>sg", fzf.live_grep, opts)
         vim.keymap.set("n", "<leader>ds", fzf.lsp_document_symbols, opts)
         vim.keymap.set("n", "<leader>sd", fzf.diagnostics_document, opts)
+        vim.keymap.set("n", "<leader>fb", fzf.file_browser, opts)
     end
 }
 
