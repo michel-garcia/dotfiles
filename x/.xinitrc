@@ -1,5 +1,6 @@
 #!/bin/sh
 
+dbus-update-activation-environment DISPLAY XAUTHORITY
 autorandr --change
 xsetroot -cursor_name left_ptr
 xset b off
