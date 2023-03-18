@@ -3,9 +3,7 @@ local date = require("user.widgets.date")
 local time = require("user.widgets.time")
 local weather = require("user.widgets.weather")
 
-local M = {}
-
-function M:new(_)
+local StartSection = function ()
     local layout = wibox.layout.fixed.horizontal(
         date(),
         time(),
@@ -22,9 +20,5 @@ function M:new(_)
     return container
 end
 
-return setmetatable(M, {
-    __call = function (_, ...)
-        return M:new(...)
-    end
-})
+return StartSection
 

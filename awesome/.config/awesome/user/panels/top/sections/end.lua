@@ -7,9 +7,7 @@ local network = require("user.widgets.network")
 local systray = require("user.widgets.systray")
 local volume = require("user.widgets.volume")
 
-local M = {}
-
-function M:new(_)
+local EndSection = function ()
     local layout = wibox.layout.fixed.horizontal(
         systray(),
         keyboard(),
@@ -27,9 +25,5 @@ function M:new(_)
     return container
 end
 
-return setmetatable(M, {
-    __call = function (_, ...)
-        return M:new(...)
-    end
-})
+return EndSection
 

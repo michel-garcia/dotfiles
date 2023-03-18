@@ -1,26 +1,28 @@
 local awful = require("awful")
 local wibox = require("wibox")
-local start_section = require("user.panels.top.sections.start")
-local center_section = require("user.panels.top.sections.center")
-local end_section = require("user.panels.top.sections.end")
 
-local top_panel = function (s)
-    local wibar = awful.wibar({
+local StartSection = require("user.panels.top.sections.start")
+local CenterSection = require("user.panels.top.sections.center")
+local EndSection = require("user.panels.top.sections.end")
+
+local TopPanel = function (s)
+    local top_panel = awful.wibar({
         position = "top",
         screen = s
     })
     local stack = wibox.layout.stack()
-    wibar.widget = stack
+    top_panel.widget = stack
     if s == screen.primary then
-        stack:add(start_section())
+        local start_section = StartSection()
+        stack:add(start_section)
     end
-    stack:add(center_section({
-        screen = s
-    }))
+    local center_section = CenterSection({ screen = s })
+    stack:add(center_section)
     if s == screen.primary then
-        stack:add(end_section())
+        local end_section = EndSection()
+        stack:add(end_section)
     end
 end
 
-return top_panel
+return TopPanel
 
