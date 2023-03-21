@@ -17,6 +17,11 @@ beautiful.init({
     widget_icon_font = "FiraCode Nerd Font Mono Bold 18"
 })
 
-naughty.config.defaults.border_width = 2
+naughty.config.defaults.border_width = 1
 naughty.config.defaults.icon_size = 48
+naughty.config.defaults.margin = 24
+naughty.config.defaults.max_width = 512
+naughty.config.defaults.position = "top_middle"
+naughty.config.padding = 24
+naughty.config.spacing = 8
 
