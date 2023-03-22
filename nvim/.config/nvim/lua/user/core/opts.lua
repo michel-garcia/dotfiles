@@ -1,5 +1,6 @@
 vim.opt.autoindent = true
 vim.opt.autoread = true
+vim.opt.breakindent = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 2
 vim.opt.colorcolumn = {}
@@ -13,6 +14,7 @@ vim.opt.ignorecase = true
 vim.opt.inccommand = "nosplit"
 vim.opt.incsearch = true
 vim.opt.laststatus = 3
+vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars = {
     space = "·",
@@ -37,6 +39,6 @@ vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.undofile = true
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.writebackup = false
 
