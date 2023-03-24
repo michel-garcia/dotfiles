@@ -1,6 +1,6 @@
 return {
     "rest-nvim/rest.nvim",
-    requires = {
+    dependencies = {
         "nvim-lua/plenary.nvim"
     },
     config = function ()
