@@ -12,6 +12,11 @@ end
 vim.opt.runtimepath:prepend(path)
 local lazy = require("lazy")
 lazy.setup("user.plugins", {
+    install = {
+        colorscheme = {
+            "gruvbox-baby"
+        }
+    },
     ui = {
         border = "single"
     }
