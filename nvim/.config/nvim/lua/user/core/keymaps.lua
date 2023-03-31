@@ -1,21 +1,21 @@
 local mappings = {
     general = {
         bind = function (opts)
+            vim.keymap.set("n", "<C-s>", "<cmd>wincmd s<CR>", opts)
+            vim.keymap.set("n", "<C-v>", "<cmd>wincmd v<CR>", opts)
+            vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<CR>", opts)
+            vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<CR>", opts)
+            vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<CR>", opts)
+            vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<CR>", opts)
+            vim.keymap.set("n", "<A-t>", "<cmd>$tabnew<CR>", opts)
+            vim.keymap.set("n", "<A-q>", "<cmd>tabclose<CR>", opts)
+            vim.keymap.set("n", "<A-,>", "<cmd>tabprevious<CR>", opts)
+            vim.keymap.set("n", "<A-.>", "<cmd>tabnext<CR>", opts)
             vim.keymap.set("v", "<", "<gv", opts)
             vim.keymap.set("v", ">", ">gv", opts)
             vim.keymap.set("v", "<A-j>", ":move '>+1<CR>gv=gv", opts)
             vim.keymap.set("v", "<A-k>", ":move '<-2<CR>gv=gv", opts)
-            vim.keymap.set({ "n", "t" }, "<A-s>", "<cmd>wincmd s<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-v>", "<cmd>wincmd v<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-h>", "<cmd>wincmd h<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-j>", "<cmd>wincmd j<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-k>", "<cmd>wincmd k<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-l>", "<cmd>wincmd l<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-t>", "<cmd>$tabnew<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-q>", "<cmd>tabclose<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-,>", "<cmd>tabprevious<CR>", opts)
-            vim.keymap.set({ "n", "t" }, "<A-.>", "<cmd>tabnext<CR>", opts)
-            vim.keymap.set("t", "<C-\\>", "<C-\\><C-n>", opts)
+            vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", opts)
         end
     },
     lsp = {
