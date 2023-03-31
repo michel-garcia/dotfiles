@@ -1,4 +1,4 @@
 local awful = require("awful")
 
-awful.spawn("hsetroot -solid '#3b3735'", false)
+awful.spawn("nitrogen --restore", false)
 
