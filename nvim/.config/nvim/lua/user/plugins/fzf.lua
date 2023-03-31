@@ -47,6 +47,7 @@ return {
     },
     {
         "michel-garcia/fzf-lua-file-browser.nvim",
+        dev = true,
         dependencies = {
             "ibhagwan/fzf-lua"
         },
