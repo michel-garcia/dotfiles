@@ -2,7 +2,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 
 beautiful.init({
-    bg_normal = "#282828",
+    bg_normal = "#0d0e0fbf",
     border_width = 2,
     border_normal = "#5f676a",
     border_focus = "#c78f23",
