@@ -18,7 +18,7 @@ local keys = gears.table.join(
         awful.spawn(terminal)
     end),
     awful.key({ modkey }, "p", function()
-        awful.spawn("rofi -disable-history -show drun")
+        awful.spawn("rofi -show drun")
     end),
     awful.key({ modkey }, "j", function ()
         awful.client.focus.byidx(1)

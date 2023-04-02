@@ -1,8 +1,14 @@
 configuration {
-    disable-history: true;
-    display-drun: "Applications ";
-    font: "FiraCode NerdFont Mono Bold 11";
+    display-drun: "Apps";
+    drun-display-format: "{name}";
+    font: "Ubuntu 10";
     sidebar-mode: false;
+}
+
+configuration {
+    drun {
+        fallback-icon: "application-default-icon";
+    }
 }
 
 @theme "/dev/null"
@@ -12,63 +18,66 @@ configuration {
 }
 
 window {
-    background-color: #282828;
-    border: 2px;
+    background-color: #282828e5;
+    border: 1px;
     border-color: #5f676a;
-    padding: 16px;
-    width: 512px;
+    location: south;
+    padding: 24px;
+    y-offset: -24px;
+    width: 900px;
 }
 
 inputbar {
-    margin: 0 0 16px 0;
-    padding: 1px;
+    children: [entry, prompt];
+    margin-bottom: 16px;
+    orientation: vertical;
 }
 
 prompt {
-    enabled: false;
-    text-color: #c78f23;
+    color: #fff;
+    enabled: true;
+    margin: 24px 0 16px 24px;
+    text-transform: bold;
 }
 
 entry {
+    background-color: #242424;
     border: 0 0 1px 0;
-    border-color: #665c54;
+    border-color: #fabd2f;
     padding: 8px;
-    placeholder: "Search apps";
+    placeholder: "Type here to search";
     placeholder-color: #665c54;
     text-color: #fff;
 }
 
 listview {
-    columns: 1;
-    dynamic: true;
+    columns: 6;
+    fixed-columns: true;
+    flow: horizontal;
     layout: vertical;
-    lines: 6;
+    lines: 4;
+    spacing: 8px;
 }
 
 element {
-    children: [
-        element-icon,
-        element-text
-    ];
-    orientation: horizontal;
-    padding: 8px;
-}
-
-element selected {
-    background-color: #504945;
+    children: [element-icon, element-text];
+    margin: 8px;
+    orientation: vertical;
 }
 
 element-icon {
-    padding: 0 8px 0 0;
-    size: 24px;
+    padding: 8px;
+    size: 48px;
 }
 
 element-text {
+    horizontal-align: 0.5;
+    text-color: #fff;
     vertical-align: 0.5;
-    text-color: #665c54;
 }
 
 element-text selected {
-    text-color: #fff;
+    highlight: underline;
+    text-color: #fabd2f;
 }
 
