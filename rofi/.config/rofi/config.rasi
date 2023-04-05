@@ -2,6 +2,13 @@ configuration {
     display-drun: "Apps";
     drun-display-format: "{name}";
     font: "Ubuntu 10";
+    hover-select: true;
+    me-accept-entry: [
+        MousePrimary,
+        MouseSecondary,
+        MouseDPrimary
+    ];
+    me-select-entry: "";
     sidebar-mode: false;
 }
 
@@ -61,8 +68,12 @@ listview {
 
 element {
     children: [element-icon, element-text];
-    margin: 8px;
+    padding: 8px;
     orientation: vertical;
+}
+
+element selected {
+    background-color: #504945;
 }
 
 element-icon {
@@ -76,8 +87,8 @@ element-text {
     vertical-align: 0.5;
 }
 
-element-text selected {
-    highlight: underline;
-    text-color: #fabd2f;
+textbox {
+    color: #fff;
+    horizontal-align: 0.5;
 }
 
