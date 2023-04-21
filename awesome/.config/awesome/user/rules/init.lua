@@ -1,8 +1,8 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
 
-local keys = require("user.bindings.client.keys")
-local buttons = require("user.bindings.client.buttons")
+local keys = require("user.bindings.keys")
+local buttons = require("user.bindings.buttons")
 
 awful.rules.rules = {
     {
@@ -10,9 +10,9 @@ awful.rules.rules = {
         properties = {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
-            buttons = buttons,
+            buttons = buttons.client,
             focus = awful.client.focus.filter,
-            keys = keys,
+            keys = keys.client,
             placement = awful.placement.no_overlap + awful.placement.no_offscreen,
             raise = true,
             screen = awful.screen.preferred

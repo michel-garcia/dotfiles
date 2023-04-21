@@ -1,2 +1,3 @@
-require("user.bindings.root")
+local keys = require("user.bindings.keys")
+root.keys(keys.global)
 

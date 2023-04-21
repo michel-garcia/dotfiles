@@ -1,4 +1,5 @@
 local awful = require("awful")
+require("awful.autofocus")
 local beautiful = require("beautiful")
 
 client.connect_signal("manage", function (c)
