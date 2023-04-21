@@ -4,6 +4,5 @@ require("user.theme")
 require("user.bindings")
 require("user.rules")
 require("user.signals")
-require("user.screens")
 require("user.panels")
 
