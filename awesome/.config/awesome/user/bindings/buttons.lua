@@ -2,7 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 
 local config = require("user.config")
-local modkey = config.modkey
+local mod_mask = config.keys.mod
 
 local buttons = {
     global = gears.table.join(),
@@ -12,7 +12,7 @@ local buttons = {
                 raise = true
             })
         end),
-        awful.button({ modkey }, 1, function (c)
+        awful.button({ mod_mask }, 1, function (c)
             c:emit_signal("request::activate", "mouse_click", {
                 raise = true
             })
@@ -21,7 +21,7 @@ local buttons = {
             c.floating = true
             c:geometry(geometry)
         end),
-        awful.button({ modkey }, 3, function (c)
+        awful.button({ mod_mask }, 3, function (c)
             c:emit_signal("request::activate", "mouse_click", {
                 raise = true
             })
