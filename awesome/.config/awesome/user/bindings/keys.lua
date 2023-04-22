@@ -1,11 +1,11 @@
 local awful = require("awful")
 local gears = require("gears")
-local naughty = require("naughty")
 
 local config = require("user.config")
-local utils = require("user.theme.utils")
 local mod_mask = config.keys.mod
 local terminal = config.apps.terminal
+
+local Maim = require("user.modules.Maim")
 
 local keys = {
     global = gears.table.join(
@@ -108,55 +108,13 @@ local keys = {
             awful.spawn.with_shell("pactl set-sink-volume @DEFAULT_SINK@ +5%")
         end),
         awful.key({}, "Print", function ()
-            local filename = string.format(
-                "~/Pictures/%s.png",
-                os.date("%Y%m%d_%H%M%S")
-            )
-            local command = string.format("maim %s", filename)
-            awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
-                if exit_code == 0 then
-                    naughty.notify({
-                        icon = utils.get_icon("screenshot-app", 48),
-                        text = string.format("Screenshot saved to '%s'", filename),
-                        title = "Screenshot taken"
-                    })
-                end
-            end)
+            Maim.capture_display()
         end),
         awful.key({ "Mod1" }, "Print", function ()
-            local filename = string.format(
-                "~/Pictures/%s.png",
-                os.date("%Y%m%d_%H%M%S")
-            )
-            local command = string.format(
-                "maim --window $(xdotool getactivewindow) %s",
-                filename
-            )
-            awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
-                if exit_code == 0 then
-                    naughty.notify({
-                        icon = utils.get_icon("screenshot-app", 48),
-                        text = string.format("Screenshot saved to '%s'", filename),
-                        title = "Screenshot taken"
-                    })
-                end
-            end)
+            Maim.capture_focused_window()
         end),
         awful.key({ "Shift" }, "Print", function ()
-            local filename = string.format(
-                "~/Pictures/%s.png",
-                os.date("%Y%m%d_%H%M%S")
-            )
-            local command = string.format("maim --select %s", filename)
-            awful.spawn.easy_async_with_shell(command, function (_, _, _, exit_code)
-                if exit_code == 0 then
-                    naughty.notify({
-                        icon = utils.get_icon("screenshot-app", 48),
-                        text = string.format("Screenshot saved to '%s'", filename),
-                        title = "Screenshot taken"
-                    })
-                end
-            end)
+            Maim.capture_selection()
         end)
     ),
     client = gears.table.join(
