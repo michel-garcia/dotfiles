@@ -1,6 +1,8 @@
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 
+local Gtk = require("user.modules.Gtk")
+
 beautiful.init({
     bg_normal = "#0d0e0fbf",
     border_width = 2,
@@ -21,6 +23,23 @@ naughty.config.defaults.icon_size = 48
 naughty.config.defaults.margin = 24
 naughty.config.defaults.max_width = 512
 naughty.config.defaults.position = "top_middle"
+naughty.config.notify_callback = function (args)
+    if not args.icon then
+        if args.freedesktop_hints then
+            args.icon = Gtk.lookup_icon(
+                args.freedesktop_hints["desktop-entry"],
+                naughty.config.defaults.icon_size
+            )
+        end
+        if not args.icon then
+            args.icon = Gtk.lookup_icon(
+                "application-default-icon",
+                naughty.config.defaults.icon_size
+            )
+        end
+    end
+    return args
+end
 naughty.config.padding = 24
 naughty.config.spacing = 8
 
