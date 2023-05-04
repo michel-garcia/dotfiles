@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd("TermEnter", {
 
 vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
-        vim.bo.formatoptions = vim.bo.formatoptions:gsub("[cro]", "")
+        vim.bo.formatoptions = ""
     end,
     group = group
 })
