@@ -1,0 +1,4 @@
+set hidden
+set incsearch
+set nopreview
+set ratios 1
