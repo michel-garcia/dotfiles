@@ -59,14 +59,8 @@ vim.api.nvim_create_autocmd("TermEnter", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    callback = function (args)
+    callback = function ()
         vim.bo.formatoptions = ""
-        if args.match == "php" then
-            vim.opt_local.autoindent = true
-            vim.opt_local.cindent = true
-            vim.opt_local.indentexpr = ""
-            vim.opt_local.smartindent = true
-        end
     end,
     group = group
 })
