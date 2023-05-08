@@ -60,7 +60,9 @@ vim.api.nvim_create_autocmd("TermEnter", {
 
 vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
-        vim.bo.formatoptions = ""
+        vim.opt.autoindent = true
+        vim.opt.formatoptions = ""
+        vim.opt.indentexpr = "return -1"
     end,
     group = group
 })
