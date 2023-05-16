@@ -44,6 +44,8 @@ bindkey "^[[6~" "end-of-buffer-or-history"
 bindkey "^[[Z" "reverse-menu-complete"
 bindkey "^[[1;5D" "backward-word"
 bindkey "^[[1;5C" "forward-word"
+bindkey "^U" "backward-kill-line"
+bindkey "^W" "backward-kill-word"
 
 source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 ZSH_HIGHLIGHT_DIRS_BLACKLIST=("/mnt")
