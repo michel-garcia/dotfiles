@@ -1,3 +1,4 @@
+map <c-c> quit
 set hidden
 set incsearch
 set nopreview
