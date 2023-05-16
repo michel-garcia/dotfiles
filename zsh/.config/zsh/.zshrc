@@ -46,6 +46,7 @@ bindkey "^[[1;5D" "backward-word"
 bindkey "^[[1;5C" "forward-word"
 
 source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+ZSH_HIGHLIGHT_DIRS_BLACKLIST=("/mnt")
 source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
