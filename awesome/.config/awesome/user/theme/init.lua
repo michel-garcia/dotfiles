@@ -14,8 +14,7 @@ beautiful.init({
     taglist_fg_focus = "#fabd2f",
     taglist_fg_occupied = "#e7d7ad",
     taglist_spacing = 4,
-    useless_gap = 6,
-    widget_icon_font = "FiraCode Nerd Font Mono Bold 18"
+    useless_gap = 6
 })
 
 naughty.config.defaults.border_width = 1

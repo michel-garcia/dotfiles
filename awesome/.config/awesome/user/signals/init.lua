@@ -7,7 +7,7 @@ awful.screen.connect_for_each_screen(function (s)
     local normal_layout = awful.layout.suit.tile
     local vertical_layout = normal_layout.bottom
     for i = 1, 9 do
-        awful.tag.add(i, {
+        awful.tag.add("\u{F0765}", {
             column_count = not rotated and 1 or 4,
             layout = not rotated and normal_layout or vertical_layout,
             master_count = not rotated and 1 or 0,

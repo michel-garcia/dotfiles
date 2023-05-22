@@ -1,154 +1,85 @@
-local awful = require("awful")
-local beautiful = require("beautiful")
 local wibox = require("wibox")
-local timer = require("gears.timer")
-local icons = require("user.theme.icons")
 
-local Battery = {}
-Battery.__index = Battery
+local Status = {
+    CHARGING = "Charging",
+    DISCHARGING = "Discharging",
+    FULL = "Full",
+    NOT_CHARGING = "Not charging",
+    UNKNOWN = "Unknown"
+}
 
-Battery.device = "BAT0"
-Battery.capacity = 0
-Battery.status = "Unknown"
+local Icon = {
+    BATTERY_UNKNOWN = "\u{f0091}",
+    BATTERY_FULL = "\u{f17e2}",
+    BATTERY_100 = "\u{f0079}",
+    BATTERY_100_CHARGING = "\u{f0085}",
+    BATTERY_90 = "\u{f0082}",
+    BATTERY_90_CHARGING = "\u{f008b}",
+    BATTERY_80 = "\u{f0081}",
+    BATTERY_80_CHARGING = "\u{f008a}",
+    BATTERY_70 = "\u{f0080}",
+    BATTERY_70_CHARGING = "\u{f089e}",
+    BATTERY_60 = "\u{f007f}",
+    BATTERY_60_CHARGING = "\u{f0089}",
+    BATTERY_50 = "\u{f007e}",
+    BATTERY_50_CHARGING = "\u{f089d}",
+    BATTERY_40 = "\u{f007d}",
+    BATTERY_40_CHARGING = "\u{f0088}",
+    BATTERY_30 = "\u{f007c}",
+    BATTERY_30_CHARGING = "\u{f0087}",
+    BATTERY_20 = "\u{f007b}",
+    BATTERY_20_CHARGING = "\u{f0086}",
+    BATTERY_10 = "\u{f007a}",
+    BATTERY_10_CHARGING = "\u{f089c}",
+    BATTERY_0 = "\u{f008e}",
+    BATTERY_0_CHARGING = "\u{f089f}",
+    BATTERY_CRITICAL = "\u{f10cd}"
+}
 
-function Battery:new(args)
-    local battery = setmetatable({}, Battery)
-    battery.device = args and args.device or Battery.device
+local Step = {
+    [100] = { Icon.BATTERY_100, Icon.BATTERY_100_CHARGING },
+    [90] = { Icon.BATTERY_90, Icon.BATTERY_90_CHARGING },
+    [80] = { Icon.BATTERY_80, Icon.BATTERY_80_CHARGING },
+    [70] = { Icon.BATTERY_70, Icon.BATTERY_70_CHARGING },
+    [60] = { Icon.BATTERY_60, Icon.BATTERY_60_CHARGING },
+    [50] = { Icon.BATTERY_50, Icon.BATTERY_50_CHARGING },
+    [40] = { Icon.BATTERY_40, Icon.BATTERY_40_CHARGING },
+    [30] = { Icon.BATTERY_30, Icon.BATTERY_30_CHARGING },
+    [20] = { Icon.BATTERY_20, Icon.BATTERY_20_CHARGING },
+    [10] = { Icon.BATTERY_10, Icon.BATTERY_10_CHARGING },
+    [0] = { Icon.BATTERY_0, Icon.BATTERY_0_CHARGING }
+}
+
+local Battery = function ()
     local icon = wibox.widget.textbox()
-    icon.font = beautiful.widget_icon_font
-    icon.text = icons.battery_outline
-    local container = wibox.container.margin(icon)
-    battery.__widget = container
-    container.left = 8
-    container.right = 8
+    icon.font = "Material Design Icons 18"
+    local percentage = wibox.widget.textbox()
+    local layout = wibox.layout.fixed.horizontal(icon, percentage)
+    layout.spacing = 4
+    local container = wibox.container.margin(layout, 4, 4)
     container.visible = false
-    battery:attach_tooltip(container)
-    timer({
-        autostart = true,
-        callback = function ()
-            battery:update(icon)
-        end,
-        timeout = args and args.timeout or 4
-    })
-    battery:update(icon)
-    return battery
-end
-
-function Battery:attach_tooltip(widget)
-    local tooltip = awful.tooltip({
-        mode = "outside",
-        objects = { widget },
-        preferred_alignments = { "middle" }
-    })
-    widget:connect_signal("mouse::enter", function ()
-        tooltip.text = string.format(
-            "Battery: %s%% - %s",
-            self.capacity,
-            self.status
-        )
+    awesome.connect_signal("battery::update", function (e)
+        container.visible = e.status == 0
+        if not container.visible then
+            return
+        end
+        local capacity, status = table.unpack(e.args)
+        if status == Status.UNKNOWN then
+            icon.text = Icon.BATTERY_UNKNOWN
+            percentage.visible = false
+            return
+        elseif status == Status.FULL then
+            icon.text = Icon.BATTERY_FULL
+            percentage.text = string.format("%s%%", capacity)
+            return
+        end
+        capacity = tonumber(capacity)
+        local index = math.floor(capacity / 10) * 10
+        local discharging, charging = table.unpack(Step[index])
+        icon.text = status == Status.CHARGING and charging or discharging
+        percentage.text = string.format("%s%%", capacity)
     end)
+    return container
 end
 
-function Battery:update(widget)
-    local capacity_command = string.format(
-        "cat /sys/class/power_supply/%s/capacity",
-        self.device
-    )
-    awful.spawn.easy_async(capacity_command, function (output)
-        self.capacity = tonumber(output)
-        self.__widget.visible = output ~= ""
-        self:refresh(widget)
-    end)
-    local status_command = string.format(
-        "cat /sys/class/power_supply/%s/status",
-        self.device
-    )
-    awful.spawn.easy_async(status_command, function (output)
-        local pattern = "(%a+)%s$"
-        self.status = output:match(pattern)
-        self:refresh(widget)
-    end)
-    collectgarbage("collect")
-end
-
-function Battery:refresh(widget)
-    local full = self.status == "Full"
-    local charging = self.status == "Charging"
-    if self.status == "Unknown" then
-        widget.text = icons.battery_unknown
-    elseif self.capacity == 100 then
-        if full then
-            widget.text = icons.battery_charging_100
-        else
-            widget.text = icons.battery
-        end
-    elseif self.capacity >= 90 then
-        if charging then
-            widget.text = icons.battery_charging_90
-        else
-            widget.text = icons.battery_90
-        end
-    elseif self.capacity >= 80 then
-        if charging then
-            widget.text = icons.battery_charging_80
-        else
-            widget.text = icons.battery_80
-        end
-    elseif self.capacity >= 70 then
-        if charging then
-            widget.text = icons.battery_charging_70
-        else
-            widget.text = icons.battery_70
-        end
-    elseif self.capacity >= 60 then
-        if charging then
-            widget.text = icons.battery_charging_60
-        else
-            widget.text = icons.battery_60
-        end
-    elseif self.capacity >= 50 then
-        if charging then
-            widget.text = icons.battery_charging_50
-        else
-            widget.text = icons.battery_50
-        end
-    elseif self.capacity >= 40 then
-        if charging then
-            widget.text = icons.battery_charging_40
-        else
-            widget.text = icons.battery_40
-        end
-    elseif self.capacity >= 30 then
-        if charging then
-            widget.text = icons.battery_charging_30
-        else
-            widget.text = icons.battery_30
-        end
-    elseif self.capacity >= 20 then
-        if charging then
-            widget.text = icons.battery_charging_20
-        else
-            widget.text = icons.battery_20
-        end
-    elseif self.capacity >= 10 then
-        if charging then
-            widget.text = icons.battery_charging_10
-        else
-            widget.text = icons.battery_10
-        end
-    else
-        if charging then
-            widget.text = icons.battery_charging_outline
-        else
-            widget.text = icons.battery_outline
-        end
-    end
-end
-
-return setmetatable(Battery, {
-    __call = function (_, ...)
-        local battery = Battery:new(...)
-        return battery.__widget
-    end
-})
-
+return Battery
