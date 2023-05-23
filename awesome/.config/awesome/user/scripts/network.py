@@ -78,7 +78,8 @@ if __name__ == "__main__":
             if not interface.signal:
                 exit(1)
         print(interface.type)
-        print(interface.ssid)
-        print(interface.signal)
+        if interface.type == TYPE_WIRELESS:
+            print(interface.ssid)
+            print(interface.signal)
     except Exception:
         exit(1)
