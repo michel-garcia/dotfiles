@@ -1,7 +1,7 @@
 local wibox = require("wibox")
 
 local Icon = {
-    ETHERNET = "\u{f0200}",
+    ETHERNET = "\u{f0318}",
     WIFI_SIGNAL_100 = "\u{f0928}",
     WIFI_SIGNAL_75 = "\u{f0925}",
     WIFI_SIGNAL_50 = "\u{f0922}",
