@@ -8,8 +8,8 @@ return {
         local lf = require("lf")
         lf.setup({
             border = "single",
-            height = .5,
-            width = .5,
+            height = 15,
+            width = 80,
             winblend = 0
         })
         vim.keymap.set("n", "<leader>e", ":Lf<CR>", {
