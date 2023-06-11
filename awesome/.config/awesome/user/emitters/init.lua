@@ -1,5 +1,4 @@
 require("user.emitters.airplane")
 require("user.emitters.battery")
 require("user.emitters.network")
-require("user.emitters.redshift")
 require("user.emitters.volume")
