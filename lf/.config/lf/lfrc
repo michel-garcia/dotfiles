@@ -1,3 +1,4 @@
+map <enter> open
 map <c-c> quit
 set hidden
 set incsearch
