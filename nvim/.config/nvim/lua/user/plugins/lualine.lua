@@ -36,7 +36,7 @@ return {
                 lualine_b = {
                     {
                         "tabs",
-                        tab_color = {
+                        tabs_color = {
                             active = "@function",
                             inactive = "lualine_c_insert"
                         }
