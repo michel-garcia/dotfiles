@@ -29,20 +29,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = group
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-    callback = function (args)
-        local saved = not vim.api.nvim_buf_get_option(args.buf, "modified")
-        if saved then
-            vim.notify("Saved successfully!")
-        else
-            local filename = vim.fn.fnamemodify(args.file, ":t")
-            local message = string.format("Failed to save '%s'", filename)
-            vim.notify(message, "error")
-        end
-    end,
-    group = group
-})
-
 vim.api.nvim_create_autocmd("OptionSet", {
     pattern = "tabline",
     callback = function (args)
