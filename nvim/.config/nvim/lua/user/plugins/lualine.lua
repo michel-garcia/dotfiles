@@ -26,9 +26,32 @@ return {
                 lualine_b = {},
                 lualine_c = {
                     {
-                        "filename",
-                        path = 1,
-                        shorting_target = 100
+                        function ()
+                            local buftype = vim.api.nvim_buf_get_option(
+                                0, "buftype"
+                            )
+                            if buftype ~= "" then
+                                return buftype
+                            end
+                            local path = vim.fn.fnamemodify(
+                                vim.api.nvim_buf_get_name(0), ":~:."
+                            )
+                            local parts = vim.split(path, "/")
+                            for i = 1, #parts - 1 do
+                                local part = parts[i]
+                                parts[i] = part:sub(
+                                    1, vim.startswith(part, ".") and 2 or 1
+                                )
+                            end
+                            local filename = table.concat(parts, "/")
+                            local modified = vim.api.nvim_buf_get_option(
+                                0, "modified"
+                            )
+                            if not modified then
+                                return filename
+                            end
+                            return table.concat({ filename, "●" }, " ")
+                        end
                     },
                     {
                         "diagnostics",
