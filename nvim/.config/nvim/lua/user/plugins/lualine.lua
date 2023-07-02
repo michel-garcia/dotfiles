@@ -1,3 +1,10 @@
+local get_sign = function (name)
+    local sign = vim.fn.sign_getdefined(name)[1]
+    if sign then
+        return sign.text
+    end
+end
+
 return {
     "nvim-lualine/lualine.nvim",
     config = function ()
@@ -23,7 +30,16 @@ return {
                         path = 1,
                         shorting_target = 100
                     },
-                    "diagnostics"
+                    {
+                        "diagnostics",
+                        colored = false,
+                        symbols = {
+                            error = get_sign("DiagnosticSignError"),
+                            warn = get_sign("DiagnosticSignWarn"),
+                            info = get_sign("DiagnosticSignInfo"),
+                            hint = get_sign("DiagnosticSignHint")
+                        }
+                    }
                 },
                 lualine_x = {
                     "filetype",
