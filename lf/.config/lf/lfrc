@@ -1,6 +1,27 @@
+cmd touch %{{
+    printf "filename: "
+    read filename
+    if [[ ! -z "$filename" ]]; then
+        touch "$filename"
+    fi
+}}
+
+cmd mkdir %{{
+    printf "directory: "
+    read filename
+    if [[ ! -z "$filename" ]]; then
+        mkdir -p "$filename"
+    fi
+}}
+
 map <enter> open
 map <c-c> quit
+map a touch
+map d mkdir
+map x cut
+map D delete
+
 set hidden
 set incsearch
 set nopreview
-set ratios 1
+set ratios 1:4
