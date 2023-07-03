@@ -9,7 +9,7 @@ return {
             local mason = require("mason")
             mason.setup({
                 ui = {
-                    border = "single",
+                    border = vim.g.borders.frame,
                     icons = {
                         package_installed = "",
                         package_pending = "",
@@ -45,7 +45,10 @@ return {
         "neovim/nvim-lspconfig",
         config = function ()
             local win = require("lspconfig.ui.windows")
-            win.default_options.border = "single"
+            win.default_options.border = vim.g.borders.frame
+            vim.api.nvim_set_hl(0, "LspInfoBorder", {
+                link = "NormalFloat"
+            })
         end
     }
 }

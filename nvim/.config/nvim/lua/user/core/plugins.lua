@@ -22,7 +22,7 @@ lazy.setup("user.plugins", {
         }
     },
     ui = {
-        border = "single"
+        border = vim.g.borders.frame
     }
 })
 

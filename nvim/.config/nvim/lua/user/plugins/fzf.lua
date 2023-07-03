@@ -58,7 +58,7 @@ return {
                 },
                 winopts_fn = function ()
                     return {
-                        border = "single",
+                        border = vim.g.borders.frame,
                         col = .5,
                         height = 15,
                         row = .5,

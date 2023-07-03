@@ -8,7 +8,7 @@ local mappings = {
             vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<CR>", opts)
             vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<CR>", opts)
             vim.keymap.set("n", "<C-t>", "<cmd>$tabnew<CR>", opts)
-            vim.keymap.set("n", "<C-w>", "<cmd>tabclose<CR>", opts)
+            vim.keymap.set("n", "<C-q>", "<cmd>tabclose<CR>", opts)
             vim.keymap.set("n", "<S-Tab>", "<cmd>tabprevious<CR>", opts)
             vim.keymap.set("n", "<Tab>", "<cmd>tabnext<CR>", opts)
             vim.keymap.set("v", "<", "<gv", opts)

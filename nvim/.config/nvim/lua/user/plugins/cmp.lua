@@ -39,7 +39,16 @@ return {
                 { name = "nvim_lua" },
                 { name = "nvim_path" },
                 { name = "nvim_lsp_signature_help" }
-            })
+            }),
+            window = {
+                completion = {
+                    border = vim.g.borders.frame,
+                    winhighlight = "Normal:NormalFloat"
+                },
+                documentation = {
+                    border = vim.g.borders.frame
+                }
+            }
         })
     end
 }
