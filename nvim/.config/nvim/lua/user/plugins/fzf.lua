@@ -84,7 +84,9 @@ return {
         },
         config = function ()
             local file_browser = require("fzf-lua-file-browser")
-            file_browser.setup()
+            file_browser.setup({
+                hidden = true
+            })
             local opts = {
                 noremap = true,
                 silent = true
