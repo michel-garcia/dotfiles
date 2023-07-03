@@ -4,20 +4,54 @@ return {
         config = function ()
             local fzf = require("fzf-lua")
             fzf.setup({
+                buffers = {
+                    fzf_opts = {
+                        ["--info"] = false
+                    },
+                    no_header = true
+                },
                 files = {
+                    cwd_prompt = false,
                     file_icons = false,
-                    find_opts = "-type f -not -path '*/.git/*' -not -path '*/node_modules/*' -printf '%P\n'",
-                    git_icons = false
+                    fzf_opts = {
+                        ["--info"] = false
+                    },
+                    git_icons = false,
+                    path_shorten = true,
+                    prompt = "Files> "
                 },
                 fzf_opts = {
-                    ["--color"] = "bg+:-1,header:-1",
-                    ["--info"] = "default",
+                    ["--algo"] = "v1",
+                    ["--color"] = table.concat({
+                        "bg+:6",
+                        "fg+:0",
+                        "hl:-1",
+                        "hl+:0",
+                        "gutter:-1",
+                        "pointer:0",
+                        "prompt:6"
+                    }, ","),
+                    ["--no-info"] = "",
+                    ["--no-scrollbar"] = "",
                     ["--scroll-off"] = 5
                 },
                 grep = {
-                    grep_opts = "--recursive --ignore-case --exclude-dir node_modules"
+                    fzf_opts = {
+                        ["--info"] = false
+                    },
+                    no_header = true
+                },
+                tabs = {
+                    fzf_opts = {
+                        ["--info"] = false
+                    },
+                    no_header = true
                 },
                 winopts = {
+                    hl = {
+                        border = "FloatBorder",
+                        normal = "FloatBorder"
+                    },
                     preview = {
                         hidden = "hidden"
                     }
@@ -36,13 +70,10 @@ return {
                 noremap = true,
                 silent = true
             }
-            vim.keymap.set("n", "<leader>pb", fzf.buffers, opts)
-            vim.keymap.set("n", "<leader>pt", fzf.tabs, opts)
-            vim.keymap.set("n", "<leader>sf", fzf.files, opts)
+            vim.keymap.set("n", "<leader>fb", fzf.buffers, opts)
+            vim.keymap.set("n", "<leader>ff", fzf.files, opts)
             vim.keymap.set("n", "<leader>sh", fzf.help_tags, opts)
-            vim.keymap.set("n", "<leader>sg", fzf.live_grep, opts)
-            vim.keymap.set("n", "<leader>ds", fzf.lsp_document_symbols, opts)
-            vim.keymap.set("n", "<leader>sd", fzf.diagnostics_document, opts)
+            vim.keymap.set("n", "<leader>fg", fzf.live_grep, opts)
         end
     },
     {
@@ -59,7 +90,7 @@ return {
                 silent = true
             }
             local fzf = require("fzf-lua")
-            vim.keymap.set("n", "<leader>fb", fzf.file_browser, opts)
+            vim.keymap.set("n", "<leader>fe", fzf.file_browser, opts)
         end
     }
 }
