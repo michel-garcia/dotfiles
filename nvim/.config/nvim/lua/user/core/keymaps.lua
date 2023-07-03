@@ -15,7 +15,7 @@ local mappings = {
             vim.keymap.set("v", ">", ">gv", opts)
             vim.keymap.set("v", "<A-j>", ":move '>+1<CR>gv=gv", opts)
             vim.keymap.set("v", "<A-k>", ":move '<-2<CR>gv=gv", opts)
-            vim.keymap.set("t", "<C-Space>", "<C-\\><C-n>", opts)
+            vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", opts)
         end
     },
     lsp = {
