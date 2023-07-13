@@ -18,6 +18,20 @@ local keys = {
         awful.key({ mod_mask }, "Return", function ()
             awful.spawn(terminal)
         end),
+        awful.key({ mod_mask , "Shift" }, "Return", function ()
+            local s = awful.screen.focused()
+            local height = s.workarea.height / 2
+            local width = s.workarea.width / 2
+            awful.spawn(terminal, {
+                floating = true,
+                height = height,
+                ontop = true,
+                placement = awful.placement.centered,
+                x = s.workarea.width - height,
+                width = width,
+                y = s.workarea.height - height
+            })
+        end),
         awful.key({ mod_mask }, "p", function()
             awful.spawn("rofi -show drun")
         end),
