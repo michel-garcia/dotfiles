@@ -4,10 +4,10 @@ local gears = require("gears")
 local update = function ()
     local cmd = table.concat({
         gears.filesystem.get_configuration_dir(),
-        "user/scripts/redshift.py"
+        "user/scripts/sunset.py"
     }, "/")
     awful.spawn.easy_async_with_shell(cmd, function (output, _, _, status)
-        awesome.emit_signal("redshift::update", {
+        awesome.emit_signal("sunset::update", {
             status = status,
             args = gears.string.split(output, "\n")
         })

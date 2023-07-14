@@ -6,7 +6,7 @@ local Battery = require("user.widgets.battery")
 local Clock = require("user.widgets.clock")
 local Network = require("user.widgets.network")
 local Taglist = require("user.widgets.taglist")
-local Redshift = require("user.widgets.redshift")
+local Sunset = require("user.widgets.sunset")
 local Systray = require("user.widgets.systray")
 local Volume = require("user.widgets.volume")
 
@@ -14,7 +14,7 @@ local airplane = Airplane()
 local battery = Battery()
 local clock = Clock()
 local network = Network()
-local redshift = Redshift()
+local sunset = Sunset()
 local systray = Systray()
 local volume = Volume()
 
@@ -32,7 +32,7 @@ end
 
 local Right = function ()
     local layout = wibox.layout.fixed.horizontal(
-        redshift,
+        sunset,
         network,
         airplane,
         volume,
