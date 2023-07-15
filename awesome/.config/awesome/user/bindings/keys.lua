@@ -27,9 +27,9 @@ local keys = {
                 height = height,
                 ontop = true,
                 placement = awful.placement.centered,
-                x = s.workarea.width / 2 - width / 2,
+                x = s.workarea.x + s.workarea.width / 2 - width / 2,
                 width = width,
-                y = s.workarea.height / 2 - height / 2
+                y = s.workarea.y + s.workarea.height / 2 - height / 2
             })
         end),
         awful.key({ mod_mask }, "p", function()
