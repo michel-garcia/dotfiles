@@ -22,6 +22,9 @@ local keys = {
             local s = awful.screen.focused()
             local height = s.workarea.height / 2
             local width = s.workarea.width / 2
+            if height > width then
+                height = width
+            end
             awful.spawn(terminal, {
                 floating = true,
                 height = height,
