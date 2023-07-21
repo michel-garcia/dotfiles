@@ -46,6 +46,15 @@ return {
         vim.api.nvim_set_hl(0, "LirFloatCurdirWindowNormal", {
             link = "NormalFloat"
         })
+        vim.api.nvim_create_autocmd("WinLeave", {
+            callback = function ()
+                local float = require("lir.float")
+                float.close()
+            end,
+            group = vim.api.nvim_create_augroup("LirConfig", {
+                clear = true
+            })
+        })
         vim.keymap.set("n", "<leader>e", function ()
             local float = require("lir.float")
             float.init()
