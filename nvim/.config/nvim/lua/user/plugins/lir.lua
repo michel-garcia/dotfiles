@@ -17,8 +17,12 @@ return {
             },
             hide_cursor = true,
             mappings = {
-                ["<CR>"] = actions.edit,
-                ["l"] = actions.edit,
+                ["<CR>"] = function ()
+                    return actions.edit({ modified_split_command = "edit" })
+                end,
+                ["l"] = function ()
+                    return actions.edit({ modified_split_command = "edit" })
+                end,
                 ["h"] = actions.up,
                 ["<C-s>"] = actions.split,
                 ["<C-v>"] = actions.vsplit,
