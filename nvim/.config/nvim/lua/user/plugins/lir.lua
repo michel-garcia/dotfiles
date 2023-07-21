@@ -15,7 +15,9 @@ return {
                     }
                 end
             },
+            hide_cursor = true,
             mappings = {
+                ["<CR>"] = actions.edit,
                 ["l"] = actions.edit,
                 ["h"] = actions.up,
                 ["<C-s>"] = actions.split,
