@@ -8,7 +8,8 @@ vim.opt.cursorline = true
 vim.opt.encoding = "utf-8"
 vim.opt.expandtab = true
 vim.opt.fillchars = {
-    eob = " "
+    eob = " ",
+    lastline = " "
 }
 vim.opt.fsync = false
 vim.opt.guicursor = "i:block"
