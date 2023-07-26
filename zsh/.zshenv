@@ -1,12 +1,9 @@
-export XDG_CONFIG_HOME="$HOME/.config"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export BROWSER="firefox"
+export EDITOR="nvim"
+export TERMINAL="kitty"
+export VISUAL="nvim"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
-export ZDOTDIR="$HOME/.config/zsh"
-export ANDROID_HOME="$HOME/Android/Sdk"
-
-export EDITOR="nvim"
-export VISUAL="nvim"
-export TERMINAL="kitty"
-export BROWSER="firefox"
-
