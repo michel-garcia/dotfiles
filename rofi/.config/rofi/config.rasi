@@ -3,6 +3,7 @@ configuration {
     drun-display-format: "{name}";
     font: "Ubuntu 10";
     hover-select: true;
+    icon-theme: "Gruvbox-Material-Dark";
     me-accept-entry: [
         MousePrimary,
         MouseSecondary,
