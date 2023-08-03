@@ -14,7 +14,6 @@ return {
                 "css",
                 "dart",
                 "glsl",
-                "help",
                 "html",
                 "http",
                 "javascript",
@@ -26,6 +25,7 @@ return {
                 "query",
                 "sql",
                 "typescript",
+                "vimdoc",
                 "yaml"
             },
             highlight = {
