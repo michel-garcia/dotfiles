@@ -33,24 +33,16 @@ return {
                             if buftype ~= "" then
                                 return buftype
                             end
-                            local path = vim.fn.fnamemodify(
+                            local path = vim.fn.pathshorten(vim.fn.fnamemodify(
                                 vim.api.nvim_buf_get_name(0), ":~:."
-                            )
-                            local parts = vim.split(path, "/")
-                            for i = 1, #parts - 1 do
-                                local part = parts[i]
-                                parts[i] = part:sub(
-                                    1, vim.startswith(part, ".") and 2 or 1
-                                )
-                            end
-                            local filename = table.concat(parts, "/")
+                            ))
                             local modified = vim.api.nvim_buf_get_option(
                                 0, "modified"
                             )
                             if not modified then
-                                return filename
+                                return path
                             end
-                            return table.concat({ filename, "●" }, " ")
+                            return table.concat({ path, "●" }, " ")
                         end
                     },
                     {
