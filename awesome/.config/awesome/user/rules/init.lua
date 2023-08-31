@@ -7,6 +7,9 @@ local buttons = require("user.bindings.buttons")
 awful.rules.rules = {
     {
         rule = {},
+        except = {
+            type = "utility"
+        },
         properties = {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
