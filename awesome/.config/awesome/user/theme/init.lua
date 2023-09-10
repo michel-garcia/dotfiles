@@ -5,7 +5,7 @@ local Gtk = require("user.modules.Gtk")
 
 beautiful.init({
     bg_normal = "#000000",
-    border_width = 1,
+    border_width = 2,
     border_normal = "#000000",
     border_focus = "#c78f23",
     font = "Ubuntu 10",
