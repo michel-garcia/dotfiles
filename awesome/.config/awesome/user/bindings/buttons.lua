@@ -18,6 +18,12 @@ local buttons = {
             })
             awful.mouse.client.move(c)
             local geometry = c:geometry()
+            if geometry.width > c.screen.workarea.width * .9 then
+                geometry.width = c.screen.workarea.width * .9
+            end
+            if geometry.height > c.screen.workarea.height * .9 then
+                geometry.height = c.screen.workarea.height * .9
+            end
             c.floating = true
             c:geometry(geometry)
         end),
