@@ -6,7 +6,7 @@ local Taglist = function (s)
         filter = awful.widget.taglist.filter.all,
         screen = s
     })
-    return wibox.container.margin(widget, 4, 4)
+    return wibox.container.margin(widget, 0, 0)
 end
 
 return Taglist

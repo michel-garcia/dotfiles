@@ -11,7 +11,8 @@ beautiful.init({
     font = "Ubuntu 10",
     systray_icon_spacing = 6,
     taglist_fg_empty = "#665c54",
-    taglist_fg_focus = "#fabd2f",
+    taglist_bg_focus = "#c78f23",
+    taglist_fg_focus = "#000000",
     taglist_fg_occupied = "#e7d7ad",
     taglist_spacing = 4
 })

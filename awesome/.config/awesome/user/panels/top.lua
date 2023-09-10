@@ -18,20 +18,21 @@ local sunset = Sunset()
 local systray = Systray()
 local volume = Volume()
 
-local Left = function ()
-    local layout = wibox.layout.fixed.horizontal(clock, systray)
+local Left = function (args)
+    local taglist = Taglist(args.screen)
+    local layout = wibox.layout.fixed.horizontal(taglist)
     local container = wibox.container.place(layout, "left")
     return container
 end
 
-local Center = function (args)
-    local taglist = Taglist(args.screen)
-    local container = wibox.container.place(taglist, "center")
+local Center = function ()
+    local container = wibox.container.place(clock, "center")
     return container
 end
 
 local Right = function ()
     local layout = wibox.layout.fixed.horizontal(
+        systray,
         sunset,
         network,
         airplane,
@@ -43,8 +44,8 @@ local Right = function ()
 end
 
 local Container = function (args)
-    local left = Left()
-    local center = Center(args)
+    local left = Left(args)
+    local center = Center()
     local right = Right()
     local stack = wibox.layout.stack(nil, left, center, right)
     local container = wibox.container.margin(stack, 4, 4)
