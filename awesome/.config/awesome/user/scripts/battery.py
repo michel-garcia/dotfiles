@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-device = "BAT0"
+device = "BAT1"
 
 
 def get_capacity():
