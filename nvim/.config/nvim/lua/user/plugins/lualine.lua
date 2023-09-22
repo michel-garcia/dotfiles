@@ -30,12 +30,18 @@ return {
                             local buftype = vim.api.nvim_buf_get_option(
                                 0, "buftype"
                             )
-                            if buftype ~= "" then
+                            local bufname = vim.api.nvim_buf_get_name(0)
+                            if buftype == "terminal" then
+                                local count = bufname:match("toggleterm#(%d+)")
+                                return string.format("terminal %s", count)
+                            elseif buftype ~= "" then
                                 return buftype
                             end
-                            local path = vim.fn.pathshorten(vim.fn.fnamemodify(
-                                vim.api.nvim_buf_get_name(0), ":~:."
-                            ))
+                            local path = vim.fn.pathshorten(
+                                vim.fn.fnamemodify(
+                                    vim.api.nvim_buf_get_name(0), ":~:."
+                                )
+                            )
                             local modified = vim.api.nvim_buf_get_option(
                                 0, "modified"
                             )
