@@ -5,12 +5,36 @@ local get_sign = function (name)
     end
 end
 
+local filename = function ()
+    local bufname = vim.api.nvim_buf_get_name(0)
+    local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+    if buftype == "terminal" then
+        local count = string.match(bufname, "toggleterm#(%d+)")
+        return string.format("terminal %s", count)
+    end
+    local path = vim.fn.fnamemodify(bufname, ":~:.")
+    local shorten_path = vim.fn.pathshorten(path)
+    local modified = vim.api.nvim_buf_get_option(0, "modified")
+    if not modified then
+        return shorten_path
+    end
+    return table.concat({ shorten_path, "●" }, " ")
+end
+
 return {
     "nvim-lualine/lualine.nvim",
     config = function ()
         local lualine = require("lualine")
         lualine.setup({
             inactive_sections = {},
+            inactive_winbar = {
+                lualine_c = {
+                    {
+                        filename,
+                        color = "lualine_b_insert"
+                    }
+                }
+            },
             options = {
                 component_separators = "",
                 disabled_filetypes = {
@@ -26,30 +50,7 @@ return {
                 lualine_b = {},
                 lualine_c = {
                     {
-                        function ()
-                            local buftype = vim.api.nvim_buf_get_option(
-                                0, "buftype"
-                            )
-                            local bufname = vim.api.nvim_buf_get_name(0)
-                            if buftype == "terminal" then
-                                local count = bufname:match("toggleterm#(%d+)")
-                                return string.format("terminal %s", count)
-                            elseif buftype ~= "" then
-                                return buftype
-                            end
-                            local path = vim.fn.pathshorten(
-                                vim.fn.fnamemodify(
-                                    vim.api.nvim_buf_get_name(0), ":~:."
-                                )
-                            )
-                            local modified = vim.api.nvim_buf_get_option(
-                                0, "modified"
-                            )
-                            if not modified then
-                                return path
-                            end
-                            return table.concat({ path, "●" }, " ")
-                        end
+                        filename
                     },
                     {
                         "diagnostics",
@@ -77,6 +78,19 @@ return {
                             active = "@function",
                             inactive = "lualine_c_insert"
                         }
+                    }
+                }
+            },
+            winbar = {
+                lualine_c = {
+                    {
+                        filename,
+                        color = "lualine_a_insert"
+                    },
+                    {
+                        function ()
+                            return string.char(32)
+                        end
                     }
                 }
             }
