@@ -10,6 +10,9 @@ local filename = function ()
     local buftype = vim.api.nvim_buf_get_option(0, "buftype")
     if buftype == "terminal" then
         local count = string.match(bufname, "toggleterm#(%d+)")
+        if not count then
+            return buftype
+        end
         return string.format("terminal %s", count)
     end
     local path = vim.fn.fnamemodify(bufname, ":~:.")
