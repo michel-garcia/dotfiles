@@ -58,7 +58,7 @@ precmd() {
     print -Pn "%B%F{green}%n%f%b"
     print -Pn "%B in %F{blue}%~%f%b"
     if [[ ! -z ${vcs_info_msg_0_} ]]; then
-        print -Pn "%B on %F{yellow}שׂ ${vcs_info_msg_0_}%f%b"
+        print -Pn "%B on %F{yellow}\ue725 ${vcs_info_msg_0_}%f%b"
     fi
     print
 }
