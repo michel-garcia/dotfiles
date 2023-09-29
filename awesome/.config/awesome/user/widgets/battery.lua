@@ -40,7 +40,7 @@ local Battery = function ()
         end
         local filename = table.concat(parts, "-")
         icon.image = Gtk.lookup_icon(filename, 16)
-        percentage.text = string.format("%s%%", filename)
+        percentage.text = string.format("%s%%", capacity)
     end)
     return container
 end
