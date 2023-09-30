@@ -11,15 +11,37 @@ local Status = {
 }
 
 local Battery = function ()
-    local icon = wibox.widget.imagebox()
-    local percentage = wibox.widget.textbox()
-    local layout = wibox.layout.fixed.horizontal(icon, percentage)
-    layout.spacing = 4
-    local container = wibox.container.margin(layout, 4, 4, 4, 4)
-    container.visible = false
+    local widget = wibox.widget({
+        layout = wibox.container.margin,
+        left = 4,
+        right = 4,
+        visible = false,
+        {
+            id = "container",
+            layout = wibox.container.place,
+            valign = "center",
+            {
+                id = "data",
+                layout = wibox.layout.fixed.horizontal,
+                spacing = 4,
+                {
+                    forced_height = 16,
+                    forced_width = 16,
+                    id = "icon",
+                    widget = wibox.widget.imagebox
+                },
+                {
+                    id = "percentage",
+                    widget = wibox.widget.textbox
+                }
+            }
+        }
+    })
+    local icon = widget.container.data.icon
+    local percentage = widget.container.data.percentage
     awesome.connect_signal("battery::update", function (e)
-        container.visible = e.status == 0
-        if not container.visible then
+        widget.visible = e.status == 0
+        if not widget.visible then
             return
         end
         local capacity, status = table.unpack(e.args)
@@ -42,7 +64,7 @@ local Battery = function ()
         icon.image = Gtk.lookup_icon(filename, 16)
         percentage.text = string.format("%s%%", capacity)
     end)
-    return container
+    return widget
 end
 
 return Battery
