@@ -1,6 +1,12 @@
 local mappings = {
     general = {
         bind = function (opts)
+            vim.keymap.set({ "n", "x" }, "j", function ()
+                vim.api.nvim_feedkeys(vim.v.count == 0 and "gj" or "j", "n", false)
+            end, opts)
+            vim.keymap.set({ "n", "x" }, "k", function ()
+                vim.api.nvim_feedkeys(vim.v.count == 0 and "gk" or "k", "n", false)
+            end, opts)
             vim.keymap.set("n", "<C-s>", "<cmd>wincmd s<CR>", opts)
             vim.keymap.set("n", "<C-v>", "<cmd>wincmd v<CR>", opts)
             vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<CR>", opts)
