@@ -50,6 +50,21 @@ return {
                 link = "NormalFloat"
             })
         end
+    },
+    {
+        "stevearc/conform.nvim",
+        keys = {
+            {
+                "<leader>f",
+                function ()
+                    local conform = require("conform")
+                    conform.format({
+                        async = true,
+                        lsp_fallback = true
+                    })
+                end
+            }
+        }
     }
 }
 
