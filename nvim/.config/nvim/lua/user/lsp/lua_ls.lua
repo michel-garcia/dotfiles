@@ -3,6 +3,9 @@ return {
         Lua = {
             telemetry = {
                 enable = false
+            },
+            workspace = {
+                checkThirdParty = false
             }
         }
     }
