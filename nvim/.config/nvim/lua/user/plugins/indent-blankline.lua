@@ -1,11 +1,13 @@
 return {
     "lukas-reineke/indent-blankline.nvim",
     config = function ()
-        local blankline = require("indent_blankline")
+        local blankline = require("ibl")
         blankline.setup({
-            show_current_context = true,
-            show_current_context_start = false,
-            show_trailing_blankline_indent = false
+            scope = {
+                enabled = true,
+                show_end = false,
+                show_start = false
+            }
         })
     end
 }
