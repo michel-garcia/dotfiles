@@ -22,7 +22,7 @@ vim.opt.listchars = {
     space = "·",
     tab = "··"
 }
-vim.opt.mouse:append("a")
+vim.opt.mouse = "a"
 vim.opt.mousemodel = "extend"
 vim.opt.number = true
 vim.opt.pumheight = 10
