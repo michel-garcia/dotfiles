@@ -1,12 +1,17 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-        "nvim-treesitter/playground"
+        "nvim-treesitter/playground",
+        "windwp/nvim-ts-autotag"
     },
     build = ":TSUpdate",
     config = function ()
         local treesitter = require("nvim-treesitter.configs")
         treesitter.setup({
+            autotag = {
+                enable = true,
+                enable_close = false
+            },
             ensure_installed = {
                 "bash",
                 "c",
