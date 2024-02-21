@@ -11,11 +11,9 @@ return {
             noremap = true,
             silent = true
         })
-        local Terminal = require("toggleterm.terminal").Terminal
-        for n = 1, 9 do
-            local terminal = Terminal:new({ count = n })
-            vim.keymap.set({ "n", "t" }, string.format("<C-%s>", n), function ()
-                terminal:toggle()
+        for i = 1, 9 do
+            vim.keymap.set({ "n", "t" }, string.format("<C-%s>", i), function ()
+                toggleterm.toggle(i)
             end, {
                 noremap = true,
                 silent = true
