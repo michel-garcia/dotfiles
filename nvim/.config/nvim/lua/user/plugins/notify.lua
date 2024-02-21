@@ -10,7 +10,8 @@ return {
                     })
                 end
             end,
-            render = "minimal",
+            max_width = math.min(vim.o.columns, 48),
+            render = "wrapped-compact",
             stages = "static"
         })
         local levels = { "ERROR", "WARN", "INFO", "DEBUG", "TRACE" }
