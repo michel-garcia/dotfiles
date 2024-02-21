@@ -1,5 +1,6 @@
 return {
     "luisiacc/gruvbox-baby",
+    priority = 1000,
     config = function ()
         vim.g.gruvbox_baby_background_color = "dark"
         vim.cmd.colorscheme("gruvbox-baby")
