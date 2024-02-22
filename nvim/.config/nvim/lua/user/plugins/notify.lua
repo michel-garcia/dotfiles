@@ -10,7 +10,7 @@ return {
                     })
                 end
             end,
-            max_width = math.min(vim.o.columns, 48),
+            max_width = math.min(vim.o.columns, 64),
             render = "wrapped-compact",
             stages = "static"
         })
