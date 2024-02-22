@@ -1,22 +1,5 @@
-local group = vim.api.nvim_create_augroup("CustomAutocommands", {
+local group = vim.api.nvim_create_augroup("AutoCmds", {
     clear = true
-})
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function (args)
-        if vim.fn.isdirectory(args.file) ~= 0 then
-            vim.opt.hidden = false
-            vim.cmd.chdir(args.file)
-        end
-    end,
-    group = group
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function ()
-        vim.opt.hidden = true
-    end,
-    group = group
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -31,15 +14,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.api.nvim_create_autocmd("OptionSet", {
     pattern = "tabline",
-    callback = function (args)
-        vim.opt.showtabline = 1
-    end,
-    group = group
-})
-
-vim.api.nvim_create_autocmd("TermEnter", {
     callback = function ()
-        vim.fn.clearmatches()
+        vim.opt.showtabline = 1
     end,
     group = group
 })
@@ -55,21 +31,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function ()
-        vim.highlight.on_yank({
-            higroup = "IncSearch",
-            timeout = 700
-        })
-    end,
-    group = group
-})
-
-vim.api.nvim_create_autocmd("TermOpen", {
-    callback = function ()
-        vim.api.nvim_win_set_option(0, "cursorline", false)
-        vim.api.nvim_win_set_option(0, "number", false)
-        vim.api.nvim_win_set_option(0, "relativenumber", false)
-        vim.api.nvim_win_set_option(0, "signcolumn", "no")
-        vim.cmd("startinsert")
+        vim.highlight.on_yank()
     end,
     group = group
 })
