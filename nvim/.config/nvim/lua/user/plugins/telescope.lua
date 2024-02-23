@@ -1,0 +1,124 @@
+return {
+    "nvim-telescope/telescope.nvim",
+    version = false,
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        {
+            "nvim-telescope/telescope-fzf-native.nvim",
+            build = "make",
+            enabled = vim.fn.executable("make") == 1
+        },
+        {
+            "nvim-telescope/telescope-file-browser.nvim",
+            dependencies = {
+                "nvim-tree/nvim-web-devicons"
+            },
+            config = function ()
+                local telescope = require("telescope")
+                vim.keymap.set("n", "<leader>fe", function ()
+                    telescope.extensions.file_browser.file_browser({
+                        cwd = vim.fn.resolve(vim.fn.expand("%:p:h"))
+                    })
+                end, {
+                    noremap = true,
+                    silent = true
+                })
+                local group = vim.api.nvim_create_augroup("TelescopeFileBrowser", {
+                    clear = true
+                })
+                vim.api.nvim_create_autocmd("VimEnter", {
+                    callback = function (args)
+                        if vim.fn.isdirectory(args.file) ~= 0 then
+                            local name = vim.api.nvim_buf_get_name(0)
+                            if name == args.file then
+                                vim.api.nvim_buf_delete(0, {
+                                    force = true
+                                })
+                            end
+                            telescope.extensions.file_browser.file_browser({
+                                cwd = vim.fn.resolve(args.file)
+                            })
+                        end
+                    end,
+                    group = group
+                })
+            end
+        }
+    },
+    opts = {
+        defaults = {
+            borderchars = {
+                { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+                prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
+                results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+                preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+            },
+            layout_strategy = "center",
+            preview = false,
+            results_title = false,
+            sorting_strategy = "ascending"
+        },
+        extensions = {
+            file_browser = {
+                display_stat = false,
+                git_status = false,
+                grouped = true,
+                hide_parent_dir = true,
+                hidden = true,
+                mappings = {
+                    ["n"] = {
+                        ["h"] = function (bufnr)
+                            local telescope = require("telescope")
+                            local file_browser = telescope.extensions.file_browser
+                            file_browser.actions.goto_parent_dir(bufnr)
+                        end,
+                        ["l"] = function (bufnr)
+                            local actions = require("telescope.actions")
+                            actions.select_default(bufnr)
+                        end
+                    },
+                    ["i"] = {
+                        ["<C-h>"] = function (bufnr)
+                            local telescope = require("telescope")
+                            local file_browser = telescope.extensions.file_browser
+                            file_browser.actions.goto_parent_dir(bufnr)
+                        end,
+                        ["<C-j>"] = function (bufnr)
+                            local actions = require("telescope.actions")
+                            actions.move_selection_next(bufnr)
+                        end,
+                        ["<C-k>"] = function (bufnr)
+                            local actions = require("telescope.actions")
+                            actions.move_selection_previous(bufnr)
+                        end,
+                        ["<C-l>"] = function (bufnr)
+                            local actions = require("telescope.actions")
+                            actions.select_default(bufnr)
+                        end,
+                        ["<bs>"] = false
+                    }
+                }
+            }
+        },
+        pickers = {
+            find_files = {
+                hidden = true
+            }
+        }
+    },
+    config = function(_, opts)
+        local telescope = require("telescope")
+        telescope.setup(opts)
+        telescope.load_extension("fzf")
+        telescope.load_extension("file_browser")
+        local builtin = require("telescope.builtin")
+        local k_opts = {
+            noremap = true,
+            silent = true
+        }
+        vim.keymap.set("n", "<leader>ff", builtin.find_files, k_opts)
+        vim.keymap.set("n", "<leader>fg", builtin.live_grep, k_opts)
+        vim.keymap.set("n", "<leader>fb", builtin.buffers, k_opts)
+        vim.keymap.set("n", "<leader>fh", builtin.help_tags, k_opts)
+    end
+}
