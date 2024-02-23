@@ -55,7 +55,7 @@ return {
         "stevearc/conform.nvim",
         keys = {
             {
-                "<leader>f",
+                "<A-f>",
                 function ()
                     local conform = require("conform")
                     conform.format({
