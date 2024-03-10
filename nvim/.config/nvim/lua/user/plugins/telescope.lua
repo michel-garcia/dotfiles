@@ -53,6 +53,7 @@ return {
                 results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
                 preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
             },
+            color_devicons = false,
             layout_strategy = "center",
             preview = false,
             results_title = false,
