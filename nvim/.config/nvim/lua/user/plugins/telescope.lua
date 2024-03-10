@@ -54,6 +54,14 @@ return {
                 preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
             },
             color_devicons = false,
+            layout_config = {
+                height = function (_, _, lines)
+                    return math.max(math.ceil(lines * .4), 15)
+                end,
+                width = function (_, columns)
+                    return math.max(math.ceil(columns * .5), 70)
+                end
+            },
             layout_strategy = "center",
             preview = false,
             results_title = false,
