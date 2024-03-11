@@ -13,12 +13,12 @@ local mappings = {
                     vim.v.count > 0 and "k" or "gk"
                 }), "n", false)
             end, opts)
-            vim.keymap.set("n", "<C-s>", "<cmd>wincmd s<CR>", opts)
-            vim.keymap.set("n", "<C-v>", "<cmd>wincmd v<CR>", opts)
-            vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<CR>", opts)
-            vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<CR>", opts)
-            vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<CR>", opts)
-            vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<CR>", opts)
+            vim.keymap.set("n", "<A-s>", "<cmd>wincmd s<CR>", opts)
+            vim.keymap.set("n", "<A-v>", "<cmd>wincmd v<CR>", opts)
+            vim.keymap.set("n", "<A-h>", "<cmd>wincmd h<CR>", opts)
+            vim.keymap.set("n", "<A-j>", "<cmd>wincmd j<CR>", opts)
+            vim.keymap.set("n", "<A-k>", "<cmd>wincmd k<CR>", opts)
+            vim.keymap.set("n", "<A-l>", "<cmd>wincmd l<CR>", opts)
             vim.keymap.set("n", "<A-t>", "<cmd>$tabnew<CR>", opts)
             vim.keymap.set("n", "<A-w>", "<cmd>tabclose<CR>", opts)
             vim.keymap.set("n", "<A-,>", "<cmd>tabprevious<CR>", opts)
@@ -28,6 +28,10 @@ local mappings = {
             vim.keymap.set("v", "<A-j>", ":move '>+1<CR>gv=gv", opts)
             vim.keymap.set("v", "<A-k>", ":move '<-2<CR>gv=gv", opts)
             vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", opts)
+            vim.keymap.set("t", "<A-h>", "<C-\\><C-n><cmd>wincmd h<CR>", opts)
+            vim.keymap.set("t", "<A-j>", "<C-\\><C-n><cmd>wincmd j<CR>", opts)
+            vim.keymap.set("t", "<A-k>", "<C-\\><C-n><cmd>wincmd k<CR>", opts)
+            vim.keymap.set("t", "<A-l>", "<C-\\><C-n><cmd>wincmd l<CR>", opts)
         end
     },
     lsp = {
