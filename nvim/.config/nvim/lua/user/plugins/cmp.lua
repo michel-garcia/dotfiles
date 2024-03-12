@@ -42,11 +42,11 @@ return {
             }),
             window = {
                 completion = {
-                    border = vim.g.borders.frame,
+                    border = "solid",
                     winhighlight = "Normal:NormalFloat"
                 },
                 documentation = {
-                    border = vim.g.borders.frame
+                    border = "solid"
                 }
             }
         })

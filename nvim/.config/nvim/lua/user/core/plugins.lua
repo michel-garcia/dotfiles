@@ -22,7 +22,7 @@ lazy.setup("user.plugins", {
         }
     },
     ui = {
-        border = vim.g.borders.frame
+        border = "solid"
     }
 })
 

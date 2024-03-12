@@ -47,12 +47,7 @@ return {
     },
     opts = {
         defaults = {
-            borderchars = {
-                { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-                prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
-                results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
-                preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
-            },
+            borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
             color_devicons = false,
             layout_config = {
                 height = function (_, _, lines)
@@ -129,5 +124,14 @@ return {
         vim.keymap.set("n", "<leader>fg", builtin.live_grep, k_opts)
         vim.keymap.set("n", "<leader>fb", builtin.buffers, k_opts)
         vim.keymap.set("n", "<leader>fh", builtin.help_tags, k_opts)
+        vim.api.nvim_set_hl(0, "TelescopeNormal", {
+            link = "NormalFloat"
+        })
+        vim.api.nvim_set_hl(0, "TelescopeBorder", {
+            link = "FloatBorder"
+        })
+        vim.api.nvim_set_hl(0, "TelescopePromptTitle", {
+            link = "lualine_a_insert"
+        })
     end
 }
