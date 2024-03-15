@@ -1,6 +1,7 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
         "nvim-treesitter/playground",
         "windwp/nvim-ts-autotag"
     },
@@ -49,6 +50,36 @@ return {
             },
             playground = {
                 enable = true
+            },
+            textobjects = {
+                move = {
+                    enable = true,
+                    set_jumps = true,
+                    goto_next_start = {
+                        ["]f"] = "@function.outer",
+                        ["]a"] = "@parameter.inner",
+                        ["]r"] = "@return.outer",
+                        ["]x"] = "@call.outer"
+                    },
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer",
+                        ["[a"] = "@parameter.inner",
+                        ["[r"] = "@return.outer",
+                        ["[x"] = "@call.outer"
+                    }
+                },
+                select = {
+                    enable = true,
+                    lookahead = true,
+                    keymaps = {
+                        ["af"] = "@function.outer",
+                        ["if"] = "@function.inner",
+                        ["aa"] = "@parameter.outer",
+                        ["ia"] = "@parameter.inner",
+                        ["ax"] = "@call.outer",
+                        ["ix"] = "@call.inner"
+                    }
+                }
             }
         })
         vim.opt.foldmethod = "expr"
