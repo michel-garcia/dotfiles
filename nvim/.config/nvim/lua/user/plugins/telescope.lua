@@ -68,40 +68,7 @@ return {
                 git_status = false,
                 grouped = true,
                 hide_parent_dir = true,
-                hidden = true,
-                mappings = {
-                    ["n"] = {
-                        ["h"] = function (bufnr)
-                            local telescope = require("telescope")
-                            local file_browser = telescope.extensions.file_browser
-                            file_browser.actions.goto_parent_dir(bufnr)
-                        end,
-                        ["l"] = function (bufnr)
-                            local actions = require("telescope.actions")
-                            actions.select_default(bufnr)
-                        end
-                    },
-                    ["i"] = {
-                        ["<C-h>"] = function (bufnr)
-                            local telescope = require("telescope")
-                            local file_browser = telescope.extensions.file_browser
-                            file_browser.actions.goto_parent_dir(bufnr)
-                        end,
-                        ["<C-j>"] = function (bufnr)
-                            local actions = require("telescope.actions")
-                            actions.move_selection_next(bufnr)
-                        end,
-                        ["<C-k>"] = function (bufnr)
-                            local actions = require("telescope.actions")
-                            actions.move_selection_previous(bufnr)
-                        end,
-                        ["<C-l>"] = function (bufnr)
-                            local actions = require("telescope.actions")
-                            actions.select_default(bufnr)
-                        end,
-                        ["<bs>"] = false
-                    }
-                }
+                hidden = true
             }
         },
         pickers = {
