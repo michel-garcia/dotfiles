@@ -1,5 +1,4 @@
 configuration {
-    display-drun: "Apps";
     drun-display-format: "{name}";
     font: "Ubuntu 10";
     hover-select: true;
@@ -27,54 +26,45 @@ configuration {
 
 window {
     background-color: #282828e5;
-    border: 1px;
-    border-color: #5f676a;
-    location: south;
+    border: 2px;
+    border-color: #fabd2f;
+    location: center;
     padding: 24px;
-    y-offset: -24px;
-    width: 900px;
+    width: 512px;
 }
 
 inputbar {
-    children: [entry, prompt];
-    margin-bottom: 16px;
+    children: [entry];
+    margin: 0 0 16px 0;
     orientation: vertical;
-}
-
-prompt {
-    color: #fff;
-    enabled: true;
-    margin: 24px 0 16px 24px;
-    text-transform: bold;
 }
 
 entry {
     background-color: #242424;
-    border: 0 0 1px 0;
-    border-color: #fabd2f;
+    border: 1px;
+    border-color: #665c54;
     padding: 8px;
-    placeholder: "Type here to search";
+    placeholder: "Search";
     placeholder-color: #665c54;
     text-color: #fff;
 }
 
 listview {
-    columns: 6;
+    columns: 1;
     fixed-columns: true;
     flow: horizontal;
     layout: vertical;
-    lines: 4;
-    spacing: 8px;
+    lines: 6;
 }
 
 element {
-    children: [element-icon, element-text];
+    children: [element-text];
     padding: 8px;
     orientation: vertical;
 }
 
 element selected {
-    background-color: #504945;
+    background-color: #fabd2f;
 }
 
 element-icon {
@@ -83,9 +73,12 @@ element-icon {
 }
 
 element-text {
-    horizontal-align: 0.5;
     text-color: #fff;
     vertical-align: 0.5;
+}
+
+element-text selected {
+    text-color: #000;
 }
 
 textbox {
