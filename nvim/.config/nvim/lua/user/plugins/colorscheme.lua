@@ -4,6 +4,9 @@ return {
     config = function ()
         vim.g.gruvbox_baby_background_color = "dark"
         vim.cmd.colorscheme("gruvbox-baby")
+        vim.api.nvim_set_hl(0, "WinSeparator", {
+            link = "IndentBlanklineChar"
+        })
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", {
             sp = "red",
             undercurl = true
