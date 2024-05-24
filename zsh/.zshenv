@@ -1,3 +1,4 @@
+export PATH="$PATH:/home/michel/.local/bin"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export BROWSER="firefox"
 export EDITOR="nvim"
