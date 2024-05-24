@@ -1,3 +1,4 @@
+from libqtile import qtile
 from libqtile.backend.wayland import InputConfig
 from libqtile.config import Key
 from libqtile.lazy import lazy
