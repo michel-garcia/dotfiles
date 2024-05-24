@@ -1,5 +1,5 @@
 from libqtile import qtile
-from libqtile.backend.wayland import InputConfig
+from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.config import Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
