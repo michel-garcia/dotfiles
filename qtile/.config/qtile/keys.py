@@ -1,3 +1,4 @@
+from libqtile.backend.wayland import InputConfig
 from libqtile.config import Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -70,3 +71,10 @@ for i in groups:
             ),
         ]
     )
+
+wl_input_rules = {
+    "type:keyboard": InputConfig(
+        kb_layout="us",
+        kb_variant="altgr-intl"
+    )
+}

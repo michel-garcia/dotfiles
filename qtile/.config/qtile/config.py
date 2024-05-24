@@ -4,7 +4,7 @@ from subprocess import Popen
 
 from layouts import layouts, floating_layout
 from groups import groups
-from keys import keys
+from keys import keys, wl_input_rules
 from mouse import mouse
 from screens import screens
 
@@ -25,7 +25,6 @@ floats_kept_above = True
 focus_on_window_activation = "smart"
 follow_mouse_focus = True
 reconfigure_screens = True
-wl_input_rules = None
 wmname = "LG3D"
 
 @hook.subscribe.startup_once
