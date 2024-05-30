@@ -7,5 +7,5 @@ xset b off
 setxkbmap -layout us -variant altgr-intl
 picom -b
 udiskie &
-exec awesome
+exec qtile start
 
