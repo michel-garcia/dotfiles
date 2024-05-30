@@ -1,12 +1,9 @@
-from libqtile import hook
-
-from subprocess import Popen
-
 from layouts import layouts, floating_layout
 from groups import groups
 from keys import keys, wl_input_rules
 from mouse import mouse
 from screens import screens
+import hooks
 
 widget_defaults = dict(
     font="Ubuntu",
@@ -26,7 +23,3 @@ focus_on_window_activation = "smart"
 follow_mouse_focus = True
 reconfigure_screens = True
 wmname = "LG3D"
-
-@hook.subscribe.startup_once
-def autostart():
-    Popen(["waypaper", "--restore"])
