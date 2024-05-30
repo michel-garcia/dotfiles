@@ -28,26 +28,39 @@ return {
             long_message_to_split = true,
             inc_rename = false,
             lsp_doc_border = false
-        }
-    },
-    config = function (_, opts)
-        local noice = require("noice")
-        local config = {
-            border = {
-                style = "solid"
+        },
+        views = {
+            cmdline_popup = {
+                border = {
+                    style = "solid"
+                },
+                win_options = {
+                    winhighlight = {
+                        FloatNormal = "NormalFloat",
+                        FloatTitle = "lualine_a_insert",
+                        Normal = "NormalFloat"
+                    }
+                }
             },
-            win_options = {
-                winhighlight = {
-                    FloatNormal = "NormalFloat",
-                    FloatTitle = "lualine_a_insert",
-                    Normal = "NormalFloat"
+            confirm = {
+                border = {
+                    style = "solid"
+                },
+                win_options = {
+                    winhighlight = {
+                        FloatNormal = "NormalFloat",
+                        FloatTitle = "lualine_a_insert",
+                        Normal = "NormalFloat"
+                    }
+                }
+            },
+            hover = {
+                border = {
+                    padding = { 0, 1 },
+                    style = "solid"
                 }
             }
         }
-        opts.views = {
-            cmdline_popup = config,
-            confirm = config
-        }
-        noice.setup(opts)
-    end
+    },
+    config = true
 }
