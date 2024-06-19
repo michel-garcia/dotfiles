@@ -24,12 +24,17 @@ screens = [
                     use_mouse_wheel=False
                 ),
                 widget.Spacer(),
-                widget.Clock(format="%Y-%m-%d %H:%M:%S"),
+                widget.Clock(format="%a %b %d %H:%M:%S"),
+                widget.OpenWeather(
+                    format="{location_city}: {main_feels_like} °{units_temperature} {icon} {weather_details}",
+                    location="Miami"
+                ),
                 widget.Spacer(),
                 extra_widget.StatusNotifier(
                     highlight_colour=colors["primary"],
                     highlight_radius=0
                 ),
+                widget.Battery(),
             ],
             background="#000",
             margin=[0, 0, 4, 0],
