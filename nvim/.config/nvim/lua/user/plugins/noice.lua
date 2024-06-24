@@ -8,7 +8,8 @@ return {
         cmdline = {
             format = {
                 cmdline = {
-                    icon = ">"
+                    icon = ">",
+                    title = "Command Palette"
                 }
             }
         },
