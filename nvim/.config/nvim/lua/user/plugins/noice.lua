@@ -33,6 +33,18 @@ return {
             lsp_doc_border = false
         },
         views = {
+            cmdline_input = {
+                border = {
+                    style = "solid"
+                },
+                win_options = {
+                    winhighlight = {
+                        FloatNormal = "NormalFloat",
+                        FloatTitle = "lualine_a_insert",
+                        Normal = "NormalFloat"
+                    }
+                }
+            },
             cmdline_popup = {
                 border = {
                     style = "solid"
