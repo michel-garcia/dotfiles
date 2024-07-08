@@ -4,9 +4,13 @@ return {
         local conform = require("conform")
         conform.setup({
             formatters_by_ft = {
+                c = { "astyle" },
+                cpp = { "astyle" },
                 javascript = { "prettier" },
                 javascriptreact = { "prettier" },
-                php = { "pretty-php" }
+                lua = { "stylua" },
+                php = { "pretty-php" },
+                python = { "black" },
             }
         })
         vim.keymap.set("n", "<A-f>", function()
