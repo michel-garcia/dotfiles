@@ -45,16 +45,14 @@ for vt in range(1, 8):
     )
 
 for i in groups:
-    keys.extend(
-        [
-            Key([mod], i.name, lazy.group[i.name].toscreen()),
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-            ),
-        ]
-    )
+    keys.extend([
+        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key(
+            [mod, "shift"],
+            i.name,
+            lazy.window.togroup(i.name, switch_group=True),
+        ),
+    ])
 
 wl_input_rules = {
     "type:keyboard": InputConfig(
