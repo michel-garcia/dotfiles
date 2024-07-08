@@ -1,10 +1,11 @@
-from libqtile import layout
 from libqtile.config import Match
+from libqtile.layout.columns import Columns
+from libqtile.layout.floating import Floating
 
 from colors import colors
 
 layouts = [
-    layout.Columns(
+    Columns(
         border_normal="#000",
         border_focus=colors["primary"],
         border_on_single=True,
@@ -13,10 +14,10 @@ layouts = [
     ),
 ]
 
-floating_layout = layout.Floating(
+floating_layout = Floating(
     border_focus=colors["primary"],
     float_rules=[
-        *layout.Floating.default_float_rules,
+        *Floating.default_float_rules,
         Match(wm_class="confirmreset"),
         Match(wm_class="makebranch"),
         Match(wm_class="maketag"),
