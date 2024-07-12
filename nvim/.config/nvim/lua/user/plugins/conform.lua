@@ -8,6 +8,7 @@ return {
                 cpp = { "astyle" },
                 javascript = { "prettier" },
                 javascriptreact = { "prettier" },
+                json = { "prettier" },
                 lua = { "stylua" },
                 php = { "pretty-php" },
                 python = { "black" },
