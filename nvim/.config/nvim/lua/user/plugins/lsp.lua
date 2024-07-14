@@ -21,9 +21,9 @@ return {
             lsp.setup({
                 ensure_installed = {
                     "clangd",
-                    "intelephense",
                     "jsonls",
                     "lua_ls",
+                    "phpactor",
                     "tsserver"
                 }
             })
