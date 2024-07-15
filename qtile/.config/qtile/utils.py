@@ -1,5 +1,5 @@
 from subprocess import Popen
 
 
-def exec(cmd):
+def launch(cmd):
     Popen(cmd, shell=True)

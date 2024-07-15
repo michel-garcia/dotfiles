@@ -4,7 +4,7 @@ from groups import init_groups
 from input import init_keys, init_mouse, init_input_rules
 from layouts import init_layouts, init_floating_layout
 from screens import init_screens
-from utils import exec
+from utils import launch
 from widgets import init_widget_defaults
 
 
@@ -30,7 +30,7 @@ wl_input_rules = init_input_rules()
 
 @hook.subscribe.startup_once
 def startup_once():
-    exec("waypaper --restore")
+    launch("waypaper --restore")
 
 @hook.subscribe.client_urgent_hint_changed
 def client_urgent_hint_changed(client):
