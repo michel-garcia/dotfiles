@@ -10,18 +10,16 @@ def init_groups():
             cmd = "kitty --override background_opacity=.9"
         case _:
             cmd = terminal
-    return [
-        *[Group(i) for i in "123456789"],
-        ScratchPad("scratchpad", [
-            DropDown(
-                "term",
-                cmd,
-                height=.95,
-                on_focus_lost_hide=True,
-                opacity=1,
-                width=.95,
-                x=.025,
-                y=.025,
-            )
-        ])
-    ]
+    dropdown = DropDown(
+        "term",
+        cmd,
+        height=.95,
+        on_focus_lost_hide=True,
+        opacity=1,
+        width=.95,
+        x=.025,
+        y=.025,
+    )
+    groups = list(map(lambda i: Group(str(i)), range(1, 10)))
+    groups.append(ScratchPad("scratchpad", [dropdown]))
+    return groups
