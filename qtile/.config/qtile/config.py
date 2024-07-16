@@ -26,6 +26,7 @@ mouse = init_mouse()
 reconfigure_screens = True
 screens = init_screens()
 wmname = "LG3D"
+widget_defaults = init_widget_defaults()
 wl_input_rules = init_input_rules()
 
 @hook.subscribe.startup_once
