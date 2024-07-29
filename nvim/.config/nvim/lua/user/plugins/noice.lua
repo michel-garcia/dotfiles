@@ -77,6 +77,10 @@ return {
                 border = {
                     padding = { 0, 1 },
                     style = "solid"
+                },
+                position = {
+                    col = 0,
+                    row = 2
                 }
             }
         }
