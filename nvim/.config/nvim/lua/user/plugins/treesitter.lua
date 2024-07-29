@@ -2,17 +2,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        "nvim-treesitter/playground",
-        "windwp/nvim-ts-autotag"
+        "nvim-treesitter/playground"
     },
     build = ":TSUpdate",
     config = function ()
         local treesitter = require("nvim-treesitter.configs")
         treesitter.setup({
-            autotag = {
-                enable = true,
-                enable_close = false
-            },
             ensure_installed = {
                 "bash",
                 "c",
@@ -86,4 +81,3 @@ return {
         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end
 }
-
