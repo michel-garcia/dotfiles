@@ -33,7 +33,7 @@ return {
                 disable = function (_, bufnr)
                     local max = 128 * 1024
                     local filename = vim.api.nvim_buf_get_name(bufnr)
-                    local ok, stats = pcall(vim.loop.fs_stat, filename)
+                    local ok, stats = pcall(vim.uv.fs_stat, filename)
                     if ok and stats and stats.size > max then
                         return true
                     end
