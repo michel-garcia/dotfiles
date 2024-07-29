@@ -21,6 +21,9 @@ return {
             },
             progress = {
                 enabled = false
+            },
+            signature = {
+                auto_open = false
             }
         },
         messages = {
