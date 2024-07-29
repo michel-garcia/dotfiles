@@ -72,8 +72,8 @@ return {
                     type = "group",
                     val = {
                         button("New file", ":enew<CR>", "e"),
-                        button("Find files", ":FzfLua files<CR>", "ff"),
-                        button("Old files", ":FzfLua oldfiles<CR>", "fo"),
+                        button("Find files", ":Telescope find_files<CR>", "ff"),
+                        button("Old files", ":Telescope oldfiles<CR>", "fo"),
                         button("Config", ":e $MYVIMRC<CR>", "c"),
                         button("Sync plugins", ":Lazy sync<CR>", "s"),
                         button("Quit", ":quit<CR>", "q")
