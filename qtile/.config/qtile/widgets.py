@@ -1,5 +1,4 @@
 from libqtile import widget
-from qtile_extras import widget as extra_widget
 
 from colors import colors
 
@@ -32,10 +31,6 @@ def init_widgets():
             location="Miami"
         ),
         widget.Spacer(),
-        extra_widget.StatusNotifier(
-            highlight_colour=colors["primary"],
-            highlight_radius=0
-        ),
         widget.Battery(),
     ]
     return widgets
