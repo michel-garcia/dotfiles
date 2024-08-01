@@ -27,7 +27,7 @@ def init_widgets():
         widget.Spacer(),
         widget.Clock(format="%a %b %d %H:%M:%S"),
         widget.OpenWeather(
-            format="{location_city}: {main_feels_like} °{units_temperature} {icon} {weather_details}",
+            format="{location_city}: {main_feels_like} °{units_temperature} {weather_details}",
             location="Miami"
         ),
         widget.Spacer(),
