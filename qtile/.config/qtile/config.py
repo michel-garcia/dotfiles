@@ -1,10 +1,8 @@
-from libqtile import hook, qtile
-
 from groups import init_groups
+from hooks import init_hooks
 from input import init_keys, init_mouse, init_input_rules
 from layouts import init_layouts, init_floating_layout
 from screens import init_screens
-from utils import launch
 from widgets import init_widget_defaults
 
 
@@ -29,11 +27,4 @@ wmname = "LG3D"
 widget_defaults = init_widget_defaults()
 wl_input_rules = init_input_rules()
 
-@hook.subscribe.startup_once
-def startup_once():
-    launch("waypaper --restore")
-
-@hook.subscribe.client_urgent_hint_changed
-def client_urgent_hint_changed(client):
-    qtile.current_screen.set_group(client.group)
-    client.group.focus(client)
+init_hooks()
