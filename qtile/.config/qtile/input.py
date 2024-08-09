@@ -26,7 +26,7 @@ def init_keys(groups):
         Key([mod, "control"], "k", lazy.layout.grow_up()),
         Key([mod], "n", lazy.layout.normalize()),
         Key([mod], "Return", lazy.spawn(terminal)),
-        Key([mod, "shift"], "s", lazy.group["scratchpad"].dropdown_toggle("term")),
+        Key([mod], "s", lazy.group["scratchpad"].dropdown_toggle("term")),
         Key([mod], "w", lazy.window.kill()),
         Key([mod], "f", lazy.window.toggle_fullscreen()),
         Key([mod], "t", lazy.window.toggle_floating()),
