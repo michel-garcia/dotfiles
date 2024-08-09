@@ -9,8 +9,9 @@ def startup_once():
 
 
 def client_urgent_hint_changed(client):
-    qtile.current_screen.set_group(client.group)
-    client.group.focus(client)
+    screen = qtile.find_closest_screen(client.x, client.y)
+    if screen:
+        screen.set_group(client.group)
 
 
 def init_hooks():
