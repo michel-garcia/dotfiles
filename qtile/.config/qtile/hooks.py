@@ -5,6 +5,7 @@ from utils import launch
 
 def startup_once():
     launch("waypaper --restore")
+    launch("nitrogen --restore")
 
 
 def client_urgent_hint_changed(client):
