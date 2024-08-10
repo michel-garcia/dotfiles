@@ -4,8 +4,10 @@ from utils import launch
 
 
 def startup_once():
-    launch("waypaper --restore")
-    launch("nitrogen --restore")
+    if qtile.core.name == "x11":
+        launch("nitrogen --restore")
+    elif qtile.core.name == "wayland":
+        launch("waypaper --restore")
 
 
 def client_urgent_hint_changed(client):
