@@ -33,6 +33,8 @@ def init_keys(groups):
         Key([mod, "control"], "r", lazy.reload_config()),
         Key([mod, "control"], "q", lazy.shutdown()),
         Key([mod], "r", lazy.spawn("rofi -show drun")),
+        Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
+        Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
     ]
     for vt in range(1, 8):
         keys.append(
