@@ -1,6 +1,6 @@
 from libqtile import qtile
 from libqtile.backend.wayland.inputs import InputConfig
-from libqtile.config import Click, Drag, Key, ScratchPad
+from libqtile.config import Click, Drag, Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -47,7 +47,7 @@ def init_keys(groups):
                 lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
             )
         )
-    for group in filter(lambda group: not isinstance(group, ScratchPad), groups):
+    for group in groups:
         keys.extend([
             Key([mod], group.name, lazy.group[group.name].toscreen()),
             Key(
