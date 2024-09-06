@@ -1,6 +1,10 @@
+from subprocess import Popen
+
 from libqtile import hook, qtile
 
-from utils import launch
+
+def launch(cmd):
+    Popen(cmd, shell=True)
 
 
 def startup_once():
