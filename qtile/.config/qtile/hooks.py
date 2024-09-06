@@ -8,10 +8,7 @@ def launch(cmd):
 
 
 def startup_once():
-    if qtile.core.name == "x11":
-        launch("nitrogen --restore")
-    elif qtile.core.name == "wayland":
-        launch("waypaper --restore")
+    launch("~/.azotebg")
 
 
 def client_urgent_hint_changed(client):
