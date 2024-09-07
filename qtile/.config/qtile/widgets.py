@@ -27,6 +27,27 @@ def init_widgets():
         widget.Spacer(),
         widget.Clock(format="%a %b %d %H:%M:%S"),
         widget.Spacer(),
-        widget.Battery(),
+        widget.Backlight(
+            backlight_name="amdgpu_bl1",
+            format="<span size='140%'>󰃠</span>    <span baseline_shift='1.5pt'>{percent:2.0%}</span>",
+        ),
+        widget.Spacer(length=4),
+        widget.PulseVolume(
+            mute_format="<span size='140%'>󰝟</span>   <span baseline_shift='1.5pt'>{volume}%</span>",
+            unmute_format="<span size='140%'>󰕾</span>   <span baseline_shift='1.5pt'>{volume}%</span>"
+        ),
+        widget.Spacer(length=4),
+        widget.Battery(
+            charge_char="󰂄",
+            discharge_char="󰁾",
+            empty_char="󰂎",
+            format="<span size='140%'>{char}</span>  <span baseline_shift='1.5pt'>{percent:2.0%}</span>",
+            full_char="󰁹",
+            not_charging_char="󰁾",
+            markup=True,
+            unknown_char="󱉝",
+            show_short_text=False
+        ),
+        widget.Spacer(length=4)
     ]
     return widgets
