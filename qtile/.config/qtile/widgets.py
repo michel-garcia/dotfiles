@@ -8,7 +8,38 @@ def init_widget_defaults():
         padding=3
     )
 
-def init_widgets():
+def init_bottom_widgets():
+    widgets = [
+        widget.Spacer(length=4),
+        widget.TaskList(
+            border="#fabd2f",
+            foreground="#eee",
+            highlight_method="block",
+            markup_focused="<span foreground='#000'>{}</span>",
+            max_title_width=256,
+            rounded=False,
+            txt_floating="",
+            txt_maximized="",
+            txt_minimized="",
+            urgent_border="#fb4934"
+        ),
+        widget.Spacer(),
+        widget.Memory(
+            format="<span size='140%'>󰍛</span>    <span baseline_shift='1.5pt'>{MemUsed:.1f}{mm}/{MemTotal:.1f}{mm}</span>",
+            measure_mem="G"
+        ),
+        widget.Spacer(length=4),
+        widget.DF(
+            foreground="#eee",
+            format="<span size='140%'>󰋊</span>    <span baseline_shift='1.5pt'>{f}G/{s}G</span>",
+            visible_on_warn=False,
+            warn_color="#fb4934"
+        ),
+        widget.Spacer(length=8)
+    ]
+    return widgets
+
+def init_top_widgets():
     widgets = [
         widget.GroupBox(
             active="#eee",
