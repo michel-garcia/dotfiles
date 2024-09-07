@@ -12,7 +12,7 @@ def init_screens():
             right=bar.Gap(4),
             top=bar.Bar(
                 init_widgets(),
-                background="#000",
+                background="#202020",
                 margin=[0, 0, 4, 0],
                 size=32,
             ),

@@ -2,14 +2,12 @@ from libqtile.config import Match
 from libqtile.layout.columns import Columns
 from libqtile.layout.floating import Floating
 
-from colors import colors
-
 
 def init_layouts():
     return [
         Columns(
             border_normal="#000",
-            border_focus=colors["primary"],
+            border_focus="#fabd2f",
             border_on_single=True,
             border_width=2,
             margin=4
@@ -18,7 +16,7 @@ def init_layouts():
 
 def init_floating_layout():
     return Floating(
-        border_focus=colors["primary"],
+        border_focus="#fabd2f",
         float_rules=[
             *Floating.default_float_rules,
             Match(wm_class="confirmreset"),
