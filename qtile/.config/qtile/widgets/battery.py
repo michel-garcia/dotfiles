@@ -55,7 +55,7 @@ class Battery(ThreadIconText):
                 if percent > 90:
                     icon = self.full_icon_name
                 elif percent > 40:
-                    icon - self.good_icon_name
+                    icon = self.good_icon_name
                 elif percent >= 20:
                     icon = self.low_icon_name
                 else:
