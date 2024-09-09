@@ -31,7 +31,8 @@ class Battery(ThreadIconText):
             batteries = [
                 name for name in os.listdir(BATTERY_DIR) if name.startswith("BAT")
             ]
-            self.battery_name = batteries.pop(0)
+            if batteries:
+                self.battery_name = batteries.pop(0)
 
     def poll(self):
         path = os.path.join(BATTERY_DIR, self.battery_name, "status")
