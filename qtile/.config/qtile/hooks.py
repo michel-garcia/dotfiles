@@ -8,7 +8,7 @@ def launch(cmd):
 
 
 def startup_once():
-    launch("~/.azotebg")
+    launch("waypaper --restore")
 
 
 def client_urgent_hint_changed(client):
