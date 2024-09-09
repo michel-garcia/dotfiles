@@ -38,10 +38,13 @@ def init_bottom_widgets():
 
 def init_top_widgets():
     widgets = [
+        widget.Spacer(length=8),
         widget.GroupBox(
             active="#eee",
+            block_highlight_text_color="#000",
             disable_drag=True,
-            highlight_method="text",
+            highlight_method="block",
+            margin_x=0,
             other_current_screen_border="#665c54",
             other_screen_border="#665c54",
             rounded=False,
