@@ -105,11 +105,11 @@ class IconText(Widget, MarginMixin):
     def calculate_length(self):
         return sum(
             [
-                self.margin_x,
+                self.margin_x if self.img and self.text_layout else 0,
                 self.img.width if self.img else 0,
                 self.margin_x if self.img and self.text_layout else 0,
                 self.text_layout.width if self.text_layout else 0,
-                self.margin_x,
+                self.margin_x if self.img and self.text_layout else 0,
             ]
         )
 
