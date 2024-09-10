@@ -16,6 +16,8 @@ def get_icon(name, size=None, theme=None):
         parser.read(path)
         theme = parser.get("Settings", "gtk-icon-theme-name")
     path = IconTheme.getIconPath(name, size, theme)
+    if not path:
+        return
     mime = Mime.get_type2(path)
     if "svg" not in mime.subtype:
         return Img.from_path(path)
@@ -59,12 +61,16 @@ class IconText(Widget, MarginMixin):
             return
         self.icon = icon
         old_width = self.img.width if self.img else 0
-        self.img = get_icon(
-            icon, self.icon_size or self.bar.height - self.margin_y * 2, self.icon_theme
+        self.img = (
+            get_icon(
+                icon,
+                self.icon_size or self.bar.height - self.margin_y * 2,
+                self.icon_theme,
+            )
+            if icon
+            else None
         )
-        if not self.img:
-            return
-        if self.img.width == old_width:
+        if not self.img or self.img.width == old_width:
             self.draw()
         else:
             self.bar.draw()
@@ -125,7 +131,7 @@ class ThreadIconText(IconText):
     def timer_setup(self):
         def on_done(future):
             try:
-                icon_name, text = future.result()
+                icon_name, text = future.result() or (None, None)
                 self.update(icon_name, text)
             except Exception:
                 pass
