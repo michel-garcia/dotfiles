@@ -6,6 +6,7 @@ from .cpu import CPU
 from .diskusage import DiskUsage
 from .memory import Memory
 from .pulsevolume import PulseVolume
+from .wlan import Wlan
 
 
 def init_widget_defaults():
@@ -58,6 +59,7 @@ def init_top_widgets():
         widget.Spacer(),
         widget.Clock(format="%a %b %d %H:%M:%S"),
         widget.Spacer(),
+        Wlan(),
         Backlight(
             backlight_name="amdgpu_bl1",
         ),
