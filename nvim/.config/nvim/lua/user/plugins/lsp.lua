@@ -24,7 +24,7 @@ return {
                     "intelephense",
                     "jsonls",
                     "lua_ls",
-                    "tsserver"
+                    "ts_ls"
                 }
             })
             local lspconfig = require("lspconfig")
