@@ -8,7 +8,7 @@ BACKLIGHT_DIR = "/sys/class/backlight"
 
 class Backlight(ThreadIconText):
     defaults = [
-        ("backlight_name", "acpi_video0"),
+        ("backlight_name", None),
         ("high_icon_name", "brightness-high-symbolic"),
         ("low_icon_name", "brightness-low-symbolic"),
         ("medium_icon_name", "brightness-medium-symbolic"),
@@ -18,6 +18,13 @@ class Backlight(ThreadIconText):
     def __init__(self, **config):
         super().__init__(**config)
         self.add_defaults(self.defaults)
+
+    def _configure(self, qtile, bar):
+        super()._configure(qtile, bar)
+        if not self.backlight_name and os.path.isdir(BACKLIGHT_DIR):
+            backlights = os.listdir(BACKLIGHT_DIR)
+            if backlights:
+                self.backlight_name = backlights.pop(0)
 
     def poll(self):
         path = os.path.join(BACKLIGHT_DIR, self.backlight_name, "brightness")

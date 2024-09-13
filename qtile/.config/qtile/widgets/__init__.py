@@ -60,9 +60,7 @@ def init_top_widgets():
         widget.Clock(format="%a %b %d %H:%M:%S"),
         widget.Spacer(),
         Wlan(),
-        Backlight(
-            backlight_name="amdgpu_bl1",
-        ),
+        Backlight(),
         PulseVolume(),
         Battery(),
         widget.Spacer(length=8),
