@@ -32,7 +32,7 @@ def init_keys(groups):
         Key([mod], "t", lazy.window.toggle_floating()),
         Key([mod, "control"], "r", lazy.reload_config()),
         Key([mod, "control"], "q", lazy.spawn("nwgbar")),
-        Key([mod], "r", lazy.spawn("nwggrid")),
+        Key([mod], "r", lazy.spawn("wofi --show drun")),
         Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
         Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
         Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
