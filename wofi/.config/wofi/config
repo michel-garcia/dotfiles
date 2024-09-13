@@ -1,0 +1,9 @@
+allow_images = true
+gtk_dark = true
+hide_scroll = true
+insensitive = true
+layer = overlay
+lines = 6
+no_actions = true
+sort_order = alphabetical
+width = 512
