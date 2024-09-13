@@ -31,7 +31,7 @@ def init_keys(groups):
         Key([mod], "f", lazy.window.toggle_fullscreen()),
         Key([mod], "t", lazy.window.toggle_floating()),
         Key([mod, "control"], "r", lazy.reload_config()),
-        Key([mod, "control"], "q", lazy.spawn("nwgbar")),
+        Key([mod, "control"], "q", lazy.shutdown()),
         Key([mod], "r", lazy.spawn("wofi --show drun")),
         Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
         Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
