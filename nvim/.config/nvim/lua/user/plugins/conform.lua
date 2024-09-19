@@ -26,7 +26,7 @@ return {
                 javascriptreact = { "prettier" },
                 json = { "prettier" },
                 lua = { "stylua" },
-                php = { "pretty-php" },
+                php = { "pint" },
                 python = { "black" },
             },
         })
