@@ -28,6 +28,8 @@ return {
                 lua = { "stylua" },
                 php = { "pint" },
                 python = { "black" },
+                typescript = { "prettier" },
+                typescriptreact = { "prettier" },
             },
         })
         vim.keymap.set("n", "<A-f>", function()
