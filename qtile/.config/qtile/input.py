@@ -52,7 +52,15 @@ def init_keys(groups):
         Key([mod], "t", lazy.window.toggle_floating()),
         Key([mod, "control"], "r", lazy.reload_config()),
         Key([mod, "control"], "q", lazy.shutdown()),
-        Key([mod], "r", lazy.spawn("wofi --show drun")),
+        Key(
+            [mod],
+            "r",
+            lazy.spawn(
+                "wofi --show drun"
+                if qtile.core.name == "wayland"
+                else "rofi -show drun"
+            ),
+        ),
         Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
         Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
         Key(
