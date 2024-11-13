@@ -8,7 +8,10 @@ def launch(cmd):
 
 
 def startup_once():
-    launch("waypaper --restore")
+    if qtile.core.name == "wayland":
+        launch("waypaper --restore")
+    else:
+        launch("nitrogen --restore")
 
 
 def client_urgent_hint_changed(client):
