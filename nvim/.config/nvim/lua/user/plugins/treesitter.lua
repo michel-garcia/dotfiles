@@ -79,5 +79,23 @@ return {
         })
         vim.opt.foldmethod = "expr"
         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+        local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+        parsers.blade = {
+            filetype = "blade",
+            install_info = {
+                branch = "main",
+                files = { "src/parser.c" },
+                url = "https://github.com/EmranMR/tree-sitter-blade"
+            }
+        }
+        vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+            callback = function ()
+                vim.api.nvim_set_option_value("filetype", "blade", {})
+            end,
+            group = vim.api.nvim_create_augroup("BladeFiletype", {
+                clear = true
+            }),
+            pattern = "*.blade.php"
+        })
     end
 }
