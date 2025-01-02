@@ -4,7 +4,6 @@ return {
         local toggleterm = require("toggleterm")
         toggleterm.setup({
             persist_mode = false,
-            shade_terminals = false,
             size = 15
         })
         vim.keymap.set({ "n", "t" }, "<C-\\>", "<Cmd>ToggleTerm<CR>", {
