@@ -23,6 +23,25 @@ return {
                     noremap = true,
                     silent = true
                 })
+                local group = vim.api.nvim_create_augroup("TelescopeFileBrowser", {
+                    clear = true
+                })
+                vim.api.nvim_create_autocmd("VimEnter", {
+                    callback = function (args)
+                        if vim.fn.isdirectory(args.file) ~= 0 then
+                            local name = vim.api.nvim_buf_get_name(0)
+                            if name == args.file then
+                                vim.api.nvim_buf_delete(0, {
+                                    force = true
+                                })
+                            end
+                            telescope.extensions.file_browser.file_browser({
+                                cwd = vim.fn.resolve(args.file)
+                            })
+                        end
+                    end,
+                    group = group
+                })
             end
         }
     },
