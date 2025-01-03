@@ -1,0 +1,33 @@
+return {
+    "kevinhwang91/nvim-hlslens",
+    config = function()
+        local hlslens = require("hlslens")
+        hlslens.setup()
+        local kopts = { noremap = true, silent = true }
+        vim.keymap.set("n", "n", function()
+            vim.api.nvim_feedkeys(string.rep("n", vim.v.count1), "n", false)
+            hlslens.start()
+        end, kopts)
+        vim.keymap.set("n", "N", function()
+            vim.api.nvim_feedkeys(string.rep("N", vim.v.count1), "n", false)
+            hlslens.start()
+        end, kopts)
+        vim.keymap.set("n", "*", function()
+            vim.api.nvim_feedkeys("*", "n", false)
+            hlslens.start()
+        end, kopts)
+        vim.keymap.set("n", "#", function()
+            vim.api.nvim_feedkeys("#", "n", false)
+            hlslens.start()
+        end, kopts)
+        vim.keymap.set("n", "g*", function()
+            vim.api.nvim_feedkeys("g*", "n", false)
+            hlslens.start()
+        end, kopts)
+        vim.keymap.set("n", "g#", function()
+            vim.api.nvim_feedkeys("g#", "n", false)
+            hlslens.start()
+        end, kopts)
+        vim.keymap.set("n", "<esc>", "<cmd>noh<cr>", kopts)
+    end,
+}

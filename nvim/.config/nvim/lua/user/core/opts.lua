@@ -12,7 +12,7 @@ vim.opt.fillchars = {
 }
 vim.opt.fsync = false
 vim.opt.guicursor = "i:block"
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.inccommand = "nosplit"
 vim.opt.incsearch = true
