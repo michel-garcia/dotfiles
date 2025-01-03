@@ -13,5 +13,8 @@ return {
                 },
             },
         },
+        wo = {
+            winhighlight = "",
+        },
     },
 }
