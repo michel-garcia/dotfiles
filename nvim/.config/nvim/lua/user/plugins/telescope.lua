@@ -64,6 +64,7 @@ return {
         },
         extensions = {
             file_browser = {
+                create_from_prompt = false,
                 display_stat = false,
                 git_status = false,
                 grouped = true,
