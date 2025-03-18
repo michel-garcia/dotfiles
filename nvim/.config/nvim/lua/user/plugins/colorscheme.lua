@@ -3,6 +3,7 @@ return {
     priority = 1000,
     config = function ()
         vim.g.gruvbox_baby_background_color = "dark"
+        vim.g.gruvbox_baby_transparent_mode = true
         vim.cmd.colorscheme("gruvbox-baby")
         vim.api.nvim_set_hl(0, "WinSeparator", {
             link = "IndentBlanklineChar"
