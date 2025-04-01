@@ -47,14 +47,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
         }
         map("n", "gD", vim.lsp.buf.declaration, opts)
         map("n", "gd", vim.lsp.buf.definition, opts)
-        map("n", "K", vim.lsp.buf.hover, opts)
+        map("n", "K", function()
+            vim.lsp.buf.hover({
+                border = "single",
+            })
+        end, opts)
         map("n", "gi", vim.lsp.buf.implementation, opts)
         map("n", "<F2>", vim.lsp.buf.rename, opts)
         map("n", "<F4>", vim.lsp.buf.code_action, opts)
         map("n", "gr", vim.lsp.buf.references, opts)
         map("n", "gl", vim.diagnostic.open_float, opts)
-        map("n", "[d", vim.diagnostic.goto_next, opts)
-        map("n", "]d", vim.diagnostic.goto_prev, opts)
+        map("n", "[d", function()
+            vim.diagnostic.jump({
+                count = 1,
+            })
+        end, opts)
+        map("n", "]d", function()
+            vim.diagnostic.jump({
+                count = -1,
+            })
+        end, opts)
     end,
     group = vim.api.nvim_create_augroup("LspMappings", {
         clear = true,
