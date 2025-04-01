@@ -12,14 +12,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = group
 })
 
-vim.api.nvim_create_autocmd("OptionSet", {
-    pattern = "tabline",
-    callback = function ()
-        vim.opt.showtabline = 1
-    end,
-    group = group
-})
-
 vim.api.nvim_create_autocmd("FileType", {
     callback = function ()
         vim.opt.autoindent = true

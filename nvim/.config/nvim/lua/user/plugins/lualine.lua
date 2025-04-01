@@ -39,6 +39,7 @@ return {
                 }
             },
             options = {
+                always_show_tabline = false,
                 component_separators = "",
                 disabled_filetypes = {
                     "alpha"
