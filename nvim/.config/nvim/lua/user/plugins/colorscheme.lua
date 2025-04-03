@@ -2,6 +2,7 @@ return {
     "luisiacc/gruvbox-baby",
     priority = 1000,
     config = function()
+        local colors = require("gruvbox-baby.colors")
         vim.g.gruvbox_baby_highlights = {
             DiagnosticUnderlineError = {
                 sp = "red",
@@ -18,6 +19,12 @@ return {
             DiagnosticUnderlineHint = {
                 sp = "lightgray",
                 style = "undercurl",
+            },
+            FloatBorder = {
+                bg = colors.p.background,
+            },
+            NormalFloat = {
+                bg = colors.p.background,
             },
             WinSeparator = {
                 link = "@comment",
