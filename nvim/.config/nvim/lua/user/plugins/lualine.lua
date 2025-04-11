@@ -93,9 +93,9 @@ return {
                     },
                     {
                         function ()
-                            return string.char(32)
+                            return " "
                         end
-                    }
+                    },
                 }
             }
         })
