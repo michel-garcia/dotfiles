@@ -1,4 +1,4 @@
 return {
     "echasnovski/mini.surround",
-    opts = {}
+    opts = {},
 }

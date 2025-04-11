@@ -1,11 +1,11 @@
-local get_sign = function (name)
+local get_sign = function(name)
     local sign = vim.fn.sign_getdefined(name)[1]
     if sign then
         return sign.text
     end
 end
 
-local filename = function ()
+local filename = function()
     local bufname = vim.api.nvim_buf_get_name(0)
     local buftype = vim.api.nvim_get_option_value("buftype", {})
     if buftype == "terminal" then
@@ -26,7 +26,7 @@ end
 
 return {
     "nvim-lualine/lualine.nvim",
-    config = function ()
+    config = function()
         local lualine = require("lualine")
         lualine.setup({
             inactive_sections = {},
@@ -34,27 +34,27 @@ return {
                 lualine_c = {
                     {
                         filename,
-                        color = "lualine_b_insert"
-                    }
-                }
+                        color = "lualine_b_insert",
+                    },
+                },
             },
             options = {
                 always_show_tabline = false,
                 component_separators = "",
                 disabled_filetypes = {
-                    "alpha"
+                    "alpha",
                 },
                 icons_enabled = false,
-                section_separators = ""
+                section_separators = "",
             },
             sections = {
                 lualine_a = {
-                    "mode"
+                    "mode",
                 },
                 lualine_b = {},
                 lualine_c = {
                     {
-                        filename
+                        filename,
                     },
                     {
                         "diagnostics",
@@ -63,16 +63,16 @@ return {
                             error = get_sign("DiagnosticSignError"),
                             warn = get_sign("DiagnosticSignWarn"),
                             info = get_sign("DiagnosticSignInfo"),
-                            hint = get_sign("DiagnosticSignHint")
-                        }
-                    }
+                            hint = get_sign("DiagnosticSignHint"),
+                        },
+                    },
                 },
                 lualine_x = {
                     "filetype",
-                    "location"
+                    "location",
                 },
                 lualine_y = {},
-                lualine_z = {}
+                lualine_z = {},
             },
             tabline = {
                 lualine_b = {
@@ -80,41 +80,40 @@ return {
                         "tabs",
                         tabs_color = {
                             active = "@function",
-                            inactive = "lualine_c_insert"
-                        }
-                    }
-                }
+                            inactive = "lualine_c_insert",
+                        },
+                    },
+                },
             },
             winbar = {
                 lualine_c = {
                     {
                         filename,
-                        color = "lualine_a_insert"
+                        color = "lualine_a_insert",
                     },
                     {
-                        function ()
+                        function()
                             return " "
-                        end
+                        end,
                     },
-                }
-            }
+                },
+            },
         })
         vim.api.nvim_create_autocmd({ "ColorScheme", "UIEnter" }, {
-            callback = function ()
+            callback = function()
                 vim.api.nvim_set_hl(0, "WinBar", {
-                    bg = "none"
+                    bg = "none",
                 })
                 vim.api.nvim_set_hl(0, "WinBarNC", {
-                    bg = "none"
+                    bg = "none",
                 })
                 vim.api.nvim_set_hl(0, "StatusLine", {
-                    bg = "none"
+                    bg = "none",
                 })
                 vim.api.nvim_set_hl(0, "TabLine", {
-                    bg = "none"
+                    bg = "none",
                 })
-            end
+            end,
         })
-    end
+    end,
 }
-

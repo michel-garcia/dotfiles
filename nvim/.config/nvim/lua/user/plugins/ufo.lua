@@ -1,18 +1,17 @@
 return {
     "kevinhwang91/nvim-ufo",
     dependencies = {
-        "kevinhwang91/promise-async"
+        "kevinhwang91/promise-async",
     },
-    config = function ()
+    config = function()
         local ufo = require("ufo")
         ufo.setup({
-            provider_selector = function ()
+            provider_selector = function()
                 return { "treesitter", "indent" }
-            end
+            end,
         })
         vim.opt.foldenable = true
         vim.opt.foldlevel = 99
         vim.opt.foldlevelstart = 99
-    end
+    end,
 }
-

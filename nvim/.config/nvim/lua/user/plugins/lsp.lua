@@ -3,9 +3,9 @@ return {
         "williamboman/mason.nvim",
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
-            "neovim/nvim-lspconfig"
+            "neovim/nvim-lspconfig",
         },
-        config = function ()
+        config = function()
             local mason = require("mason")
             mason.setup({
                 ui = {
@@ -13,9 +13,9 @@ return {
                     icons = {
                         package_installed = "󰄬",
                         package_pending = "󰁅",
-                        package_uninstalled = "󰅖"
-                    }
-                }
+                        package_uninstalled = "󰅖",
+                    },
+                },
             })
             local lsp = require("mason-lspconfig")
             lsp.setup({
@@ -24,29 +24,28 @@ return {
                     "intelephense",
                     "jsonls",
                     "lua_ls",
-                    "ts_ls"
-                }
+                    "ts_ls",
+                },
             })
             local lspconfig = require("lspconfig")
             lsp.setup_handlers({
-                function (server_name)
+                function(server_name)
                     local cmp = require("cmp_nvim_lsp")
                     local path = string.format("user.lsp.%s", server_name)
                     local ok, config = pcall(require, path)
                     local opts = vim.tbl_deep_extend("force", {
-                        capabilities = cmp.default_capabilities()
+                        capabilities = cmp.default_capabilities(),
                     }, ok and config or {})
                     lspconfig[server_name].setup(opts)
-                end
+                end,
             })
-        end
+        end,
     },
     {
         "neovim/nvim-lspconfig",
-        config = function ()
+        config = function()
             local win = require("lspconfig.ui.windows")
             win.default_options.border = "solid"
-        end
-    }
+        end,
+    },
 }
-

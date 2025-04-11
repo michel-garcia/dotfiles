@@ -1,6 +1,6 @@
 return {
     "echasnovski/mini.cursorword",
     opts = {
-        delay = 0
-    }
+        delay = 0,
+    },
 }

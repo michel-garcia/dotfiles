@@ -2,12 +2,11 @@ return {
     settings = {
         Lua = {
             telemetry = {
-                enable = false
+                enable = false,
             },
             workspace = {
-                checkThirdParty = false
-            }
-        }
-    }
+                checkThirdParty = false,
+            },
+        },
+    },
 }
-

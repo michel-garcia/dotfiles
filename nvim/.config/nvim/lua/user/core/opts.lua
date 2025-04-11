@@ -8,7 +8,7 @@ vim.opt.encoding = "utf-8"
 vim.opt.expandtab = true
 vim.opt.fillchars = {
     eob = " ",
-    lastline = " "
+    lastline = " ",
 }
 vim.opt.fsync = false
 vim.opt.guicursor = "i:block"
@@ -21,7 +21,7 @@ vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars = {
     space = "·",
-    tab = "··"
+    tab = "··",
 }
 vim.opt.mouse = "a"
 vim.opt.mousemodel = "extend"
@@ -45,4 +45,3 @@ vim.opt.termguicolors = true
 vim.opt.undofile = true
 vim.opt.wrap = true
 vim.opt.writebackup = false
-

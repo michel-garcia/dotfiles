@@ -1,7 +1,6 @@
 return {
     "sindrets/diffview.nvim",
     dependencies = {
-        "nvim-lua/plenary.nvim"
-    }
+        "nvim-lua/plenary.nvim",
+    },
 }
-

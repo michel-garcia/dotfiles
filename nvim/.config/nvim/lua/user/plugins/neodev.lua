@@ -1,7 +1,7 @@
 return {
     "folke/neodev.nvim",
-    config = function ()
+    config = function()
         local neodev = require("neodev")
         neodev.setup()
-    end
+    end,
 }

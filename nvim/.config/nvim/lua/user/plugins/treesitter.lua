@@ -2,10 +2,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        "nvim-treesitter/playground"
+        "nvim-treesitter/playground",
     },
     build = ":TSUpdate",
-    config = function ()
+    config = function()
         local treesitter = require("nvim-treesitter.configs")
         treesitter.setup({
             ensure_installed = {
@@ -27,10 +27,10 @@ return {
                 "sql",
                 "typescript",
                 "vimdoc",
-                "yaml"
+                "yaml",
             },
             highlight = {
-                disable = function (_, bufnr)
+                disable = function(_, bufnr)
                     local max = 128 * 1024
                     local filename = vim.api.nvim_buf_get_name(bufnr)
                     local ok, stats = pcall(vim.uv.fs_stat, filename)
@@ -38,13 +38,13 @@ return {
                         return true
                     end
                 end,
-                enable = true
+                enable = true,
             },
             indent = {
-                enable = false
+                enable = false,
             },
             playground = {
-                enable = true
+                enable = true,
             },
             textobjects = {
                 move = {
@@ -54,14 +54,14 @@ return {
                         ["]f"] = "@function.outer",
                         ["]a"] = "@parameter.inner",
                         ["]r"] = "@return.outer",
-                        ["]x"] = "@call.outer"
+                        ["]x"] = "@call.outer",
                     },
                     goto_previous_start = {
                         ["[f"] = "@function.outer",
                         ["[a"] = "@parameter.inner",
                         ["[r"] = "@return.outer",
-                        ["[x"] = "@call.outer"
-                    }
+                        ["[x"] = "@call.outer",
+                    },
                 },
                 select = {
                     enable = true,
@@ -72,10 +72,10 @@ return {
                         ["aa"] = "@parameter.outer",
                         ["ia"] = "@parameter.inner",
                         ["ax"] = "@call.outer",
-                        ["ix"] = "@call.inner"
-                    }
-                }
-            }
+                        ["ix"] = "@call.inner",
+                    },
+                },
+            },
         })
         vim.opt.foldmethod = "expr"
         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -85,17 +85,17 @@ return {
             install_info = {
                 branch = "main",
                 files = { "src/parser.c" },
-                url = "https://github.com/EmranMR/tree-sitter-blade"
-            }
+                url = "https://github.com/EmranMR/tree-sitter-blade",
+            },
         }
         vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-            callback = function ()
+            callback = function()
                 vim.api.nvim_set_option_value("filetype", "blade", {})
             end,
             group = vim.api.nvim_create_augroup("BladeFiletype", {
-                clear = true
+                clear = true,
             }),
-            pattern = "*.blade.php"
+            pattern = "*.blade.php",
         })
-    end
+    end,
 }

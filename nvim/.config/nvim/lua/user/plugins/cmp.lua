@@ -9,65 +9,64 @@ return {
         "hrsh7th/cmp-path",
         "L3MON4D3/LuaSnip",
         "mortepau/codicons.nvim",
-        "onsails/lspkind-nvim"
+        "onsails/lspkind-nvim",
     },
-    config = function ()
+    config = function()
         local cmp = require("cmp")
         cmp.setup({
             formatting = {
                 format = require("lspkind").cmp_format({
-                    mode = "symbol"
-                })
+                    mode = "symbol",
+                }),
             },
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(),
                 ["<C-n>"] = cmp.mapping.select_next_item(),
                 ["<C-e>"] = cmp.mapping.close(),
                 ["<CR>"] = cmp.mapping.confirm({
-                    select = false
-                })
+                    select = false,
+                }),
             }),
             preselect = cmp.PreselectMode.None,
             snippet = {
-                expand = function (args)
+                expand = function(args)
                     local luasnip = require("luasnip")
                     luasnip.lsp_expand(args.body)
-                end
+                end,
             },
             sources = cmp.config.sources({
                 { name = "nvim_buffer" },
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
                 { name = "nvim_path" },
-                { name = "nvim_lsp_signature_help" }
+                { name = "nvim_lsp_signature_help" },
             }),
             window = {
                 completion = {
                     border = "solid",
-                    winhighlight = "Normal:NormalFloat"
+                    winhighlight = "Normal:NormalFloat",
                 },
                 documentation = {
-                    border = "solid"
-                }
-            }
+                    border = "solid",
+                },
+            },
         })
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             matching = {
-                disallow_symbol_nonprefix_matching = false
+                disallow_symbol_nonprefix_matching = false,
             },
             sources = cmp.config.sources({
-                { name = "path" }
+                { name = "path" },
             }, {
-                { name = "cmdline" }
-            })
+                { name = "cmdline" },
+            }),
         })
         cmp.setup.cmdline({ "/", "?" }, {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
-                { name = "buffer" }
-            })
+                { name = "buffer" },
+            }),
         })
-    end
+    end,
 }
-

@@ -9,7 +9,7 @@ return {
             "meson.build",
             "node_modules",
             "package.json",
-            "vendor"
-        }
-    }
+            "vendor",
+        },
+    },
 }

@@ -1,10 +1,10 @@
 return {
     "michel-garcia/rsync.nvim",
     dev = true,
-    config = function ()
+    config = function()
         local rsync = require("rsync")
         rsync.setup({
-            sync_up_on_write = true
+            sync_up_on_write = true,
         })
-    end
+    end,
 }
