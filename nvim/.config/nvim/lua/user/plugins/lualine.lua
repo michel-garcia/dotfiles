@@ -99,6 +99,22 @@ return {
                 }
             }
         })
+        vim.api.nvim_create_autocmd({ "ColorScheme", "UIEnter" }, {
+            callback = function ()
+                vim.api.nvim_set_hl(0, "WinBar", {
+                    bg = "none"
+                })
+                vim.api.nvim_set_hl(0, "WinBarNC", {
+                    bg = "none"
+                })
+                vim.api.nvim_set_hl(0, "StatusLine", {
+                    bg = "none"
+                })
+                vim.api.nvim_set_hl(0, "TabLine", {
+                    bg = "none"
+                })
+            end
+        })
     end
 }
 
