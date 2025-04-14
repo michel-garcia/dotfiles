@@ -8,12 +8,6 @@ local signs = {
 vim.diagnostic.config({
     severity_sort = true,
     signs = {
-        linehl = {
-            [vim.diagnostic.severity.ERROR] = "Error",
-            [vim.diagnostic.severity.WARN] = "Warn",
-            [vim.diagnostic.severity.INFO] = "Info",
-            [vim.diagnostic.severity.HINT] = "Hint",
-        },
         text = signs,
     },
     underline = true,
