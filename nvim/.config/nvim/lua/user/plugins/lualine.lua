@@ -42,7 +42,7 @@ return {
                 always_show_tabline = false,
                 component_separators = "",
                 disabled_filetypes = {
-                    "alpha",
+                    "snacks_dashboard",
                 },
                 icons_enabled = false,
                 section_separators = "",
