@@ -27,6 +27,14 @@ return {
                 },
             },
         },
+        indent = {
+            animate = {
+                enabled = false,
+            },
+            scope = {
+                enabled = false,
+            },
+        },
     },
     config = function(_, opts)
         local snacks = require("snacks")
