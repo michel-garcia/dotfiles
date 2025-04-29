@@ -5,14 +5,6 @@ return {
         "rcarriga/nvim-notify",
     },
     opts = {
-        cmdline = {
-            format = {
-                cmdline = {
-                    icon = ">",
-                    title = "Command Palette",
-                },
-            },
-        },
         lsp = {
             override = {
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -32,8 +24,8 @@ return {
         presets = {
             bottom_search = false,
             command_palette = true,
-            long_message_to_split = true,
             inc_rename = false,
+            long_message_to_split = true,
             lsp_doc_border = false,
         },
         views = {
@@ -85,5 +77,50 @@ return {
             },
         },
     },
-    config = true,
+    config = function(_, opts)
+        local noice = require("noice")
+        noice.setup(opts)
+        vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleLua", {
+            link = "lualine_a_insert",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlineIconLua", {
+            link = "@function",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleHelp", {
+            link = "lualine_a_insert",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlineIconHelp", {
+            link = "@function",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleInput", {
+            link = "lualine_a_insert",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlineIconInput", {
+            link = "@function",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleFilter", {
+            link = "lualine_a_insert",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlineIconFilter", {
+            link = "@function",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleSearch", {
+            link = "lualine_a_insert",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlineIconSearch", {
+            link = "@function",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleCmdline", {
+            link = "lualine_a_insert",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlineIconCmdline", {
+            link = "@function",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleCalculator", {
+            link = "lualine_a_insert",
+        })
+        vim.api.nvim_set_hl(0, "NoiceCmdlineIconCalculator", {
+            link = "@function",
+        })
+    end,
 }
