@@ -25,5 +25,6 @@ def init_floating_layout():
             Match(wm_class="ssh-askpass"),
             Match(title="branchdialog"),
             Match(title="pinentry"),
+            Match(func=lambda c: c.is_transient_for())
         ]
     )
