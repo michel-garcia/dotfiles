@@ -3,6 +3,9 @@ local version = vim.version()
 return {
     "folke/snacks.nvim",
     opts = {
+        bigfile = {
+            line_length = 1000,
+        },
         dashboard = {
             formats = {
                 icon = function()
