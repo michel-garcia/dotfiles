@@ -118,4 +118,8 @@ def init_mouse():
 
 
 def init_input_rules():
-    return {"type:keyboard": InputConfig(kb_layout="us", kb_variant="altgr-intl")}
+    return {
+        "type:keyboard": InputConfig(
+            kb_layout="us", kb_options="caps:escape", kb_variant="altgr-intl"
+        )
+    }
