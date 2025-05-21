@@ -35,10 +35,6 @@ map("v", ">", ">gv")
 map("v", "<A-j>", ":move '>+1<CR>gv=gv")
 map("v", "<A-k>", ":move '<-2<CR>gv=gv")
 map("t", "<Esc>", "<C-\\><C-n>")
-map("t", "<A-h>", "<C-\\><C-n><cmd>wincmd h<CR>")
-map("t", "<A-j>", "<C-\\><C-n><cmd>wincmd j<CR>")
-map("t", "<A-k>", "<C-\\><C-n><cmd>wincmd k<CR>")
-map("t", "<A-l>", "<C-\\><C-n><cmd>wincmd l<CR>")
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
