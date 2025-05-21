@@ -7,14 +7,6 @@ end
 
 local filename = function()
     local bufname = vim.api.nvim_buf_get_name(0)
-    local buftype = vim.api.nvim_get_option_value("buftype", {})
-    if buftype == "terminal" then
-        local count = string.match(bufname, "toggleterm#(%d+)")
-        if not count then
-            return buftype
-        end
-        return string.format("terminal %s", count)
-    end
     local path = vim.fn.fnamemodify(bufname, ":~:.")
     local shorten_path = vim.fn.pathshorten(path)
     local modified = vim.api.nvim_get_option_value("modified", {})
