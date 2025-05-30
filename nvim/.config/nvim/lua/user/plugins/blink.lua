@@ -1,6 +1,13 @@
 return {
     "Saghen/blink.cmp",
     opts = {
+        cmdline = {
+            completion = {
+                ghost_text = {
+                    enabled = false,
+                },
+            },
+        },
         completion = {
             documentation = {
                 auto_show = true,
