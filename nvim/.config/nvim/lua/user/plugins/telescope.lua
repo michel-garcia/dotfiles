@@ -52,6 +52,7 @@ return {
                     grouped = true,
                     hide_parent_dir = true,
                     hidden = true,
+                    hijack_netrw = true,
                 },
             },
             pickers = {
@@ -78,34 +79,11 @@ return {
         config = function()
             local telescope = require("telescope")
             telescope.load_extension("file_browser")
-            local kopts = {
-                noremap = true,
-                silent = true,
-            }
             vim.keymap.set("n", "<leader>fe", function()
                 telescope.extensions.file_browser.file_browser({
                     cwd = vim.fn.resolve(vim.fn.expand("%:p:h")),
                 })
-            end, kopts)
-            local group = vim.api.nvim_create_augroup("TelescopeFileBrowser", {
-                clear = true,
-            })
-            vim.api.nvim_create_autocmd("VimEnter", {
-                callback = function(args)
-                    if vim.fn.isdirectory(args.file) ~= 0 then
-                        local name = vim.api.nvim_buf_get_name(0)
-                        if name == args.file then
-                            vim.api.nvim_buf_delete(0, {
-                                force = true,
-                            })
-                        end
-                        telescope.extensions.file_browser.file_browser({
-                            cwd = vim.fn.resolve(args.file),
-                        })
-                    end
-                end,
-                group = group,
-            })
+            end, { noremap = true, silent = true })
         end,
     },
 }
