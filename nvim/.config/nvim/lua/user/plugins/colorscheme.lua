@@ -4,6 +4,9 @@ return {
     config = function()
         local colors = require("gruvbox-baby.colors")
         vim.g.gruvbox_baby_highlights = {
+            ColorColumn = {
+                link = "CursorColumn",
+            },
             DiagnosticUnderlineError = {
                 sp = "red",
                 style = "undercurl",
