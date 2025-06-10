@@ -57,11 +57,21 @@ return {
             },
             pickers = {
                 find_files = {
+                    file_ignore_patterns = {
+                        ".git",
+                        "node_modules",
+                        "vendor",
+                    },
                     hidden = true,
                 },
                 live_grep = {
                     additional_args = {
                         "--hidden",
+                    },
+                    file_ignore_patterns = {
+                        ".git",
+                        "node_modules",
+                        "vendor",
                     },
                 },
             },
