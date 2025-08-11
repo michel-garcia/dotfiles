@@ -1,4 +1,4 @@
-export PATH="$PATH:/home/michel/.local/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.config/composer/vendor/bin"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export BROWSER="firefox"
 export EDITOR="nvim"
