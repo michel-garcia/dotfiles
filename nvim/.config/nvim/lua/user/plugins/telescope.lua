@@ -4,29 +4,9 @@ return {
         version = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-tree/nvim-web-devicons",
         },
-        config = function(_, opts)
-            local telescope = require("telescope")
-            telescope.setup(opts)
-            local builtin = require("telescope.builtin")
-            local kopts = {
-                noremap = true,
-                silent = true,
-            }
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, kopts)
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, kopts)
-            vim.keymap.set("n", "<leader>fb", builtin.buffers, kopts)
-            vim.keymap.set("n", "<leader>fh", builtin.help_tags, kopts)
-            vim.api.nvim_set_hl(0, "TelescopeNormal", {
-                link = "NormalFloat",
-            })
-            vim.api.nvim_set_hl(0, "TelescopeBorder", {
-                link = "FloatBorder",
-            })
-            vim.api.nvim_set_hl(0, "TelescopePromptTitle", {
-                link = "lualine_a_insert",
-            })
-        end,
         opts = {
             defaults = {
                 borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
@@ -48,11 +28,13 @@ return {
                 file_browser = {
                     create_from_prompt = false,
                     display_stat = false,
+                    dir_icon = "󰉋",
                     git_status = false,
                     grouped = true,
                     hide_parent_dir = true,
                     hidden = true,
-                    hijack_netrw = true,
+                    select_buffer = true,
+                    quiet = true,
                 },
             },
             pickers = {
@@ -76,6 +58,75 @@ return {
                 },
             },
         },
+        config = function(_, opts)
+            local actions = require("telescope.actions")
+            opts.defaults.mappings = {
+                ["i"] = {
+                    ["<CR>"] = actions.select_default,
+                    ["<Esc>"] = actions.close,
+                },
+            }
+            local telescope = require("telescope")
+            local file_browser = telescope.extensions.file_browser
+            opts.extensions.file_browser.mappings = {
+                ["i"] = {
+                    ["<C-e>"] = file_browser.actions.create,
+                    ["<C-r>"] = file_browser.actions.rename,
+                    ["<C-m>"] = file_browser.actions.move,
+                    ["<C-y>"] = file_browser.actions.copy,
+                    ["<C-d>"] = file_browser.actions.remove,
+                },
+            }
+            telescope.setup(opts)
+            telescope.load_extension("file_browser")
+            vim.api.nvim_create_autocmd("VimEnter", {
+                callback = function()
+                    pcall(vim.api.nvim_clear_autocmds, {
+                        group = "FileExplorer",
+                    })
+                end,
+                once = true,
+            })
+            vim.api.nvim_create_autocmd("BufEnter", {
+                callback = function()
+                    vim.schedule(function()
+                        local bufname = vim.api.nvim_buf_get_name(0)
+                        if vim.fn.isdirectory(bufname) == 0 then
+                            return
+                        end
+                        vim.api.nvim_set_option_value("bufhidden", "wipe", {
+                            buf = 0,
+                        })
+                        file_browser.file_browser({
+                            cwd = vim.fn.resolve(vim.fn.expand("%:p:h")),
+                        })
+                    end)
+                end,
+                group = vim.api.nvim_create_augroup("TelescopeFileBrowser", {
+                    clear = true,
+                }),
+            })
+            local builtin = require("telescope.builtin")
+            vim.keymap.set("n", "<leader>fa", builtin.builtin)
+            vim.keymap.set("n", "<leader>ff", builtin.find_files)
+            vim.keymap.set("n", "<leader>fe", function()
+                file_browser.file_browser({
+                    cwd = vim.fn.resolve(vim.fn.expand("%:p:h")),
+                })
+            end)
+            vim.keymap.set("n", "<leader>fg", builtin.live_grep)
+            vim.keymap.set("n", "<leader>fb", builtin.buffers)
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags)
+            vim.api.nvim_set_hl(0, "TelescopeNormal", {
+                link = "NormalFloat",
+            })
+            vim.api.nvim_set_hl(0, "TelescopeBorder", {
+                link = "FloatBorder",
+            })
+            vim.api.nvim_set_hl(0, "TelescopePromptTitle", {
+                link = "lualine_a_insert",
+            })
+        end,
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -85,20 +136,5 @@ return {
             telescope.load_extension("fzf")
         end,
         enabled = vim.fn.executable("make") == 1,
-    },
-    {
-        "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            local telescope = require("telescope")
-            telescope.load_extension("file_browser")
-            vim.keymap.set("n", "<leader>fe", function()
-                telescope.extensions.file_browser.file_browser({
-                    cwd = vim.fn.resolve(vim.fn.expand("%:p:h")),
-                })
-            end, { noremap = true, silent = true })
-        end,
     },
 }
