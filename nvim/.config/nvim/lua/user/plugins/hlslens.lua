@@ -28,6 +28,5 @@ return {
             vim.api.nvim_feedkeys("g#", "n", false)
             hlslens.start()
         end, kopts)
-        vim.keymap.set("n", "<esc>", "<cmd>noh<cr>", kopts)
     end,
 }
