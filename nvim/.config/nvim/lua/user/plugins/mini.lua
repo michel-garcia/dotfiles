@@ -1,16 +1,16 @@
 return {
     {
-        "echasnovski/mini.cursorword",
+        "nvim-mini/mini.cursorword",
         opts = {
             delay = 0,
         },
     },
     {
-        "echasnovski/mini.surround",
+        "nvim-mini/mini.surround",
         config = true,
     },
     {
-        "echasnovski/mini.splitjoin",
+        "nvim-mini/mini.splitjoin",
         config = true,
     },
 }
