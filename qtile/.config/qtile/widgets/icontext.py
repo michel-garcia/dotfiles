@@ -106,7 +106,7 @@ class IconText(Widget, MarginMixin):
             x = self.margin_x + (self.img.width + self.margin_x) if self.img else 0
             y = self.bar.height / 2 - self.text_layout.height / 2 + 1
             self.text_layout.draw(x, y)
-        self.drawer.draw(offsetx=self.offset, offsety=self.offsety, width=self.width)
+        self.drawer.draw(offsetx=self.offsetx, offsety=self.offsety, width=self.width)
 
     def calculate_length(self):
         return sum(
