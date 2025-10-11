@@ -1,0 +1,21 @@
+$active: #fabd2f;
+
+* {
+    all: unset;
+    font-family: "Ubuntu", sans-serif, monospace;
+}
+
+.bar {
+    background-color: #202020;
+    padding: 0.4rem 0.4rem;
+}
+
+.workspace {
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+}
+
+.workspace.active {
+    background-color: $active;
+    color: black;
+}
