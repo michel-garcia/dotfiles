@@ -67,16 +67,6 @@ return {
                 },
             }
             local telescope = require("telescope")
-            local file_browser = telescope.extensions.file_browser
-            opts.extensions.file_browser.mappings = {
-                ["i"] = {
-                    ["<C-e>"] = file_browser.actions.create,
-                    ["<C-r>"] = file_browser.actions.rename,
-                    ["<C-m>"] = file_browser.actions.move,
-                    ["<C-y>"] = file_browser.actions.copy,
-                    ["<C-d>"] = file_browser.actions.remove,
-                },
-            }
             telescope.setup(opts)
             telescope.load_extension("file_browser")
             vim.api.nvim_create_autocmd("VimEnter", {
@@ -97,7 +87,7 @@ return {
                         vim.api.nvim_set_option_value("bufhidden", "wipe", {
                             buf = 0,
                         })
-                        file_browser.file_browser({
+                        telescope.extensions.file_browser.file_browser({
                             cwd = vim.fn.resolve(vim.fn.expand("%:p:h")),
                         })
                     end)
@@ -110,7 +100,7 @@ return {
             vim.keymap.set("n", "<leader>fa", builtin.builtin)
             vim.keymap.set("n", "<leader>ff", builtin.find_files)
             vim.keymap.set("n", "<leader>fe", function()
-                file_browser.file_browser({
+                telescope.extensions.file_browser.file_browser({
                     cwd = vim.fn.resolve(vim.fn.expand("%:p:h")),
                 })
             end)
