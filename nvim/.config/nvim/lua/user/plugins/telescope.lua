@@ -84,6 +84,10 @@ return {
                         if vim.fn.isdirectory(bufname) == 0 then
                             return
                         end
+                        if bufname == vim.g.netrw_bufname then
+                            return
+                        end
+                        vim.g.netrw_bufname = bufname
                         vim.api.nvim_set_option_value("bufhidden", "wipe", {
                             buf = 0,
                         })
