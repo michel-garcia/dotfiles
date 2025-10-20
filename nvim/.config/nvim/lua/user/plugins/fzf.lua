@@ -5,9 +5,6 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         opts = {
-            defaults = {
-                color_icons = false,
-            },
             files = {
                 cwd_prompt = false,
                 git_icons = false,
@@ -23,20 +20,13 @@ return {
                 ["--no-unicode"] = true,
                 ["--separator"] = " ",
             },
-            winopts = function()
-                local height = vim.api.nvim_win_get_height(0)
-                local width = vim.api.nvim_win_get_width(0)
-                return {
+            winopts = {
+                border = "single",
+                preview = {
                     border = "single",
-                    col = 0.5,
-                    height = math.max(math.ceil(height * 0.4), 15),
-                    preview = {
-                        hidden = "hidden",
-                    },
-                    row = 0.5,
-                    width = math.max(math.ceil(width * 0.5), 80),
-                }
-            end,
+                },
+                title_flags = false,
+            },
         },
         config = function(_, opts)
             local fzf = require("fzf-lua")
@@ -54,7 +44,9 @@ return {
             "ibhagwan/fzf-lua",
         },
         opts = {
-            hidden = true,
+            cwd_header = true,
+            cwd_prompt = false,
+            hijack_netrw = true,
         },
         config = function(_, opts)
             local file_browser = require("fzf-lua-file-browser")
