@@ -6,8 +6,20 @@ $active: #fabd2f;
 }
 
 .bar {
-    background-color: #202020;
-    padding: 0.4rem 0.4rem;
+    background-color: black;
+    min-height: 24px;
+    padding: 0.5rem;
+}
+
+.window {
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+.window.active {
+    background-color: $active;
+    color: black;
 }
 
 .workspace {
