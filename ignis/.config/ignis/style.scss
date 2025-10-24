@@ -11,6 +11,27 @@ $active: #fabd2f;
     padding: 0.5rem;
 }
 
+.tray {
+    padding: 0 8px;
+}
+
+.tray-menu {
+    background-color: black;
+    margin-top: 8px;
+    padding: 1rem;
+    padding-top: 0;
+}
+
+.tray-menu label {
+    padding: .25rem;
+    width: 100%;
+}
+
+.tray-menu label:hover {
+    background-color: $active;
+    color: black;
+}
+
 .window {
     min-height: 1.5rem;
     min-width: 1.5rem;

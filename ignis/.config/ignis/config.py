@@ -3,7 +3,7 @@ from ignis.utils import get_n_monitors
 from ignis.widgets import Widget
 from os import path
 
-from widgets import battery, clock, volume, wlan, windows, workspaces
+from widgets import battery, clock, tray, volume, wlan, windows, workspaces
 
 app = IgnisApp.get_default()
 app.apply_css(path.expanduser("~/.config/ignis/style.scss"))
@@ -27,7 +27,9 @@ def top_bar(monitor):
         child=Widget.CenterBox(
             start_widget=Widget.Box(child=[workspaces()]),
             center_widget=Widget.Box(child=[clock()]),
-            end_widget=Widget.Box(spacing=6, child=[wlan(), volume(), battery()]),
+            end_widget=Widget.Box(
+                spacing=6, child=[tray(), wlan(), volume(), battery()]
+            ),
         ),
         css_classes=["bar"],
         exclusivity="exclusive",
