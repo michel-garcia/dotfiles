@@ -13,7 +13,7 @@ class Workspace(Widget.Button):
         hyprland = HyprlandService.get_default()
         if workspace.id == hyprland.active_workspace.id:
             self.add_css_class("active")
-        elif workspace.windows == 0:
+        elif len(hyprland.get_windows_on_workspace(workspace.id)) == 0:
             self.add_css_class("empty")
 
 
