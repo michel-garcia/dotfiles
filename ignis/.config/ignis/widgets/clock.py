@@ -3,11 +3,12 @@ from ignis.utils import Poll
 from ignis.widgets import Widget
 
 
-def clock(format="%a %b %d %H:%M:%S"):
-    def update(label):
-        text = datetime.now().strftime(format)
-        label.set_text(text)
+class Clock(Widget.Label):
+    def __init__(self, format="%a %b %d %H:%M:%S"):
+        self.format = format
+        super().__init__()
+        Poll(1000, lambda _: self.update())
 
-    label = Widget.Label()
-    Poll(1000, lambda _: update(label))
-    return label
+    def update(self):
+        text = datetime.now().strftime(self.format)
+        self.set_text(text)

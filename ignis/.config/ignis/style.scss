@@ -24,7 +24,6 @@ $active: #fabd2f;
 
 .tray-menu label {
     padding: .25rem;
-    width: 100%;
 }
 
 .tray-menu label:hover {
@@ -51,4 +50,8 @@ $active: #fabd2f;
 .workspace.active {
     background-color: $active;
     color: black;
+}
+
+.workspace.empty {
+    color: gray;
 }

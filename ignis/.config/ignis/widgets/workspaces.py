@@ -1,26 +1,33 @@
 from ignis.services.hyprland import HyprlandService
 from ignis.widgets import Widget
 
-service = HyprlandService.get_default()
+
+class Workspace(Widget.Button):
+    def __init__(self, workspace):
+        name = str(workspace.id - workspace.monitor_id * 10)
+        super().__init__(
+            child=Widget.Label(label=name),
+            css_classes=["workspace"],
+            on_click=lambda _: workspace.switch_to(),
+        )
+        hyprland = HyprlandService.get_default()
+        if workspace.id == hyprland.active_workspace.id:
+            self.add_css_class("active")
+        elif workspace.windows == 0:
+            self.add_css_class("empty")
 
 
-def workspace(w):
-    widget = Widget.Button(
-        css_classes=["workspace"],
-        on_click=lambda _: w.switch_to(),
-        child=Widget.Label(label=str(w.id)),
-    )
-    if w.id == service.active_workspace.id:
-        widget.add_css_class("active")
-
-    return widget
-
-
-def workspaces():
-    return Widget.EventBox(
-        spacing=4,
-        child=service.bind_many(
-            ["workspaces", "active_workspace"],
-            transform=lambda workspaces, _: [workspace(i) for i in workspaces],
-        ),
-    )
+class Workspaces(Widget.EventBox):
+    def __init__(self, monitor):
+        hyprland = HyprlandService.get_default()
+        super().__init__(
+            child=hyprland.bind_many(
+                ["workspaces", "active_workspace"],
+                transform=lambda workspaces, _: [
+                    Workspace(workspace)
+                    for workspace in workspaces
+                    if workspace.monitor_id == monitor
+                ],
+            ),
+            spacing=4,
+        )

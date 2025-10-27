@@ -1,32 +1,33 @@
 from ignis.services.hyprland import HyprlandService
 from ignis.widgets import Widget
-import textwrap
-
-service = HyprlandService.get_default()
 
 
-def window(w):
-    widget = Widget.Button(
-        child=Widget.Label(
-            label=textwrap.shorten(w.title, placeholder="...", width=32)
-        ),
-        css_classes=["window"],
-        on_click=lambda _: service.send_command(
-            "dispatch focuswindow address:{address}".format(address=w.address)
-        ),
-    )
-    if w.pid == service.active_window.pid:
-        widget.add_css_class("active")
-    return widget
+class Window(Widget.Button):
+    def __init__(self, window):
+        hyprland = HyprlandService.get_default()
+        super().__init__(
+            child=Widget.Label(ellipsize="end", label=window.title, max_width_chars=32),
+            css_classes=["window"],
+            on_click=lambda _: hyprland.send_command(
+                "dispatch focuswindow address:{address}".format(address=window.address)
+            ),
+        )
+        if window.pid == hyprland.active_window.pid:
+            self.add_css_class("active")
 
 
-def windows():
-    return Widget.EventBox(
-        spacing=4,
-        child=service.bind_many(
-            ["active_workspace", "windows", "active_window"],
-            transform=lambda active_workspace, windows, _: [
-                window(w) for w in windows if w.workspace_id == active_workspace.id
-            ],
-        ),
-    )
+class Windows(Widget.EventBox):
+    def __init__(self, monitor):
+        hyprland = HyprlandService.get_default()
+        super().__init__(
+            child=hyprland.bind_many(
+                ["active_workspace", "windows", "active_window"],
+                transform=lambda active_workspace, windows, _: [
+                    Window(window)
+                    for window in windows
+                    if window.workspace_id
+                    == hyprland.monitors[monitor].active_workspace_id
+                ],
+            ),
+            spacing=4,
+        )
