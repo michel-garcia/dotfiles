@@ -14,7 +14,7 @@ local lazy = require("lazy")
 lazy.setup("user.plugins", {
     dev = {
         fallback = true,
-        path = "~/Projects/plugins",
+        path = "~/Projects",
     },
     install = {
         colorscheme = {
