@@ -4,7 +4,6 @@ vim.opt.breakindent = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 0
 vim.opt.colorcolumn = { 80 }
-vim.opt.confirm = true
 vim.opt.encoding = "utf-8"
 vim.opt.expandtab = true
 vim.opt.fillchars = {
