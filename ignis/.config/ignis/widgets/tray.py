@@ -13,6 +13,7 @@ class TrayItem(Widget.Button):
             on_click=lambda _: asyncio.create_task(item.active_async()),
             on_right_click=lambda _: menu.popup() if menu else None,
         )
+        item.connect("removed", lambda _: self.unparent())
 
 
 class Tray(Widget.Box):
