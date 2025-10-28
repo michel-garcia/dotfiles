@@ -12,7 +12,6 @@ class TrayItem(Widget.Button):
             child=Widget.Box(child=[Widget.Icon(image=item.bind("icon")), menu]),
             on_click=lambda _: asyncio.create_task(item.active_async()),
             on_right_click=lambda _: menu.popup() if menu else None,
-            tooltip_text=item.bind("tooltip"),
         )
 
 
@@ -20,7 +19,7 @@ class Tray(Widget.Box):
     def __init__(self):
         super().__init__(
             css_classes=["tray"],
-            spacing=4,
+            spacing=10,
         )
         systray = SystemTrayService.get_default()
         systray.connect("added", lambda _, item: self.append(TrayItem(item)))

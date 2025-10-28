@@ -16,19 +16,32 @@ $active: #fabd2f;
 }
 
 .tray-menu {
-    background-color: black;
     margin-top: 8px;
-    padding: 1rem;
-    padding-top: 0;
-}
-
-.tray-menu label {
-    padding: .25rem;
-}
-
-.tray-menu label:hover {
-    background-color: $active;
-    color: black;
+    arrow {
+        background-color: #2e2e2e;
+        border: 1px solid #424242;
+    }
+    contents {
+        background-color: #2e2e2e;
+        border: 1px solid #424242;
+        min-width: 256px;
+        padding: 0.75rem;
+    }
+    label:disabled {
+        color: gray;
+    }
+    modelbutton {
+        padding: 0.25rem;
+    }
+    modelbutton:hover {
+        background-color: $active;
+        color: black;
+    }
+    separator {
+        background-color: #424242;
+        margin: 0.5rem 0;
+        min-height: 1px;
+    }
 }
 
 .window {
