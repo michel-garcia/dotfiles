@@ -6,6 +6,9 @@ return {
                 ghost_text = {
                     enabled = false,
                 },
+                menu = {
+                    auto_show = true,
+                },
             },
         },
         completion = {
@@ -33,20 +36,24 @@ return {
                         },
                     },
                 },
+                scrollbar = false,
             },
         },
         fuzzy = {
             implementation = "lua",
         },
         signature = {
-            enabled = true,
             window = {
                 border = "solid",
             },
         },
         sources = {
-            default = {
-                "lazydev", "lsp", "path", "snippets", "buffer",
+            default = { "lsp", "path", "snippets", "buffer" },
+            per_filetype = {
+                lua = {
+                    inherit_defaults = true,
+                    "lazydev",
+                },
             },
             providers = {
                 lazydev = {
