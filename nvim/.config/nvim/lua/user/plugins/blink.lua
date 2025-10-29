@@ -25,7 +25,6 @@ return {
                 },
             },
             menu = {
-                border = "solid",
                 draw = {
                     columns = {
                         { "kind_icon", "label", gap = 1 },
