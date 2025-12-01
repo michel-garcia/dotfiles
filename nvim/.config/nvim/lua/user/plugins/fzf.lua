@@ -36,6 +36,21 @@ return {
             vim.keymap.set("n", "<leader>fb", fzf.buffers)
             vim.keymap.set("n", "<leader>fg", fzf.live_grep)
             vim.keymap.set("n", "<leader>fh", fzf.help_tags)
+            vim.keymap.set("n", "<leader>fq", fzf.quickfix)
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(args)
+                    vim.schedule(function()
+                        vim.api.nvim_buf_delete(args.buf, {
+                            force = true,
+                        })
+                        fzf.quickfix()
+                    end)
+                end,
+                group = vim.api.nvim_create_augroup("FzfLuaQuickFix", {
+                    clear = true,
+                }),
+                pattern = "qf",
+            })
         end,
     },
     {
