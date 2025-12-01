@@ -24,6 +24,7 @@ return {
                 border = "single",
                 preview = {
                     border = "single",
+                    wrap = true,
                 },
                 title_flags = false,
             },
