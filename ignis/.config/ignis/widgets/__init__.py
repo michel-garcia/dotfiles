@@ -1,5 +1,6 @@
 from .battery import Battery
 from .clock import Clock
+from .cpu import Cpu
 from .memory import Memory
 from .tray import Tray
 from .volume import Volume
