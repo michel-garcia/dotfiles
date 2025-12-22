@@ -2,6 +2,8 @@ from ignis.services.upower import UPowerService
 from ignis.utils import Poll
 from ignis.widgets import Widget
 
+upower = UPowerService.get_default()
+
 
 class Battery(Widget.Box):
     def __init__(self):
@@ -16,7 +18,6 @@ class Battery(Widget.Box):
 
     def update(self):
         try:
-            upower = UPowerService.get_default()
             battery = upower.batteries[0]
             self.icon.set_image(battery.icon_name)
             text = "{percent}%".format(percent=int(battery.percent))

@@ -2,6 +2,8 @@ import asyncio
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
 from ignis.widgets import Widget
 
+systray = SystemTrayService.get_default()
+
 
 class TrayItem(Widget.Button):
     def __init__(self, item):
@@ -22,5 +24,4 @@ class Tray(Widget.Box):
             css_classes=["tray"],
             spacing=10,
         )
-        systray = SystemTrayService.get_default()
         systray.connect("added", lambda _, item: self.append(TrayItem(item)))

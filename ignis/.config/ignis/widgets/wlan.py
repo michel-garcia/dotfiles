@@ -3,6 +3,8 @@ from ignis.services.network.wifi import Wifi
 from ignis.utils import Poll
 from ignis.widgets import Widget
 
+network = NetworkService.get_default()
+
 
 class Wlan(Widget.Box):
     def __init__(self):
@@ -16,7 +18,6 @@ class Wlan(Widget.Box):
         Poll(3000, lambda _: self.update())
 
     def update(self):
-        network = NetworkService.get_default()
         device = next(iter(network.wifi.devices))
         if not device:
             return

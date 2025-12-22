@@ -1,6 +1,6 @@
 from ignis.app import IgnisApp
-from ignis.utils import get_n_monitors
 from ignis.widgets import Widget
+from ignis.utils import get_n_monitors
 from os import path
 
 from widgets import Battery, Clock, Tray, Volume, Wlan, Windows, Workspaces
@@ -15,7 +15,7 @@ class BottomBar(Widget.Window):
             exclusivity="exclusive",
             layer="top",
             monitor=monitor,
-            namespace="bottom-bar-{monitor}".format(monitor=monitor),
+            namespace="bottom-bar:{monitor}".format(monitor=monitor),
         )
 
 
@@ -35,7 +35,7 @@ class TopBar(Widget.Window):
             exclusivity="exclusive",
             layer="top",
             monitor=monitor,
-            namespace="top-bar-{monitor}".format(monitor=monitor),
+            namespace="top-bar:{monitor}".format(monitor=monitor),
         )
 
 
