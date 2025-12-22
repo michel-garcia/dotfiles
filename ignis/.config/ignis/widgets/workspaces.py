@@ -1,33 +1,32 @@
-from ignis.services.hyprland import HyprlandService
+from ignis.services.niri import NiriService
 from ignis.widgets import Widget
+from ignis.utils import get_monitor
+
+niri = NiriService.get_default()
 
 
 class Workspace(Widget.Button):
     def __init__(self, workspace):
-        name = str(workspace.id - workspace.monitor_id * 10)
         super().__init__(
-            child=Widget.Label(label=name),
+            child=Widget.Label(label=str(workspace.idx)),
             css_classes=["workspace"],
             on_click=lambda _: workspace.switch_to(),
         )
-        hyprland = HyprlandService.get_default()
-        if workspace.id == hyprland.active_workspace.id:
+        if workspace.is_active:
             self.add_css_class("active")
-        elif len(hyprland.get_windows_on_workspace(workspace.id)) == 0:
+            return
+        windows = [w for w in niri.windows if w.workspace_id == workspace.id]
+        if len(windows) == 0:
             self.add_css_class("empty")
 
 
-class Workspaces(Widget.EventBox):
+class Workspaces(Widget.Box):
     def __init__(self, monitor):
-        hyprland = HyprlandService.get_default()
-        super().__init__(
-            child=hyprland.bind_many(
-                ["workspaces", "active_workspace"],
-                transform=lambda workspaces, _: [
-                    Workspace(workspace)
-                    for workspace in workspaces
-                    if workspace.monitor_id == monitor
-                ],
-            ),
-            spacing=4,
-        )
+        super().__init__(spacing=4)
+        self.sync(monitor)
+        niri.connect("notify::workspaces", lambda *_: self.sync(monitor))
+
+    def sync(self, monitor):
+        monitor_name = get_monitor(monitor).get_connector()
+        workspaces = [w for w in niri.workspaces if w.output == monitor_name]
+        self.child = [Workspace(w) for w in workspaces]
