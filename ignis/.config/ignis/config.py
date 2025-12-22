@@ -3,14 +3,17 @@ from ignis.widgets import Widget
 from ignis.utils import get_n_monitors
 from os import path
 
-from widgets import Battery, Clock, Tray, Volume, Wlan, Windows, Workspaces
+from widgets import Battery, Clock, Memory, Tray, Volume, Wlan, Windows, Workspaces
 
 
 class BottomBar(Widget.Window):
     def __init__(self, monitor):
         super().__init__(
             anchor=["left", "bottom", "right"],
-            child=Widget.CenterBox(start_widget=Widget.Box(child=[Windows(monitor)])),
+            child=Widget.CenterBox(
+                start_widget=Widget.Box(child=[Windows(monitor)]),
+                end_widget=Widget.Box(child=[Memory()]),
+            ),
             css_classes=["bar"],
             exclusivity="exclusive",
             layer="top",
