@@ -1,5 +1,9 @@
 return {
     {
+        "nvim-mini/mini.cmdline",
+        config = true,
+    },
+    {
         "nvim-mini/mini.completion",
         opts = {
             delay = {
