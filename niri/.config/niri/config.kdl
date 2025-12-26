@@ -236,6 +236,11 @@ window-rule {
 }
 
 window-rule {
+    match app-id="firefox"
+    clip-to-geometry true
+}
+
+window-rule {
     match app-id="steam" title="Friends List"
     open-floating true
 }
