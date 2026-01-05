@@ -1,0 +1,5 @@
+background-color=#2e2e2e
+border-color=#424242
+icons=1
+on-notify=exec mpv ~/.local/share/sounds/steam/stereo/message.ogg
+padding=24
