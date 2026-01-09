@@ -30,14 +30,6 @@ return {
                 },
             },
         },
-        indent = {
-            animate = {
-                enabled = false,
-            },
-            scope = {
-                enabled = false,
-            },
-        },
         notifier = {
             margin = {
                 bottom = 1,
