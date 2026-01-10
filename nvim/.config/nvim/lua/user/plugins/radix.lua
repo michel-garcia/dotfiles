@@ -1,15 +1,17 @@
 return {
     "michel-garcia/radix.nvim",
-    dev = true,
-    opts = {
-        patterns = {
-            ".git",
-            "Makefile",
-            "composer.json",
-            "meson.build",
-            "node_modules",
-            "package.json",
-            "vendor",
-        },
-    },
+    config = function()
+        local radix = require("radix")
+        radix.setup({
+            patterns = {
+                ".git",
+                "Makefile",
+                "composer.json",
+                "meson.build",
+                "node_modules",
+                "package.json",
+                "vendor",
+            },
+        })
+    end,
 }

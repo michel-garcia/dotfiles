@@ -1,7 +1,7 @@
 return {
     "michel-garcia/notify.nvim",
-    dev = true,
-    opts = {
-        border = "solid",
-    },
+    config = function()
+        local notify = require("notify")
+        notify.setup()
+    end,
 }

@@ -15,13 +15,9 @@ return {
             },
         })
         local map = require("dial.map")
-        local opts = {
-            noremap = true,
-            silent = true,
-        }
-        vim.keymap.set("n", "<C-a>", map.inc_normal(), opts)
-        vim.keymap.set("n", "<C-x>", map.dec_normal(), opts)
-        vim.keymap.set("v", "<C-a>", map.inc_visual(), opts)
-        vim.keymap.set("v", "<C-x>", map.dec_visual(), opts)
+        vim.keymap.set("n", "<C-a>", map.inc_normal())
+        vim.keymap.set("n", "<C-x>", map.dec_normal())
+        vim.keymap.set("v", "<C-a>", map.inc_visual())
+        vim.keymap.set("v", "<C-x>", map.dec_visual())
     end,
 }

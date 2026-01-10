@@ -1,4 +1,7 @@
 return {
     "RaafatTurki/hex.nvim",
-    config = true,
+    config = function()
+        local hex = require("hex")
+        hex.setup()
+    end,
 }

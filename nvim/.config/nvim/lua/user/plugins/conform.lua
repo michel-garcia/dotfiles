@@ -37,9 +37,6 @@ return {
                 async = true,
                 lsp_fallback = false,
             })
-        end, {
-            noremap = true,
-            silent = true,
-        })
+        end)
     end,
 }

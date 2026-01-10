@@ -1,38 +1,40 @@
 return {
     {
-        "mason-org/mason.nvim",
-        opts = {
-            ui = {
-                border = "solid",
-                icons = {
-                    package_installed = "󰄬",
-                    package_pending = "󰁅",
-                    package_uninstalled = "󰅖",
-                },
-            },
-        },
-    },
-    {
         "neovim/nvim-lspconfig",
         config = function()
-            local win = require("lspconfig.ui.windows")
-            win.default_options.border = "solid"
+            vim.lsp.config("*", {
+                capabilities = vim.lsp.protocol.make_client_capabilities(),
+            })
+        end,
+    },
+    {
+        "mason-org/mason.nvim",
+        config = function()
+            local mason = require("mason")
+            mason.setup({
+                ui = {
+                    icons = {
+                        package_installed = "󰄬",
+                        package_pending = "󰁅",
+                        package_uninstalled = "󰅖",
+                    },
+                },
+            })
         end,
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        dependencies = {
-            "mason-org/mason.nvim",
-            "neovim/nvim-lspconfig",
-        },
-        opts = {
-            ensure_installed = {
-                "clangd",
-                "intelephense",
-                "jsonls",
-                "lua_ls",
-                "ts_ls",
-            },
-        },
+        config = function()
+            local lspconfig = require("mason-lspconfig")
+            lspconfig.setup({
+                ensure_installed = {
+                    "clangd",
+                    "intelephense",
+                    "jsonls",
+                    "lua_ls",
+                    "ts_ls",
+                },
+            })
+        end,
     },
 }
