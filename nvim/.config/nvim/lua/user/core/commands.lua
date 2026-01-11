@@ -1,3 +1,10 @@
+vim.api.nvim_create_user_command("PackUpdate", function()
+    vim.pack.update(nil, {
+        force = true,
+    })
+    vim.notify("Plugins have been updated.", vim.log.levels.INFO)
+end, {})
+
 vim.api.nvim_create_user_command("ReloadConfig", function()
     for name, _ in pairs(package.loaded) do
         if string.sub(name, 0, string.len("user")) == "user" then
