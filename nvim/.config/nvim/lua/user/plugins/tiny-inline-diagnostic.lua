@@ -7,7 +7,6 @@ return {
                 add_messages = {
                     use_max_severity = true,
                 },
-                enable_on_insert = true,
                 multilines = {
                     enabled = true,
                 },
