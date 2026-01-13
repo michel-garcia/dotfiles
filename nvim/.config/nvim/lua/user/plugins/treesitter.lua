@@ -20,7 +20,7 @@ return {
                     return
                 end
                 local treesitter = require("nvim-treesitter")
-                treesitter.install(args.match):await(function()
+                treesitter.install(lang):await(function()
                     vim.treesitter.start(args.buf, lang)
                 end)
             end,
