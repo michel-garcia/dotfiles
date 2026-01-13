@@ -23,11 +23,7 @@ return {
                     ["--separator"] = " ",
                 },
                 grep = {
-                    rg_opts = table.concat({
-                        "--column",
-                        "--hidden",
-                        "--line-number",
-                    }, " "),
+                    hidden = true,
                 },
                 winopts = {
                     border = "single",
