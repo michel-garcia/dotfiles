@@ -3,8 +3,8 @@ return {
     config = function()
         local gitsigns = require("gitsigns")
         gitsigns.setup({
-            current_line_blame = false,
-            signcolumn = true,
+            attach_to_untracked = true,
+            linehl = true,
         })
     end,
 }
