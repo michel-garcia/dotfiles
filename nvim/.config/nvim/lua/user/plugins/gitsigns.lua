@@ -4,7 +4,6 @@ return {
         local gitsigns = require("gitsigns")
         gitsigns.setup({
             attach_to_untracked = true,
-            linehl = true,
         })
     end,
 }
