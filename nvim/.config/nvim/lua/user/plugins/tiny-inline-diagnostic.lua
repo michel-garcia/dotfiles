@@ -5,6 +5,7 @@ return {
         diagnostic.setup({
             options = {
                 add_messages = {
+                    show_multiple_glyphs = false,
                     use_max_severity = true,
                 },
                 multilines = {
