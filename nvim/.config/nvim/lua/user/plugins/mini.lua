@@ -18,7 +18,7 @@ return {
                 },
                 window = {
                     signature = {
-                        border = "none",
+                        border = "solid",
                     },
                 },
             })
