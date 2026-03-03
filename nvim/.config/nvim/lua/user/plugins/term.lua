@@ -5,18 +5,28 @@ return {
         ergoterm.setup()
         local pick = function()
             ergoterm.select({
-                default = {
-                    fn = function(selected)
-                        local terms = ergoterm:get_all()
-                        for _, term in ipairs(terms) do
-                            if term ~= selected then
-                                term:close()
-                            else
-                                term:focus()
+                callbacks = {
+                    default = {
+                        desc = "Focus",
+                        fn = function(selected)
+                            local terms = ergoterm.filter_by_tag("bottom")
+                            for _, term in ipairs(terms) do
+                                if term ~= selected then
+                                    term:close()
+                                else
+                                    term:focus()
+                                end
                             end
-                        end
-                    end,
+                        end,
+                    },
+                    ["<C-w>"] = {
+                        desc = "Kill",
+                        fn = function(selected)
+                            selected:cleanup()
+                        end,
+                    },
                 },
+                prompt = "> ",
             })
         end
         local spawn = function()
