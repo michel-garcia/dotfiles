@@ -30,7 +30,7 @@ return {
             })
         end
         local spawn = function()
-            local terms = ergoterm:get_all()
+            local terms = ergoterm.filter_by_tag("bottom")
             for _, term in ipairs(terms) do
                 term:close()
             end
@@ -38,6 +38,16 @@ return {
             local term = ergoterm:new({
                 border = "single",
                 name = string.format("Term %s", count + 1),
+                on_stop = function()
+                    vim.schedule(function()
+                        terms = ergoterm.filter_by_tag("bottom")
+                        for i, term in ipairs(terms) do
+                            term:update({
+                                name = string.format("Term %s", i),
+                            })
+                        end
+                    end)
+                end,
                 size = {
                     below = 12,
                 },
@@ -59,7 +69,7 @@ return {
         vim.keymap.set({ "n", "t" }, "<C-t>", function()
             spawn()
         end)
-        vim.keymap.set("t", "<C-f>", function()
+        vim.keymap.set("t", "<C-o>", function()
             pick()
         end)
         vim.keymap.set("t", "<C-x>", function()
