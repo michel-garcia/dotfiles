@@ -66,18 +66,29 @@ return {
             end
             spawn()
         end)
-        vim.keymap.set({ "n", "t" }, "<C-t>", function()
-            spawn()
-        end)
-        vim.keymap.set("t", "<C-o>", function()
-            pick()
-        end)
-        vim.keymap.set("t", "<C-x>", function()
-            local term = ergoterm:get_focused()
-            if term then
-                term:cleanup()
-            end
-        end)
-        vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<CR>")
+        vim.api.nvim_create_autocmd("FileType", {
+            callback = function(args)
+                local opts = {
+                    buffer = args.buf,
+                }
+                vim.keymap.set("t", "<C-t>", function()
+                    spawn()
+                end, opts)
+                vim.keymap.set("t", "<C-x>", function()
+                    local term = ergoterm:get_focused()
+                    if term then
+                        term:cleanup()
+                    end
+                end, opts)
+                vim.keymap.set("t", "<C-o>", function()
+                    pick()
+                end, opts)
+                vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<CR>", opts)
+            end,
+            group = vim.api.nvim_create_augroup("TermKeys", {
+                clear = true,
+            }),
+            pattern = "ergoterm"
+        })
     end,
 }
