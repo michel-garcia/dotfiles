@@ -1,10 +1,4 @@
-local Diagnostics = function(config)
-    local Diagnostics = require("lualine.component.diagnostics")
-    local diagnostics = Diagnostics(config.options)
-    return diagnostics:update_status()
-end
-
-local Filename = function(config)
+local filename_formatter = function(filename)
     local ok, ergoterm = pcall(require, "ergoterm")
     if ok then
         local win = vim.api.nvim_get_current_win()
@@ -17,35 +11,7 @@ local Filename = function(config)
             return term.name
         end
     end
-    local Filename = require("lualine.components.filename")
-    local filename = Filename(config.options)
-    return filename:update_status()
-end
-
-local Filetype = function(config)
-    local Filetype = require("lualine.components.filetype")
-    local filetype = Filetype(config.options)
-    return filetype:update_status()
-end
-
-local Location = function()
-    local get_location = require("lualine.components.location")
-    return get_location()
-end
-
-local Mode = function()
-    local get_mode = require("lualine.components.mode")
-    return get_mode()
-end
-
-local Spacer = function()
-    return string.char(32)
-end
-
-local Tabs = function(config)
-    local Tabs = require("lualine.components.tabs")
-    local tabs = Tabs(config.options)
-    return tabs:update_status()
+    return filename
 end
 
 local get_sign = function(severity)
@@ -68,8 +34,9 @@ return {
             inactive_winbar = {
                 lualine_c = {
                     {
-                        Filename,
+                        "filename",
                         color = "lualine_b_insert",
+                        fmt = filename_formatter,
                         symbols = {
                             modified = "●",
                         },
@@ -84,21 +51,19 @@ return {
             },
             sections = {
                 lualine_a = {
-                    {
-                        Mode,
-                    },
+                    "mode",
                 },
                 lualine_b = {},
                 lualine_c = {
                     {
-                        Filename,
+                        "filename",
                         path = 1,
                         symbols = {
                             modified = "●",
                         },
                     },
                     {
-                        Diagnostics,
+                        "diagnostics",
                         colored = false,
                         symbols = {
                             error = get_sign(vim.diagnostic.severity.ERROR),
@@ -110,12 +75,8 @@ return {
                     },
                 },
                 lualine_x = {
-                    {
-                        Filetype,
-                    },
-                    {
-                        Location,
-                    },
+                    "filetype",
+                    "location",
                 },
                 lualine_y = {},
                 lualine_z = {},
@@ -123,7 +84,7 @@ return {
             tabline = {
                 lualine_b = {
                     {
-                        Tabs,
+                        "tabs",
                         tabs_color = {
                             active = "@function",
                             inactive = "lualine_c_insert",
@@ -134,14 +95,17 @@ return {
             winbar = {
                 lualine_c = {
                     {
-                        Filename,
+                        "filename",
                         color = "lualine_a_insert",
+                        fmt = filename_formatter,
                         symbols = {
                             modified = "●",
                         },
                     },
                     {
-                        Spacer,
+                        function()
+                            return string.char(32)
+                        end,
                     },
                 },
             },
