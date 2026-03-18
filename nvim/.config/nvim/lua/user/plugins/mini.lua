@@ -3,7 +3,11 @@ return {
         "nvim-mini/mini.cmdline",
         config = function()
             local cmdline = require("mini.cmdline")
-            cmdline.setup()
+            cmdline.setup({
+                autopeek = {
+                    enable = false,
+                },
+            })
         end,
     },
     {
