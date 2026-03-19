@@ -1,5 +1,3 @@
-table.unpack = table.unpack or unpack
-
 return {
     {
         "ibhagwan/fzf-lua",
@@ -60,16 +58,11 @@ return {
                     local opts = {
                         buffer = args.buf,
                     }
-                    local win = vim.api.nvim_get_current_win()
-                    local config = vim.api.nvim_win_get_config(win)
-                    local vars = table.unpack(config.title)
-                    local title = table.unpack(vars)
-                    if not string.find(title, "(Builtin)") then
-                        vim.keymap.set("t", "<Esc>", function()
-                            vim.api.nvim_win_close(win, true)
-                            fzf.builtin()
-                        end, opts)
-                    end
+                    vim.keymap.set("t", "<C-t>", function()
+                        local win = vim.api.nvim_get_current_win()
+                        vim.api.nvim_win_close(win, true)
+                        fzf.builtin()
+                    end, opts)
                 end,
                 group = vim.api.nvim_create_augroup("FzfLua", {
                     clear = true,
