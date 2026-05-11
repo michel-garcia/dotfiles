@@ -7,9 +7,14 @@ return {
         config = function()
             local fzf = require("fzf-lua")
             fzf.setup({
+                file_ignore_patterns = {
+                    "node_modules",
+                    "vendor",
+                },
                 files = {
                     cwd_prompt = false,
                     git_icons = false,
+                    no_ignore = true,
                 },
                 fzf_colors = {
                     true,
