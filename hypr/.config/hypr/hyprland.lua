@@ -1,5 +1,6 @@
 require("lua.env")
 require("lua.monitors")
+require("lua.hooks")
 require("lua.layout")
 require("lua.anims")
 require("lua.misc")
