@@ -60,8 +60,8 @@ hl.bind("SUPER + F12", function()
     local res = handle:read("*a")
     handle:close()
     if res and res:match("%d") then
-        hl.dispatch(hl.dsp.exec_cmd("pkill hyprsunset"))
+        hl.exec_cmd("pkill hyprsunset")
     else
-        hl.dispatch(hl.dsp.exec_cmd("hyprsunset --temperature 4000"))
+        hl.exec_cmd("hyprsunset --temperature 4000")
     end
 end)
