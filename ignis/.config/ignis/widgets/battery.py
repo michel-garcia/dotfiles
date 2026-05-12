@@ -7,10 +7,9 @@ upower = UPowerService.get_default()
 
 class Battery(Widget.Box):
     def __init__(self):
-        self.icon = Widget.Icon(pixel_size=16)
         self.label = Widget.Label()
         super().__init__(
-            child=[self.icon, self.label],
+            child=[self.label],
             spacing=6,
             visible=False,
         )
@@ -19,8 +18,7 @@ class Battery(Widget.Box):
     def update(self):
         try:
             battery = upower.batteries[0]
-            self.icon.set_image(battery.icon_name)
-            text = "{percent}%".format(percent=int(battery.percent))
+            text = "BAT: {percent}%".format(percent=int(battery.percent))
             self.label.set_text(text)
             self.set_visible(True)
         except:

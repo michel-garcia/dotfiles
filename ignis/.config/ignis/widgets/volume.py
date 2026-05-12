@@ -8,11 +8,10 @@ class Volume(Widget.Box):
         audio = AudioService.get_default()
         super().__init__(
             child=[
-                Widget.Icon(image=audio.speaker.bind("icon_name"), pixel_size=16),
                 Widget.Label(
                     label=audio.speaker.bind(
                         "volume",
-                        transform=lambda volume: "{volume}%".format(volume=volume),
+                        transform=lambda volume: "VOL: {volume}%".format(volume=volume),
                     )
                 ),
             ],

@@ -8,10 +8,9 @@ network = NetworkService.get_default()
 
 class Wlan(Widget.Box):
     def __init__(self):
-        self.icon = Widget.Icon(pixel_size=16)
         self.label = Widget.Label()
         super().__init__(
-            child=[self.icon, self.label],
+            child=[self.label],
             spacing=6,
             visible=False,
         )
@@ -24,7 +23,6 @@ class Wlan(Widget.Box):
         access_point = next(iter(device.access_points))
         if not access_point:
             return
-        self.icon.set_image(network.wifi.icon_name)
-        text = "{strength}%".format(strength=access_point.strength)
+        text = "WIFI: {strength}%".format(strength=access_point.strength)
         self.label.set_text(text)
         self.set_visible(True)
