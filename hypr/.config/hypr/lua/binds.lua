@@ -52,6 +52,10 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+hl.bind("Print", hl.dsp.exec_cmd("hyprshot --mode output --mode active"))
+hl.bind("ALT + Print", hl.dsp.exec_cmd("hyprshot --mode window"))
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd("hyprshot --mode region"))
+
 hl.bind("SUPER + F12", function()
     local handle = io.popen("pgrep -x hyprsunset")
     if not handle then
