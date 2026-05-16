@@ -8,8 +8,9 @@ hyprland = HyprlandService.get_default()
 class Workspace(Widget.Button):
     def __init__(self, workspace):
         self.workspace = workspace
+        name = str(workspace.id % 10)
         super().__init__(
-            child=Widget.Label(label=workspace.name),
+            child=Widget.Label(label=name),
             css_classes=["workspace"],
             on_click=lambda _: self.switch_to(),
         )
@@ -31,9 +32,12 @@ class Workspaces(Widget.Box):
     def __init__(self, monitor):
         super().__init__(spacing=4)
         self.update(monitor)
-        hyprland.connect("notify::active-workspace", lambda *_: self.update(monitor))
+        for signal in ("notify::active-workspace", "notify::workspaces"):
+            hyprland.connect(signal, lambda *_: self.update(monitor))
 
     def update(self, monitor):
         monitor_name = get_monitor(monitor).get_connector()
-        workspaces = [w for w in hyprland.workspaces if w.monitor == monitor_name]
+        workspaces = [
+            w for w in hyprland.workspaces if w.monitor == monitor_name and w.id > 0
+        ]
         self.child = [Workspace(w) for w in workspaces]
