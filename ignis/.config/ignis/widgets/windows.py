@@ -19,13 +19,17 @@ class Window(Widget.Button):
 class Windows(Widget.Box):
     def __init__(self, monitor):
         super().__init__(spacing=4)
-        self.sync(monitor)
-        hyprland.connect("notify::active-window", lambda *_: self.sync(monitor))
-        hyprland.connect("notify::active-workspace", lambda *_: self.sync(monitor))
+        self.update(monitor)
+        for signal in ("notify::active-window", "notify::active-workspace"):
+            hyprland.connect(signal, lambda *_: self.update(monitor))
 
-    def sync(self, monitor):
+    def update(self, monitor):
         if not hyprland.active_workspace:
             self.child = []
             return
-        windows = [w for w in hyprland.windows if w.workspace_id == hyprland.active_workspace.id]
+        windows = [
+            w
+            for w in hyprland.windows
+            if w.workspace_id == hyprland.active_workspace.id
+        ]
         self.child = [Window(w) for w in windows]
