@@ -14,8 +14,28 @@ hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
 
 for i = 1, 10 do
     local key = i % 10
-    hl.bind(string.format("SUPER + %s", key), hl.dsp.focus({ workspace = i }))
-    hl.bind(string.format("SUPER + SHIFT + %s", key), hl.dsp.window.move({ workspace = i }))
+    if hl.plugin.split_monitor_workspaces then
+        hl.bind(string.format("SUPER + %s", key), function()
+            hl.plugin.split_monitor_workspaces.workspace(i)
+        end)
+        hl.bind(string.format("SUPER + SHIFT + %s", key), function()
+            hl.plugin.split_monitor_workspaces.move_to_workspace(i)
+        end)
+    else
+        hl.bind(string.format("SUPER + %s", key), hl.dsp.focus({ workspace = i }))
+        hl.bind(string.format("SUPER + SHIFT + %s", key), hl.dsp.window.move({ workspace = i }))
+    end
+end
+
+hl.bind("SUPER + CTRL + H", hl.dsp.focus({ monitor = "-1" }))
+hl.bind("SUPER + CTRL + L", hl.dsp.focus({ monitor = "+1" }))
+if hl.plugin.split_monitor_workspaces then
+    hl.bind("SUPER + CTRL + SHIFT + H", function()
+        hl.plugin.split_monitor_workspaces.change_monitor("-1")
+    end)
+    hl.bind("SUPER + CTRL + SHIFT + L", function()
+        hl.plugin.split_monitor_workspaces.change_monitor("+1")
+    end)
 end
 
 hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("magic"))
