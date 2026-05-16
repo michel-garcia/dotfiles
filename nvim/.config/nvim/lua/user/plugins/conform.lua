@@ -29,6 +29,7 @@ return {
                 lua = { "stylua" },
                 php = { "pint" },
                 python = { "black" },
+                rust = { "rustfmt" },
                 scss = { "prettier" },
                 typescript = { "prettier" },
                 typescriptreact = { "prettier" },
