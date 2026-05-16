@@ -7,10 +7,11 @@ hyprland = HyprlandService.get_default()
 
 class Workspace(Widget.Button):
     def __init__(self, workspace):
+        self.workspace = workspace
         super().__init__(
             child=Widget.Label(label=workspace.name),
             css_classes=["workspace"],
-            on_click=lambda _: workspace.switch_to(),
+            on_click=lambda _: self.switch_to(),
         )
         if workspace.id == hyprland.active_workspace.id:
             self.add_css_class("active")
@@ -18,6 +19,12 @@ class Workspace(Widget.Button):
         windows = [w for w in hyprland.windows if w.workspace_id == workspace.id]
         if len(windows) == 0:
             self.add_css_class("empty")
+
+    def switch_to(self):
+        command = "dispatch hl.dsp.focus({{ workspace = {id} }})".format(
+            id=self.workspace.id
+        )
+        hyprland.send_command(command)
 
 
 class Workspaces(Widget.Box):

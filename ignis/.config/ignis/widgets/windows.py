@@ -6,14 +6,24 @@ hyprland = HyprlandService.get_default()
 
 class Window(Widget.Button):
     def __init__(self, window):
-        label = "[ {name} ]".format(name=window.class_name)
+        self.window = window
         super().__init__(
-            child=Widget.Label(ellipsize="end", label=label, max_width_chars=32),
+            child=Widget.Label(
+                ellipsize="end",
+                label="[ {name} ]".format(name=window.class_name),
+                max_width_chars=32,
+            ),
             css_classes=["window"],
-            on_click=lambda _: window.focus(),
+            on_click=lambda _: self.focus(),
         )
         if window.pid == hyprland.active_window.pid:
             self.add_css_class("active")
+
+    def focus(self):
+        command = 'dispatch hl.dsp.focus({{ window = "address:{address}" }})'.format(
+            address=self.window.address
+        )
+        hyprland.send_command(command)
 
 
 class Windows(Widget.Box):
