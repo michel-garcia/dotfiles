@@ -53,32 +53,46 @@ hl.animation({
 })
 
 hl.animation({
-    leaf = "windows",
-    enabled = true,
-    speed = 1,
-    spring = "easy",
+    leaf = "fade",
+    enabled = false,
 })
 
 hl.animation({
     leaf = "windowsIn",
     enabled = true,
-    speed = 1,
-    spring = "easy",
-    style = "popin 90%",
+    speed = 3,
+    bezier = "default",
+    style = "slide right",
 })
 
 hl.animation({
     leaf = "windowsOut",
     enabled = true,
-    speed = 1,
-    bezier = "linear",
-    style = "popin 90%",
+    speed = 3,
+    bezier = "default",
+    style = "slide right",
+})
+
+hl.animation({
+    leaf = "windowsMove",
+    enabled = true,
+    speed = 3,
+    bezier = "default",
+    style = "slidehorz",
 })
 
 hl.animation({
     leaf = "workspaces",
     enabled = true,
-    speed = 2,
-    bezier = "quick",
+    speed = 3,
+    bezier = "default",
+    style = "slidevert",
+})
+
+hl.animation({
+    leaf = "specialWorkspace",
+    enabled = true,
+    speed = 3,
+    bezier = "default",
     style = "slidevert",
 })
