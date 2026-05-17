@@ -31,7 +31,8 @@ class Windows(Widget.Box):
     def __init__(self, monitor):
         super().__init__(spacing=4)
         self.update(monitor)
-        hyprland.connect("notify::active-window", lambda *_: self.update(monitor))
+        for signal in ("notify::active-window", "notify::windows"):
+            hyprland.connect(signal, lambda *_: self.update(monitor))
 
     def update(self, monitor_id):
         monitor_name = get_monitor(monitor_id).get_connector()
