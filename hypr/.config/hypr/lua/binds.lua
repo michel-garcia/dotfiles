@@ -7,10 +7,13 @@ hl.bind(
 )
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 
-hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
-hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
-hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
-hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + H", hl.dsp.layout("focus l"))
+hl.bind("SUPER + J", hl.dsp.layout("focus u"))
+hl.bind("SUPER + L", hl.dsp.layout("focus r"))
+hl.bind("SUPER + K", hl.dsp.layout("focus d"))
+
+hl.bind("SUPER + SHIFT + H", hl.dsp.layout("swapcol l"))
+hl.bind("SUPER + SHIFT + L", hl.dsp.layout("swapcol r"))
 
 for i = 1, 10 do
     local key = i % 10
