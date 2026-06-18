@@ -2,11 +2,7 @@ vim.pack.add({
     "https://github.com/luisiacc/gruvbox-baby",
 })
 
-local colors = require("gruvbox-baby.colors")
 vim.g.gruvbox_baby_highlights = {
-    ColorColumn = {
-        link = "CursorColumn",
-    },
     DiagnosticUnderlineError = {
         sp = "red",
         style = "undercurl",
@@ -23,11 +19,14 @@ vim.g.gruvbox_baby_highlights = {
         sp = "lightgray",
         style = "undercurl",
     },
-    FloatBorder = {
-        bg = colors.p.background,
+    StatusLine = {
+        bg = "none",
     },
-    NormalFloat = {
-        bg = colors.p.background,
+    StatusLineNC = {
+        bg = "none",
+    },
+    StatusLineTerm = {
+        bg = "none",
     },
     WinSeparator = {
         link = "@comment",
