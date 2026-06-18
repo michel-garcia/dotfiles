@@ -3,61 +3,14 @@ vim.pack.add({
 })
 
 local get_mode_section = function()
-    local data = vim.api.nvim_get_mode()
-    local names = {
-        ["n"] = "NORMAL",
-        ["no"] = "O-PENDING",
-        ["nov"] = "O-PENDING",
-        ["noV"] = "O-PENDING",
-        ["no\22"] = "O-PENDING",
-        ["niI"] = "NORMAL",
-        ["niR"] = "NORMAL",
-        ["niV"] = "NORMAL",
-        ["nt"] = "NORMAL",
-        ["ntT"] = "NORMAL",
-        ["v"] = "VISUAL",
-        ["vs"] = "VISUAL",
-        ["V"] = "V-LINE",
-        ["Vs"] = "V-LINE",
-        ["\22"] = "V-BLOCK",
-        ["\22s"] = "V-BLOCK",
-        ["s"] = "SELECT",
-        ["S"] = "S-LINE",
-        ["\19"] = "S-BLOCK",
-        ["i"] = "INSERT",
-        ["ic"] = "INSERT",
-        ["ix"] = "INSERT",
-        ["R"] = "REPLACE",
-        ["Rc"] = "REPLACE",
-        ["Rx"] = "REPLACE",
-        ["Rv"] = "V-REPLACE",
-        ["Rvc"] = "V-REPLACE",
-        ["Rvx"] = "V-REPLACE",
-        ["c"] = "COMMAND",
-        ["cv"] = "EX",
-        ["ce"] = "EX",
-        ["r"] = "REPLACE",
-        ["rm"] = "MORE",
-        ["r?"] = "CONFIRM",
-        ["!"] = "SHELL",
-        ["t"] = "TERMINAL",
-    }
-    local name = names[data.mode] or data.mode
-    local groups = {
-        ["NORMAL"] = "MiniStatuslineModeNormal",
-        ["INSERT"] = "MiniStatuslineModeInsert",
-        ["COMMAND"] = "MiniStatuslineModeCommand",
-        ["REPLACE"] = "MiniStatuslineModeReplace",
-        ["V-REPLACE"] = "MiniStatuslineModeReplace",
-        ["VISUAL"] = "MiniStatuslineModeVisual",
-        ["V-LINE"] = "MiniStatuslineModeVisual",
-        ["V-BLOCK"] = "MiniStatuslineModeVisual",
-    }
-    local hl = groups[name] or "MiniStatuslineModeOther"
+    local statusline = require("mini.statusline")
+    local name, hl = statusline.section_mode({
+        trunc_width = 64,
+    })
     return {
         hl = hl,
         strings = {
-            name,
+            string.upper(name),
         },
     }
 end
