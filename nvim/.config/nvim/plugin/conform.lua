@@ -5,6 +5,17 @@ vim.pack.add({
 local conform = require("conform")
 conform.setup({
     formatters = {
+        pasfmt = {
+            args = {
+                "-C",
+                "tab_width=4",
+                "$FILENAME",
+            },
+            cmd = {
+                "pasfmt",
+            },
+            stdin = false,
+        },
         prettier = {
             prepend_args = {
                 "--tab-width",
@@ -28,6 +39,7 @@ conform.setup({
         javascriptreact = { "prettier" },
         json = { "prettier" },
         lua = { "stylua" },
+        pascal = { "pasfmt" },
         php = { "pint" },
         python = { "black" },
         rust = { "rustfmt" },
