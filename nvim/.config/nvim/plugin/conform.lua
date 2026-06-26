@@ -5,6 +5,14 @@ vim.pack.add({
 local conform = require("conform")
 conform.setup({
     formatters = {
+        astyle = {
+            prepend_args = {
+                "--indent-after-parens",
+                "--indent-continuation=1",
+                "--min-conditional-indent=0",
+                "--max-continuation-indent=80",
+            },
+        },
         pasfmt = {
             args = {
                 "-C",
