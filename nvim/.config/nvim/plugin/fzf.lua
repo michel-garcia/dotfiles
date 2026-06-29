@@ -38,6 +38,7 @@ fzf.setup({
         title_flags = false,
     },
 })
+vim.keymap.set("n", "<Tab>", fzf.builtin)
 vim.keymap.set("n", "<leader>ff", fzf.files)
 vim.keymap.set("n", "<leader>fb", fzf.buffers)
 vim.keymap.set("n", "<leader>fg", fzf.live_grep)
@@ -62,7 +63,7 @@ vim.api.nvim_create_autocmd("FileType", {
         local opts = {
             buffer = args.buf,
         }
-        vim.keymap.set("t", "<C-t>", function()
+        vim.keymap.set("t", "<Tab>", function()
             local win = vim.api.nvim_get_current_win()
             vim.api.nvim_win_close(win, true)
             fzf.builtin()
