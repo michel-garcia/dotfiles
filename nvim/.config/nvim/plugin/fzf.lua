@@ -38,7 +38,6 @@ fzf.setup({
         title_flags = false,
     },
 })
-vim.keymap.set("n", "<Tab>", fzf.builtin)
 vim.keymap.set("n", "<leader>ff", fzf.files)
 vim.keymap.set("n", "<leader>fb", fzf.buffers)
 vim.keymap.set("n", "<leader>fg", fzf.live_grep)
