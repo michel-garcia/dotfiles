@@ -54,6 +54,7 @@ conform.setup({
         scss = { "prettier" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
+        xml = { "xmlformatter" },
     },
 })
 vim.keymap.set("n", "<A-f>", function()
