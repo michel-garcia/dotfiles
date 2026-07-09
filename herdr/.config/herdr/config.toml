@@ -1,0 +1,25 @@
+[keys]
+prefix = "alt+a"
+new_workspace = "alt+shift+n"
+close_workspace = "alt+shift+d"
+switch_workspace = "alt+shift+1..9"
+navigate_workspace_down = "j"
+navigate_workspace_up = "k"
+new_tab = "alt+c"
+switch_tab = "alt+1..9"
+split_horizontal = "alt+s"
+split_vertical = "alt+v"
+close_pane = "alt+x"
+focus_pane_left = "alt+h"
+focus_pane_down = "alt+j"
+focus_pane_up = "alt+k"
+focus_pane_right = "alt+l"
+[theme]
+name = "gruvbox"
+auto_switch = false
+[theme.custom]
+panel_bg = "transparent"
+[ui]
+prompt_new_tab_name = false
+pane_borders = false
+
