@@ -1,15 +1,15 @@
 [keys]
 prefix = "alt+a"
-new_workspace = "alt+shift+n"
-close_workspace = "alt+shift+d"
+new_workspace = "alt+shift+t"
+close_workspace = "alt+shift+w"
 switch_workspace = "alt+shift+1..9"
 navigate_workspace_down = "j"
 navigate_workspace_up = "k"
-new_tab = "alt+c"
+new_tab = "alt+t"
 switch_tab = "alt+1..9"
 split_horizontal = "alt+s"
 split_vertical = "alt+v"
-close_pane = "alt+x"
+close_pane = "alt+w"
 focus_pane_left = "alt+h"
 focus_pane_down = "alt+j"
 focus_pane_up = "alt+k"
@@ -22,4 +22,3 @@ panel_bg = "transparent"
 [ui]
 prompt_new_tab_name = false
 pane_borders = false
-
