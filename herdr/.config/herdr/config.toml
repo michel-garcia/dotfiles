@@ -1,3 +1,4 @@
+onboarding = false
 [keys]
 prefix = "alt+a"
 new_workspace = "alt+shift+t"
