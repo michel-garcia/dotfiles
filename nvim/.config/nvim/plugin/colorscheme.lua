@@ -39,6 +39,19 @@ vim.g.gruvbox_baby_highlights = {
     StatusLineTerm = {
         bg = "none",
     },
+    WinBar = {
+        bg = "none",
+    },
+    WinBarTitle = {
+        bg = colors.p.bright_yellow,
+        fg = "black",
+    },
+    WinBarTitleNC = {
+        fg = colors.p.soft_yellow,
+    },
+    WinBarNC = {
+        bg = "none",
+    },
     WinSeparator = {
         link = "@comment",
     },

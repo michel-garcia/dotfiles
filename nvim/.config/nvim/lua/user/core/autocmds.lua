@@ -29,3 +29,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
     group = group,
 })
+
+vim.api.nvim_create_autocmd({ "BufWinEnter", "CursorHold", "WinEnter" }, {
+    callback = function()
+        local current = vim.api.nvim_get_current_win()
+        local wins = vim.api.nvim_tabpage_list_wins(0)
+        for _, win in ipairs(wins) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            local buftype = vim.api.nvim_get_option_value("buftype", {
+                buf = buf,
+            })
+            if buftype == "" then
+                if win == current then
+                    vim.wo[win].winbar = "%#WinBarTitle# %t %m %*"
+                else
+                    vim.wo[win].winbar = "%#WinBarTitleNC# %t %m %*"
+                end
+            end
+        end
+    end,
+    group = group,
+})
