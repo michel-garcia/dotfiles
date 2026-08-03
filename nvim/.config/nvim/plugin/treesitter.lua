@@ -1,15 +1,5 @@
 vim.pack.add({
-    "https://github.com/neovim-treesitter/nvim-treesitter",
-    "https://github.com/neovim-treesitter/treesitter-parser-registry",
-})
-
-vim.api.nvim_create_autocmd("User", {
-    callback = function(args)
-        if args.data.spec.name == "nvim-treesitter" then
-            vim.cmd("TSUpdate")
-        end
-    end,
-    pattern = "PackChanged",
+    "https://github.com/nvim-treesitter/nvim-treesitter",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
