@@ -15,15 +15,13 @@ hl.bind("SUPER + K", hl.dsp.layout("focus d"))
 hl.bind("SUPER + SHIFT + H", hl.dsp.layout("swapcol l"))
 hl.bind("SUPER + SHIFT + L", hl.dsp.layout("swapcol r"))
 
+local _, split_monitor_workspaces = pcall(require, "plugins.split-monitor-workspaces")
 for i = 1, 10 do
     local key = i % 10
-    if hl.plugin.split_monitor_workspaces then
-        hl.bind(string.format("SUPER + %s", key), function()
-            hl.plugin.split_monitor_workspaces.workspace(i)
-        end)
-        hl.bind(string.format("SUPER + SHIFT + %s", key), function()
-            hl.plugin.split_monitor_workspaces.move_to_workspace(i)
-        end)
+    if split_monitor_workspaces then
+        local id = tostring(i)
+        hl.bind(string.format("SUPER + %s", key), split_monitor_workspaces.workspace(id))
+        hl.bind(string.format("SUPER + SHIFT + %s", key), split_monitor_workspaces.move_to_workspace(id))
     else
         hl.bind(string.format("SUPER + %s", key), hl.dsp.focus({ workspace = i }))
         hl.bind(string.format("SUPER + SHIFT + %s", key), hl.dsp.window.move({ workspace = i }))
