@@ -8,8 +8,23 @@ vim.lsp.config("*", {
     capabilities = capabilities,
 })
 
+vim.lsp.config('csharp_ls', {
+    cmd = {
+        'csharp-ls'
+    },
+    filetypes = {
+        'cs'
+    },
+    root_markers = {
+        '*.sln',
+        '*.csproj',
+        '.git'
+    },
+})
+
 vim.lsp.enable({
     "clangd",
+    "csharp_ls",
     "lua_ls",
     "pyright",
     "phpantom_lsp",
