@@ -60,6 +60,6 @@ conform.setup({
 vim.keymap.set("n", "<A-f>", function()
     conform.format({
         async = true,
-        lsp_fallback = false,
+        lsp_format = "fallback",
     })
 end)
