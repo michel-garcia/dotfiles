@@ -17,7 +17,9 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost", "FileType", "LspAttac
         vim.schedule(function()
             vim.opt.autoindent = true
             vim.opt.formatoptions = ""
-            vim.opt.indentexpr = "return -1"
+            vim.opt.indentexpr = function ()
+                return -1
+            end
         end)
     end,
     group = group,
