@@ -25,8 +25,8 @@ vim.lsp.config('csharp_ls', {
 vim.lsp.enable({
     "clangd",
     "csharp_ls",
+    "intelephense",
     "lua_ls",
     "pyright",
-    "phpantom_lsp",
     "ts_ls",
 })
