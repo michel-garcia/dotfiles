@@ -1,5 +1,6 @@
 return {
     "https://github.com/luisiacc/gruvbox-baby",
+    priority = 1000,
     config = function()
         local colors = require("gruvbox-baby.colors")
         vim.g.gruvbox_baby_highlights = {
