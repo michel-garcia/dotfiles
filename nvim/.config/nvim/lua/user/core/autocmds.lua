@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = group,
 })
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost", "FileType", "LspAttach" }, {
+vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.schedule(function()
             vim.opt.autoindent = true
