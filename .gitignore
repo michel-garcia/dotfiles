@@ -1,4 +1,5 @@
 .zcompdump
 .zsh_history
 __pycache__
+lazy-lock.json
 nvim-pack-lock.json

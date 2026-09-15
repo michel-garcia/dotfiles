@@ -1,0 +1,60 @@
+return {
+    "https://github.com/luisiacc/gruvbox-baby",
+    config = function()
+        local colors = require("gruvbox-baby.colors")
+        vim.g.gruvbox_baby_highlights = {
+            ColorColumn = {
+                link = "CursorColumn",
+            },
+            DiagnosticUnderlineError = {
+                sp = "red",
+                style = "undercurl",
+            },
+            DiagnosticUnderlineWarn = {
+                sp = "orange",
+                style = "undercurl",
+            },
+            DiagnosticUnderlineInfo = {
+                sp = "lightblue",
+                style = "undercurl",
+            },
+            DiagnosticUnderlineHint = {
+                sp = "lightgray",
+                style = "undercurl",
+            },
+            FloatBorder = {
+                bg = colors.p.background,
+            },
+            NormalFloat = {
+                bg = colors.p.background,
+            },
+            StatusLine = {
+                bg = "none",
+            },
+            StatusLineNC = {
+                bg = "none",
+            },
+            StatusLineTerm = {
+                bg = "none",
+            },
+            WinBar = {
+                bg = "none",
+            },
+            WinBarTitle = {
+                bg = colors.p.bright_yellow,
+                fg = "black",
+            },
+            WinBarTitleNC = {
+                fg = colors.p.soft_yellow,
+            },
+            WinBarNC = {
+                bg = "none",
+            },
+            WinSeparator = {
+                link = "@comment",
+            },
+        }
+        vim.g.gruvbox_baby_transparent_mode = true
+        vim.cmd.colorscheme("gruvbox-baby")
+    end,
+}
