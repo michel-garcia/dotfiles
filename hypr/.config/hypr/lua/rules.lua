@@ -2,7 +2,6 @@ hl.workspace_rule({
     gaps_in = 4,
     gaps_out = 64,
     layout = "master",
-    on_created_empty = "kitty",
     workspace = "special:magic",
 })
 
