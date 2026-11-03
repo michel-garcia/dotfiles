@@ -1,6 +1,6 @@
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpm reload")
-    hl.exec_cmd("ignis init")
+    hl.exec_cmd("ags run")
     hl.exec_cmd("waypaper --restore")
 end)
 
