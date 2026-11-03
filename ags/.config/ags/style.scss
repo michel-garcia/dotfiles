@@ -1,0 +1,81 @@
+$active: #fabd2f;
+
+* {
+    all: unset;
+    font-family: "Ubuntu", sans-serif, monospace;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.bar {
+    background: black;
+    min-height: 24px;
+    padding: 0.5rem;
+}
+
+.calendar {
+    background: black;
+    padding: 8px;
+    grid > * {
+        min-height: 24px;
+        min-width: 24px;
+    }
+    .today {
+        background: $active;
+        color: black;
+    }
+}
+
+.tray {
+    padding: 0 8px;
+}
+
+.tray-menu-popover {
+    arrow {
+        background: #2e2d2e;
+        border: 1px solid #424242;
+    }
+    contents {
+        background: #2e2e2e;
+        border: 1px solid #424242;
+        min-width: 256px;
+        padding: 0.75rem;
+    }
+    label:disabled {
+        color: gray;
+    }
+    modelbutton {
+        padding: 0.25rem;
+    }
+    modelbutton:hover {
+        background: $active;
+        color: black;
+    }
+    separator {
+        background: #424242;
+        margin: 0.5rem 0;
+        min-height: 1px;
+    }
+}
+
+.window {
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+    padding: 0 0.5rem;
+    &.active {
+        background: $active;
+        color: black;
+    }
+}
+
+.workspace {
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+    &.empty {
+        color: gray;
+    }
+    &.active {
+        background: $active;
+        color: black;
+    }
+}
